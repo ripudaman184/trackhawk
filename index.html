@@ -71,6 +71,7 @@
     <nav class="tabs" id="tabs">
       <button class="tab is-active" data-view="jobs">Job Hunter</button>
       <button class="tab" data-view="cards">Flashcards</button>
+      <button class="tab" data-view="project">Project</button>
     </nav>
 
     <div class="topbar-right">
@@ -256,6 +257,53 @@
         <kbd>Space</kbd> flip · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>K</kbd> know it · <kbd>R</kbd> review again
       </p>
     </div>
+  </section>
+
+  <!-- ----------------------------- PROJECT ------------------------------ -->
+  <section id="view-project" class="view is-hidden">
+    <div class="rm-head">
+      <div>
+        <h1 class="rm-title">TRACKHAWK <span>2.0</span></h1>
+        <p class="rm-sub">JS toy → Java artifact · 3 weeks · ~44 focused hours</p>
+      </div>
+      <div class="rm-window">Mon 24 Aug → Sun 13 Sep 2026</div>
+    </div>
+
+    <div class="rm-progress">
+      <div class="rm-bar"><span id="rm-fill"></span></div>
+      <span class="rm-count" id="rm-count">0 / 0</span>
+    </div>
+
+    <div class="ladder" id="ladder"></div>
+
+    <section class="panel">
+      <h2 class="ptitle">The three weeks</h2>
+      <p class="phint">Evenings ≈ 2h, weekends ≈ 4h. The dashed bar is a stretch — the first thing you cut.</p>
+      <div class="gantt" id="gantt"></div>
+      <div class="miles" id="miles"></div>
+    </section>
+
+    <div class="phases" id="phases"></div>
+
+    <section class="panel">
+      <h2 class="ptitle">Slip rules — decided now, not at 11pm</h2>
+      <p class="phint">Something will overrun. Cut in this order, and never renegotiate mid-week.</p>
+      <div class="cuts">
+        <div class="cut"><b>cut 1st</b><span>PIT mutation testing</span></div>
+        <div class="cut"><b>cut 2nd</b><span>Wiring the PWA to the API</span></div>
+        <div class="cut"><b>cut 3rd</b><span>Cloud deploy — compose is fine</span></div>
+        <div class="cut never"><b>never cut</b><span>Tests · CI · Known-limitations README · Phase 4 locking</span></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 class="ptitle" style="color:var(--marker)">The one that isn't optional</h2>
+      <p class="phint">
+        The project earns you the conversation — it cannot earn you the invite.
+        If these stay empty, the roadmap succeeded and the job hunt didn't.
+      </p>
+      <div class="apps" id="apps"></div>
+    </section>
   </section>
 </div>
 
@@ -465,6 +513,7 @@
 <script src="js/core.js"></script>
 <script src="js/jobs.js"></script>
 <script src="js/cards.js"></script>
+<script src="js/roadmap.js"></script>
 <script src="js/main.js"></script>
 <script>
   if ("serviceWorker" in navigator) {
