@@ -1,6 +1,6 @@
 /* TrackHawk service worker — caches the shell so the app opens instantly and
    works offline. Data is never cached here; it lives encrypted in the vault. */
-const CACHE = "trackhawk-v4";
+const CACHE = "trackhawk-v6";
 const SHELL = [
   "./", "./index.html", "./css/style.css",
   "./js/core.js", "./js/jobs.js", "./js/cards.js", "./js/roadmap.js", "./js/main.js",
