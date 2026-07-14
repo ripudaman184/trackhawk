@@ -171,6 +171,31 @@ const ROADMAP = (() => {
     });
     $("#gantt").innerHTML = g;
 
+    /* phones can't fit a 21-column gantt — same data, stacked by week */
+    const WK = [[0, 6], [7, 13], [14, 20]];
+    $("#rm-weeks").innerHTML = WK.map((w, i) => {
+      const inWeek = PHASES.filter(p => p.bar.s <= w[1] && p.bar.e >= w[0]);
+      const ids = inWeek.flatMap(p => p.tasks.map((_, j) => `${p.id}-${j}`));
+      const n = ids.filter(isDone).length;
+      return `
+        <div class="rmw">
+          <div class="rmw-top">
+            <b>${WEEKS[i][0]}</b>
+            <span>${WEEKS[i][1]} · ${n}/${ids.length}</span>
+          </div>
+          <div class="rmw-bars">
+            ${inWeek.map(p => {
+              const d = p.tasks.filter((_, j) => isDone(`${p.id}-${j}`)).length;
+              const pct = Math.round(100 * d / p.tasks.length);
+              return `<div class="rmw-bar ${p.ghost ? "ghost" : ""}">
+                        <i style="background:${p.color}"></i>${esc(p.bar.text)}
+                        <em>${pct}%</em>
+                      </div>`;
+            }).join("")}
+          </div>
+        </div>`;
+    }).join("");
+
     $("#miles").innerHTML = MILES.map(m => `
       <div class="mile" style="background:${m.color}">
         <b>${m.when}</b><span>${m.what}</span>

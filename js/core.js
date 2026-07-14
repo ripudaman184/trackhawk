@@ -216,6 +216,21 @@ const TH = (() => {
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
   const now = () => Date.now();
 
+  /* A vault written by an older build won't have maps that were added later
+     (e.g. `tasks`). Decrypting it and handing it straight to the UI blows up on
+     the first `data.tasks[id]`. So every decrypted payload gets normalised
+     against the current shape before anyone touches it.                       */
+  function hydrate(data) {
+    const base = EMPTY();
+    if (!data || typeof data !== "object") return base;
+    MAPS.forEach(m => {
+      if (!data[m] || typeof data[m] !== "object") data[m] = {};
+    });
+    data.prefs = data.prefs || {};
+    data.v = base.v;
+    return data;
+  }
+
   /* ---------------------------------------------------------------- session */
   const S = {
     pw: null,           // password, memory only — needed to re-derive per-salt
@@ -330,7 +345,7 @@ const TH = (() => {
       if (raw) {
         const env = JSON.parse(raw);
         await adoptSalt(env);
-        S.data = await open(S.key, env);
+        S.data = hydrate(await open(S.key, env));
       } else {
         S.data = EMPTY();
       }
@@ -345,7 +360,7 @@ const TH = (() => {
       S.sha = f.sha;
       await adoptSalt(f.json);      // every device converges on the file's salt
       try {
-        S.data = await open(S.key, f.json);
+        S.data = hydrate(await open(S.key, f.json));
       } catch {
         throw new Error(
           "Couldn't decrypt the data in your repo. That means this password isn't the " +
@@ -370,7 +385,7 @@ const TH = (() => {
       const remote = await GH.getFile(S.cfg.path);
       if (remote && remote.sha !== S.sha) {
         await adoptSalt(remote.json);
-        S.data = merge(await open(S.key, remote.json), S.data);
+        S.data = merge(hydrate(await open(S.key, remote.json)), S.data);
       }
       const env = await seal(S.key, S.salt, S.data);
       S.sha = await GH.putFile(S.cfg.path, env, remote ? remote.sha : null, message);
@@ -392,7 +407,7 @@ const TH = (() => {
     const f = await GH.getFile(S.cfg.path);
     if (!f || f.sha === S.sha) return false;
     await adoptSalt(f.json);
-    S.data = merge(S.data, await open(S.key, f.json));
+    S.data = merge(S.data, hydrate(await open(S.key, f.json)));
     S.sha = f.sha;
     emit();
     return true;
@@ -482,7 +497,7 @@ const TH = (() => {
     return new Blob([JSON.stringify(S.data, null, 2)], {type: "application/json"});
   }
   async function importJSON(obj) {
-    S.data = merge(S.data, obj);
+    S.data = merge(S.data, hydrate(obj));
     await save("trackhawk: import");
     emit();
   }
