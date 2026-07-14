@@ -98,10 +98,12 @@ const UI = (() => {
   /* -------------------------------------------------------------- chrome */
   $("#tabs").onclick = e => {
     const t = e.target.closest(".tab"); if (!t) return;
+    const v = t.dataset.view;
     $$(".tab").forEach(x => x.classList.toggle("is-active", x === t));
-    $("#view-jobs").classList.toggle("is-hidden", t.dataset.view !== "jobs");
-    $("#view-cards").classList.toggle("is-hidden", t.dataset.view !== "cards");
-    if (t.dataset.view === "cards") CARDS.render();
+    ["jobs", "cards", "project"].forEach(name =>
+      $("#view-" + name).classList.toggle("is-hidden", name !== v));
+    if (v === "cards") CARDS.render();
+    if (v === "project") ROADMAP.render();
   };
 
   $("#subtabs").onclick = e => {
@@ -164,6 +166,7 @@ const UI = (() => {
       if (!$("#app").classList.contains("is-hidden")) {
         JOBS.render();
         if (!$("#view-cards").classList.contains("is-hidden")) CARDS.render();
+        if (!$("#view-project").classList.contains("is-hidden")) ROADMAP.render();
       }
     }
   });
