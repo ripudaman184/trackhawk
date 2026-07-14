@@ -112,16 +112,16 @@ kbd{font-family:'JetBrains Mono',monospace;font-size:10px;background:#1B1B22;bor
 .chip.is-on{color:var(--canvas);background:var(--lime);border-color:var(--lime);font-weight:700}
 
 /* -------------------------------- spine ------------------------------- */
-.spine{display:flex;gap:4px;margin-bottom:14px}
-.seg-cell{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:9px 11px;position:relative;overflow:hidden}
+.spine{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-bottom:14px}
+.seg-cell{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:9px 11px;position:relative;overflow:hidden}
 .seg-cell b{display:block;font-family:'JetBrains Mono',monospace;font-size:19px}
 .seg-cell span{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-family:'JetBrains Mono',monospace}
 .seg-cell i{position:absolute;left:0;bottom:0;height:3px}
 
 /* ------------------------------- board -------------------------------- */
 .stage-picker{display:none;gap:6px;overflow-x:auto;margin-bottom:12px;padding-bottom:4px}
-.board{display:flex;gap:12px;align-items:flex-start;overflow-x:auto;padding-bottom:16px}
-.col{flex:0 0 264px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px}
+.board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;align-items:start;padding-bottom:16px}
+.col{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:9px}
 .col.over{border-color:var(--lime);box-shadow:0 0 0 1px var(--lime) inset}
 .col-head{display:flex;align-items:center;gap:8px;padding:2px 4px 10px}
 .dot{width:8px;height:8px;border-radius:50%}
@@ -135,8 +135,8 @@ kbd{font-family:'JetBrains Mono',monospace;font-size:10px;background:#1B1B22;bor
 .jcard:hover{border-color:var(--line2);transform:translateY(-1px)}
 .jcard.dragging{opacity:.4}
 .jc-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.jc-role{font-weight:700;font-size:14px;line-height:1.25}
-.jc-co{font-size:12px;color:var(--mute);margin-top:2px}
+.jc-role{font-weight:700;font-size:13.5px;line-height:1.25;overflow-wrap:anywhere}
+.jc-co{font-size:11.5px;color:var(--mute);margin-top:2px;overflow-wrap:anywhere}
 .jc-match{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:6px}
 .jc-match.hi{background:rgba(200,255,50,.12);color:var(--lime)}
 .jc-match.mid{background:rgba(255,176,32,.12);color:var(--amber)}
@@ -290,36 +290,6 @@ kbd{font-family:'JetBrains Mono',monospace;font-size:10px;background:#1B1B22;bor
 .toast.bad{background:var(--marker);color:#fff}
 
 /* ------------------------------ responsive ---------------------------- */
-@media (max-width:1000px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .span-4{grid-column:span 2}
-  .kpis{grid-template-columns:repeat(3,1fr)}
-  .docs,.snips{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width:720px){
-  .view{padding:12px}
-  .brand-name{display:none}
-  .search{max-width:none;flex:1 1 100%;order:9}
-  .grid,.two{grid-template-columns:1fr}
-  .span-2,.span-4{grid-column:span 1}
-  .kpis,.kpis.four{grid-template-columns:repeat(2,1fr)}
-  .docs,.snips{grid-template-columns:1fr}
-  .spine{overflow-x:auto}
-  .seg-cell{flex:0 0 33%}
-  /* one column at a time — dragging six columns sideways on a phone is misery */
-  .stage-picker{display:flex}
-  .board{display:block}
-  .col{width:100%;flex:none}
-  .col:not(.is-shown){display:none}
-  .flashcard{min-height:470px}
-  .face{padding:20px}
-  .modal{width:100vw;height:100dvh;max-height:none;top:0;left:0;transform:none;border-radius:0;border:0}
-}
-@media (prefers-reduced-motion:reduce){
-  .flashcard{transition:none}
-}
-:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
-
 /* ------------------------- deck import + scan viewer ------------------------ */
 .import-summary{
   background:#0D0D12;border:1px solid var(--line);border-radius:10px;padding:12px;
@@ -430,12 +400,120 @@ dialog#scan-viewer::backdrop{background:rgba(4,4,6,.9)}
 .dot.on{background:var(--marker);border-color:var(--marker)}
 .week .wk-n{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mute)}
 
-@media(max-width:1000px){.phases,.miles{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:760px){
-  .phases,.miles{grid-template-columns:1fr}
-  .gantt{grid-template-columns:82px repeat(21,1fr);font-size:9px}
-  .gantt .lane{font-size:9.5px;white-space:normal;padding-right:6px}
-  .gbar{font-size:8.5px;padding:0 5px}
-  .gbar em{display:none}
-  .rm-window{margin-left:0}
+
+/* phone-only week strip: hidden by default, switched on in the phone block below */
+.rm-weeks{display:none}
+
+/* ================================ RESPONSIVE ================================ */
+html,body{overflow-x:hidden;max-width:100%}
+.view{max-width:1560px;margin:0 auto}
+img,pre,textarea{max-width:100%}
+
+/* ---- laptops / small desktops: 6 kanban columns get too thin, go 3 x 2 ---- */
+@media (max-width:1180px){
+  .board{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .spine{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .span-4{grid-column:span 2}
+  .kpis{grid-template-columns:repeat(3,1fr)}
+  .docs,.snips{grid-template-columns:repeat(2,1fr)}
+  .phases{grid-template-columns:repeat(2,1fr)}
+  .miles{grid-template-columns:repeat(3,1fr)}
 }
+
+/* ------------------------------- ANDROID ---------------------------------- */
+@media (max-width:760px){
+  body{background-size:18px 18px}
+  .view{padding:12px 10px 40px}
+  .topbar{gap:8px;padding:10px 12px}
+  .brand-name{display:none}
+  .tabs{flex:1}
+  .tab{flex:1;padding:8px 6px;font-size:12px;text-align:center}
+  .topbar-right{gap:5px}
+  .sync{display:none}
+
+  /* --- Job Hunter --- */
+  .subtabs{gap:6px}
+  .subtab{flex:1;padding:8px 4px;font-size:10px;text-align:center}
+  .subtabs .btn{flex:1 1 100%;order:9}
+  .search{max-width:none;flex:1 1 100%;order:8}
+  .spine{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+  .seg-cell{padding:8px 9px}
+  .seg-cell b{font-size:16px}
+  .stage-picker{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:10px;
+                padding-bottom:2px;-webkit-overflow-scrolling:touch}
+  .stage-picker::-webkit-scrollbar{display:none}
+  .stage-picker .chip{flex:0 0 auto}
+  .board{display:block}
+  .col{width:100%}
+  .col:not(.is-shown){display:none}
+  .jcard{padding:13px}
+  .jc-role{font-size:15px}
+  .jc-co{font-size:13px}
+
+  /* --- Insights --- */
+  .grid{grid-template-columns:1fr}
+  .span-2,.span-4{grid-column:span 1}
+  .panel{padding:15px}
+  .kpis,.kpis.four{grid-template-columns:repeat(2,1fr)}
+  .donut-wrap{flex-direction:column;align-items:flex-start}
+  .donut{width:140px;height:140px;align-self:center}
+  .timeline{height:110px;gap:3px}
+  .tl span{font-size:8px}
+  .brow .lab{width:88px}
+  .two{grid-template-columns:1fr}
+
+  /* --- Library --- */
+  .docs,.snips{grid-template-columns:1fr}
+  .chips{gap:5px}
+
+  /* --- Flashcards --- */
+  #view-cards .subtabs{gap:6px}
+  .deck-select{max-width:none;flex:1 1 60%}
+  #view-cards .subtabs .btn{flex:1 1 auto;order:0;font-size:12px;padding:8px 10px}
+  #import-cards{flex:1 1 100% !important}
+  .flashcard{min-height:520px}
+  .face{padding:18px 16px}
+  .q{font-size:20px;line-height:1.22}
+  .idea{font-size:14.5px}
+  .steps{font-size:13.5px;margin-left:16px}
+  .face pre{font-size:11px;padding:11px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .metarow{gap:6px}
+  .editcard,.seepage{margin-left:0}
+  .controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .controls .btn{width:100%}
+  .controls .grow{display:none}
+  .keys{display:none}
+
+  /* --- Project --- */
+  .rm-head{gap:10px}
+  .rm-window{margin-left:0;font-size:11px;padding:7px 11px}
+  .ladder{gap:6px}
+  .rung{min-width:0;flex:1 1 30%;padding:9px 10px}
+  .rung b{font-size:17px}
+  .rung span{font-size:9.5px}
+  .gantt{display:none}          /* 21 day-columns cannot fit a phone. Weeks below instead. */
+  .rm-weeks{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .miles{grid-template-columns:1fr;gap:8px}
+  .phases{grid-template-columns:1fr}
+  .cuts{flex-direction:column}
+  .cut{min-width:0}
+  .week{flex-wrap:wrap;gap:9px}
+  .dot{width:30px;height:30px}
+  .checks li{font-size:13px}
+  .checks .box{width:18px;height:18px}
+}
+
+/* the phone-only week strip (hidden on desktop, where the gantt does the job) */
+.rmw{background:#0D0D12;border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+.rmw-top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.rmw-top b{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.rmw-top span{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mute)}
+.rmw-bars{display:flex;flex-direction:column;gap:6px}
+.rmw-bar{display:flex;align-items:center;gap:8px;font-size:12px}
+.rmw-bar i{width:9px;height:9px;border-radius:3px;flex:0 0 auto}
+.rmw-bar em{margin-left:auto;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--mute)}
+.rmw-bar.ghost{opacity:.6}
+
+@media (prefers-reduced-motion:reduce){.flashcard{transition:none}}
+:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
