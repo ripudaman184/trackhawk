@@ -104,11 +104,17 @@ const TH = (() => {
       return res.json();
     },
 
-    /* small files (< 1 MB) — the encrypted state file */
+    /* The Contents API refuses to inline anything over 1 MB — it returns the
+       metadata with an empty body and encoding:"none". The sha is still there,
+       and the Blobs API will serve the same file up to 100 MB. So: try the
+       cheap path, fall back to blobs when the vault outgrows it.             */
     async getFile(path) {
       const {owner, repo} = S.cfg;
       const j = await GH.req(`/repos/${owner}/${repo}/contents/${path}?ref=${S.cfg.branch || "main"}`);
       if (!j) return null;
+      if (!j.content || j.encoding === "none") {
+        return {sha: j.sha, json: await GH.getBlob(j.sha)};
+      }
       return {sha: j.sha, json: JSON.parse(atob(j.content.replace(/\n/g, "")))};
     },
 
