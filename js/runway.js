@@ -189,13 +189,16 @@ const RUNWAY = (() => {
   }
 
   /* ------------------------------------------------------------ vault I/O */
+  /* self-heal: works even if an older core.js (no study map yet) is briefly cached */
+  function studyMap() { if (!TH.S || !TH.S.data) return {}; if (!TH.S.data.study) TH.S.data.study = {}; return TH.S.data.study; }
   function rec(date) {
-    let r = TH.S.data.study[date];
-    if (!r) { r = {id:date, done:{}, tmin:{}, note:"", problems:null, applied:0}; TH.S.data.study[date] = r; }
+    const m = studyMap();
+    let r = m[date];
+    if (!r) { r = {id:date, done:{}, tmin:{}, note:"", problems:null, applied:0}; m[date] = r; }
     if (!r.done) r.done = {}; if (!r.tmin) r.tmin = {};
     return r;
   }
-  const peek = date => TH.S.data.study[date] || {done:{}, tmin:{}};
+  const peek = date => studyMap()[date] || {done:{}, tmin:{}};
   let syncTimer = null;
   function syncSoon(r, msg) { clearTimeout(syncTimer); syncTimer = setTimeout(() => TH.put("study", r, msg), 900); }
   function syncNow(r, msg)  { TH.put("study", r, msg); }
