@@ -193,10 +193,11 @@ const TH = (() => {
     cards: {},     // id -> {deckId, section, q, ...}
     progress: {},  // cardId -> {known, reps, at}
     tasks: {},     // roadmap taskId -> {done, at}
+    study: {},     // "YYYY-MM-DD" -> {done, tmin, note, problems, applied, at}
     prefs: {},
   });
 
-  const MAPS = ["jobs", "docs", "decks", "cards", "progress", "tasks"];
+  const MAPS = ["jobs", "docs", "decks", "cards", "progress", "tasks", "study"];
 
   function merge(a, b) {
     const out = EMPTY();
