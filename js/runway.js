@@ -217,7 +217,6 @@ const RUNWAY = (() => {
       {id:"notes", label:"Jotted key takeaways into notes"},
       {id:"explain", label:"Explained today's topic in 2 sentences"},
       {id:"review", label:"Reviewed yesterday briefly"},
-      {id:"commit", label:"Committed code to GitHub"},
       {id:"tracker", label:"Updated progress"},
     ];
     const t = day.theory;
@@ -512,8 +511,10 @@ const RUNWAY = (() => {
 
     wire(root);
 
-    if (view==="today") { const sp=root.querySelector(".rw-spine .sel"); if(sp) sp.scrollIntoView({inline:"center",block:"nearest"});
-      if (activeNote) { const n=$("#rw-note"); if(n){ n.focus(); if(caret!=null) n.setSelectionRange(caret,caret); } } }
+    if (view==="today") {
+      if (!activeNote) { const sp=root.querySelector(".rw-spine .sel"); if(sp) sp.scrollIntoView({inline:"center",block:"nearest"}); }
+      if (activeNote) { const n=$("#rw-note"); if(n){ n.focus({preventScroll:true}); if(caret!=null) n.setSelectionRange(caret,caret); } }
+    }
   }
 
   function wire(root) {
@@ -528,19 +529,28 @@ const RUNWAY = (() => {
     root.querySelectorAll("[data-tog]").forEach(li=>li.onclick=()=>{ const r=rec(selected); const id=li.dataset.tog;
       r.done[id]=!r.done[id]; syncNow(r, `trackhawk: study ${r.done[id]?"✓":"✗"} ${selected} ${id}`); render(); });
 
-    root.querySelectorAll("[data-time]").forEach(inp=>inp.oninput=()=>{ const r=rec(selected), k=inp.dataset.time;
-      r.tmin[k]= inp.value===""?null:Math.max(0,+inp.value);
-      const day=byDate[selected], e=day.expected[k], act=+inp.value||0;
-      const bar=inp.closest(".rw-tcell").querySelector(".rw-tbar>i");
-      if(bar) bar.style.width=Math.round((e?Math.min(1,act/e):(act>0?1:0))*100)+"%";
-      syncSoon(r,"trackhawk: study time "+selected); });
+    // Inputs update memory (and the visual bar) on every keystroke, but only PERSIST
+    // on change/blur — so no sync-driven re-render happens while you're typing.
+    root.querySelectorAll("[data-time]").forEach(inp=>{
+      inp.oninput=()=>{ const r=rec(selected), k=inp.dataset.time;
+        r.tmin[k]= inp.value===""?null:Math.max(0,+inp.value);
+        const day=byDate[selected], e=day.expected[k], act=+inp.value||0;
+        const bar=inp.closest(".rw-tcell").querySelector(".rw-tbar>i");
+        if(bar) bar.style.width=Math.round((e?Math.min(1,act/e):(act>0?1:0))*100)+"%"; };
+      inp.onchange=()=>{ syncNow(rec(selected),"trackhawk: study time "+selected); };
+    });
 
-    root.querySelectorAll("[data-num]").forEach(inp=>inp.oninput=()=>{ const r=rec(selected), k=inp.dataset.num;
-      r[k]= inp.value===""?(k==="problems"?null:0):Math.max(0,+inp.value); syncSoon(r,"trackhawk: study "+k+" "+selected); });
+    root.querySelectorAll("[data-num]").forEach(inp=>{
+      inp.oninput=()=>{ const r=rec(selected), k=inp.dataset.num;
+        r[k]= inp.value===""?(k==="problems"?null:0):Math.max(0,+inp.value); };
+      inp.onchange=()=>{ syncNow(rec(selected),"trackhawk: study "+inp.dataset.num+" "+selected); };
+    });
 
     const note=root.querySelector("#rw-note");
-    if(note){ note.oninput=()=>{ const r=rec(selected); r.note=note.value; syncSoon(r,"trackhawk: study note "+selected); };
-      note.onblur=()=>{ const r=rec(selected); r.note=note.value; syncNow(r,"trackhawk: study note "+selected); }; }
+    if(note){
+      note.oninput=()=>{ rec(selected).note=note.value; };                 // memory only, no re-render
+      note.onchange=()=>{ const r=rec(selected); r.note=note.value; syncNow(r,"trackhawk: study note "+selected); };
+    }
   }
 
   return {render};
