@@ -9,9 +9,9 @@ const ROADMAP = (() => {
   const esc = s => String(s ?? "").replace(/[&<>"']/g,
     c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 
-  /* day 0 = Mon 21 Sep 2026 */
-  const DNUM = [21,22,23,24,25,26,27,28,29,30,1,2,3,4,5,6,7,8,9,10,11];
-  const WEEKS = [["Week 1","21 – 27 Sep"], ["Week 2","28 Sep – 4 Oct"], ["Week 3","5 – 11 Oct"]];
+  /* day 0 = Mon 28 Sep 2026 */
+  const DNUM = [28,29,30,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
+  const WEEKS = [["Week 1","28 Sep – 4 Oct"], ["Week 2","5 – 11 Oct"], ["Week 3","12 – 18 Oct"]];
 
   const LADDER = [
     {score: "4.0", label: "today — JS, no tests",    color: "var(--rejected, #6C7080)"},
@@ -22,15 +22,15 @@ const ROADMAP = (() => {
   ];
 
   const MILES = [
-    {when: "Sun 27 Sep", what: "Auth → create → list, end to end", color: "var(--s-applied)"},
-    {when: "Sun 4 Oct",  what: "mvn verify green + coverage",      color: "var(--s-screen)"},
-    {when: "Sun 11 Oct", what: "Shipped · pitched · pinned",       color: "var(--marker)"},
+    {when: "Sun 4 Oct",  what: "Auth → create → list, end to end", color: "var(--s-applied)"},
+    {when: "Sun 11 Oct", what: "mvn verify green + coverage",      color: "var(--s-screen)"},
+    {when: "Sun 18 Oct", what: "Shipped · pitched · pinned",       color: "var(--marker)"},
   ];
 
   const PHASES = [
     {
       id: "p0", tag: "Phase 0 · harden", name: "Fix the JS you already shipped",
-      when: "Mon 21 – Tue 22 Sep · 2 evenings", color: "var(--violet)",
+      when: "Mon 28 – Tue 29 Sep · 2 evenings", color: "var(--violet)",
       bar: {s: 0, e: 1, text: "Phase 0"},
       tasks: [
         "Sanitize the card <code>idea</code> field — whitelist &lt;b&gt; only (closes the import XSS)",
@@ -42,7 +42,7 @@ const ROADMAP = (() => {
     },
     {
       id: "p1", tag: "Phase 1 · spring", name: "The Java backend",
-      when: "Wed 23 – Sun 27 Sep · 3 evenings + weekend", color: "var(--ink)",
+      when: "Wed 30 Sep – Sun 4 Oct · 3 evenings + weekend", color: "var(--ink)",
       bar: {s: 2, e: 6, text: "Phase 1 — entities · JPA · auth"},
       tasks: [
         "Initializr: Web, Data JPA, Security, Validation, Postgres, Flyway, Actuator",
@@ -56,7 +56,7 @@ const ROADMAP = (() => {
     },
     {
       id: "p2", tag: "Phase 2 · tests", name: "The part that gets you hired",
-      when: "Mon 28 Sep – Fri 2 Oct · 5 evenings", color: "var(--cyan)",
+      when: "Mon 5 – Fri 9 Oct · 5 evenings", color: "var(--cyan)",
       bar: {s: 7, e: 11, text: "Phase 2 — JUnit · Testcontainers"},
       tasks: [
         "JUnit 5 + Mockito per service — happy path <i>and</i> one failure path each",
@@ -69,7 +69,7 @@ const ROADMAP = (() => {
     },
     {
       id: "ps", tag: "Stretch · cut me first", name: "Wire the PWA to the API",
-      when: "Sat 3 – Sun 4 Oct · weekend", color: "var(--mute)", ghost: true,
+      when: "Sat 10 – Sun 11 Oct · weekend", color: "var(--mute)", ghost: true,
       bar: {s: 12, e: 13, text: "stretch", ghost: true},
       tasks: [
         "\"Backend mode\" adapter in <code>core.js</code> (GitHub mode stays)",
@@ -78,7 +78,7 @@ const ROADMAP = (() => {
     },
     {
       id: "p3", tag: "Phase 3 · ops", name: "Runnable by a stranger",
-      when: "Mon 5 – Tue 6 Oct · 2 evenings", color: "var(--amber)",
+      when: "Mon 12 – Tue 13 Oct · 2 evenings", color: "var(--amber)",
       bar: {s: 14, e: 15, text: "Phase 3"},
       tasks: [
         "Multi-stage Dockerfile",
@@ -89,7 +89,7 @@ const ROADMAP = (() => {
     },
     {
       id: "p4", tag: "Phase 4 · the hard thing", name: "One thing done properly",
-      when: "Wed 7 – Fri 9 Oct · 3 evenings", color: "var(--marker)",
+      when: "Wed 14 – Fri 16 Oct · 3 evenings", color: "var(--marker)",
       bar: {s: 16, e: 18, text: "Phase 4"},
       tasks: [
         "<code>@Version</code> optimistic locking on Job and Card",
@@ -101,7 +101,7 @@ const ROADMAP = (() => {
     },
     {
       id: "p5", tag: "Phase 5 · the pitch", name: "Nobody reads code they can't run",
-      when: "Sat 10 – Sun 11 Oct · weekend", color: "var(--lime)",
+      when: "Sat 17 – Sun 18 Oct · weekend", color: "var(--lime)",
       bar: {s: 19, e: 20, text: "Phase 5"},
       tasks: [
         "README: problem → constraint → architecture diagram → tradeoffs",
