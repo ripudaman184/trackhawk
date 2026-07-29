@@ -51,6 +51,25 @@ const RUNWAY = (() => {
       transition:width .55s cubic-bezier(.2,.8,.2,1)}
     .rw-meter .rw-now{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--paper);opacity:.75;border-radius:2px}
     .rw-meter .rw-now:after{content:"";position:absolute;top:-3px;left:-2px;width:6px;height:6px;border-radius:50%;background:var(--paper)}
+    .rw-plane{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:15px;filter:drop-shadow(0 0 6px rgba(200,255,50,.7));
+      transition:left 1.1s cubic-bezier(.34,1.2,.5,1);pointer-events:none;z-index:3}
+    .rw-flame{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);font-weight:700;
+      margin-left:auto;padding-right:12px;animation:rw-flick 1.6s ease-in-out infinite}
+    @keyframes rw-flick{0%,100%{opacity:1;transform:translateY(0)}50%{opacity:.75;transform:translateY(-1px)}}
+    .rw-rtop .pct{margin-left:0}
+    /* completed-pip checkmark + phase-tint hover glow + hot-day spark + click ripple */
+    .rw-pip .rw-tick{position:absolute;top:2px;right:3px;font-size:8px;color:#12121a;font-style:normal;z-index:3;font-weight:800}
+    .rw-pip:hover{box-shadow:0 8px 18px -6px var(--tint,rgba(0,0,0,.75)),0 0 0 1px var(--tint,transparent) inset}
+    .rw-pip.hot:before{content:"";position:absolute;top:3px;left:3px;width:4px;height:4px;border-radius:50%;
+      background:var(--cyan);box-shadow:0 0 5px var(--cyan);z-index:3;animation:rw-pulse 1.8s ease-in-out infinite}
+    @keyframes rw-pulse{0%,100%{opacity:.5;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+    .rw-pip.today{animation:rw-breathe 2.4s ease-in-out infinite}
+    @keyframes rw-breathe{0%,100%{box-shadow:0 0 0 2px rgba(255,176,32,.28)}50%{box-shadow:0 0 0 4px rgba(255,176,32,.14)}}
+    .rw-pip.just{animation:rw-pop .4s cubic-bezier(.3,1.5,.5,1)}
+    @keyframes rw-pop{0%{transform:scale(1)}40%{transform:scale(1.22)}100%{transform:scale(1)}}
+    .rw-ripple{position:absolute;border-radius:50%;background:var(--lime);opacity:.5;transform:translate(-50%,-50%);
+      pointer-events:none;animation:rw-rip .5s ease-out forwards;z-index:5}
+    @keyframes rw-rip{to{width:60px;height:60px;opacity:0}}
 
     /* month band (single-strip mode only) */
     .rw-months{display:none;grid-template-columns:repeat(53,1fr);gap:3px;margin-bottom:8px}
@@ -313,7 +332,7 @@ const RUNWAY = (() => {
   function syncNow(r, msg)  { TH.put("study", r, msg); }
 
   /* ---------------------------------------------------------------- state */
-  let keepSpineFocus = false;
+  let keepSpineFocus = false, justPopped = null;
   const rt = () => { const n = new Date(); return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0"); };
   const clamp = iso => iso < START ? START : iso > END ? END : (byDate[iso] ? iso : START);
   const today = clamp(rt());
@@ -393,19 +412,19 @@ const RUNWAY = (() => {
 
   /* ------------------------------------------------------------ sub-views */
   const DOWI = {Mon:0,Tue:1,Wed:2,Thu:3,Fri:4,Sat:5,Sun:6};
+  const PHASE_TINT = {AUTO:"rgba(255,176,32,.55)", SPRING:"rgba(200,255,50,.5)", PREP:"rgba(34,211,197,.5)"};
   function spineHTML() {
     const doneN = SCHEDULE.filter(d=>comp(d.date)>=0.999).length;
     const idx = SCHEDULE.findIndex(d=>d.date===today)+1;
     const overall = SCHEDULE.reduce((a,d)=>a+comp(d.date),0)/SCHEDULE.length;
     const elapsed = Math.max(0,Math.min(1, idx/SCHEDULE.length));
+    const cur = streak();
 
-    // month band, aligned to the same 53 columns as the pips
     const months=[]; SCHEDULE.forEach(d=>{ const m=months[months.length-1];
       if (m && m.k===d.month) m.n++; else months.push({k:d.month,n:1}); });
-    const FULL={Jul:"July",Aug:"August",Sep:"September"};
+    const FULL={Jul:"July",Aug:"August",Sep:"September",Oct:"October"};
     const band = months.map(m=>`<div class="rw-mo" style="grid-column:span ${m.n}">${m.n>4?(FULL[m.k]||m.k):m.k}</div>`).join("");
 
-    // leading blanks so the calendar view lines up under Mon–Sun
     const pad = DOWI[SCHEDULE[0].dow] || 0;
     let cells = ""; for (let i=0;i<pad;i++) cells += `<div class="rw-pip rw-pad"></div>`;
 
@@ -417,22 +436,30 @@ const RUNWAY = (() => {
       if (day.date===today) cls.push("today");
       if (day.date===selected) cls.push("sel");
       if (day.milestone) cls.push("mile");
+      if (day.type==="weekday" && day.prep>=4) cls.push("hot");   // headline-prep days get a spark
+      const tint = day.type==="weekday" ? PHASE_TINT[day.phase] : PHASE_TINT.PREP;
       cells += `<button class="${cls.join(" ")}" data-goto="${day.date}" type="button"
+        style="--tint:${tint}"
         aria-label="Day ${day.id}, ${day.dow} ${day.month} ${day.day}, ${Math.round(c*100)}% done">
-        ${c>0?`<i class="rw-fill" style="height:${Math.round(c*100)}%"></i>`:""}<b>${day.day}</b></button>`;
+        ${c>0?`<i class="rw-fill" style="height:${Math.round(c*100)}%"></i>`:""}<b>${day.day}</b>${c>=0.999?'<em class="rw-tick">✓</em>':""}</button>`;
     });
-
-    // trailing blanks so the calendar's last row is a full week, not a stray cell
     const tail = (7 - ((pad + SCHEDULE.length) % 7)) % 7;
     for (let i=0;i<tail;i++) cells += `<div class="rw-pip rw-pad"></div>`;
 
-    const behind = overall < elapsed - 0.02;
+    const behind = overall < elapsed - 0.02, ahead = overall > elapsed + 0.02;
+    const quips = behind ? ["catch the tail","a little behind the line","the plan's ahead of you — reel it in"]
+                : ahead ? ["ahead of the line ✦","flying","you're beating the plan"]
+                : ["dead on the line","right on schedule","locked in"];
+    const quip = quips[idx % quips.length];
+    const flame = cur>0 ? `<span class="rw-flame" title="${cur}-day streak">🔥 ${cur}</span>` : "";
+
     return `<div class="rw-runway">
       <div class="rw-rtop"><h2>The runway</h2>
-        <span class="sub">Day ${idx} of ${SCHEDULE.length} · ${doneN} complete · ${behind?"behind the line":"on the line"}</span>
-        <span class="pct">${Math.round(overall*100)}%</span></div>
+        <span class="sub">Day ${idx} of ${SCHEDULE.length} · ${doneN} complete · ${quip}</span>
+        ${flame}<span class="pct">${Math.round(overall*100)}%</span></div>
       <div class="rw-meter"><i style="width:${Math.round(overall*100)}%"></i>
-        <span class="rw-now" style="left:${(elapsed*100).toFixed(1)}%" title="where the plan expects you today"></span></div>
+        <span class="rw-now" style="left:${(elapsed*100).toFixed(1)}%" title="where the plan expects you today"></span>
+        <span class="rw-plane" style="left:${(overall*100).toFixed(1)}%" aria-hidden="true">✈</span></div>
       <div class="rw-months">${band}</div>
       <div class="rw-dowhd"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
       <div class="rw-spine">${cells}</div>
@@ -442,7 +469,7 @@ const RUNWAY = (() => {
         <span><i class="rw-dot" style="background:#1d1830;border:1px solid #2c2444"></i>weekend</span>
         <span><i class="rw-dot" style="border:1px solid var(--amber)"></i>today</span>
         <span><i class="rw-dot" style="background:var(--amber);transform:rotate(45deg);border-radius:1px;width:7px;height:7px"></i>milestone</span>
-        <span style="margin-left:auto;opacity:.75">tap a day to open it</span></div>
+        <span style="margin-left:auto;opacity:.7">✈ = your progress · │ = today's target</span></div>
       <div class="rw-tip"></div></div>`;
   }
 
@@ -698,6 +725,8 @@ const RUNWAY = (() => {
 
     if (view==="today") {
       if (keepSpineFocus) { const sp=root.querySelector(".rw-spine .sel"); if(sp) sp.focus({preventScroll:true}); keepSpineFocus=false; }
+      if (justPopped) { const pp=root.querySelector('.rw-spine .rw-pip[data-goto="'+justPopped+'"]');
+        if(pp){ pp.classList.add("just"); setTimeout(()=>pp.classList.remove("just"),450); } justPopped=null; }
       if (activeNote && activeSel) { const n=root.querySelector(activeSel);
         if(n){ n.focus({preventScroll:true}); try{ if(caret!=null) n.setSelectionRange(caret,caret); }catch(e){} } }
     }
@@ -706,8 +735,15 @@ const RUNWAY = (() => {
   function wire(root) {
     root.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{ view=b.dataset.v; render(); });
     root.querySelectorAll("[data-seg] [data-r]").forEach(b=>b.onclick=()=>{ rollMode=b.dataset.r; render(); });
-    root.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>{ selected=b.dataset.goto;
-      if (b.dataset.open){ view="today"; window.scrollTo({top:0,behavior:"smooth"}); } render(); });
+    root.querySelectorAll("[data-goto]").forEach(b=>b.onclick=ev=>{
+      if (b.classList.contains("rw-pip")) {   // little ripple on the runway pips
+        const host=b.closest(".rw-runway"); if(host){ const r=host.getBoundingClientRect(), br=b.getBoundingClientRect();
+          const rip=document.createElement("span"); rip.className="rw-ripple"; rip.style.width=rip.style.height="8px";
+          rip.style.left=(br.left-r.left+br.width/2)+"px"; rip.style.top=(br.top-r.top+br.height/2)+"px";
+          host.appendChild(rip); setTimeout(()=>rip.remove(),480); } }
+      selected=b.dataset.goto;
+      if (b.dataset.open){ view="today"; window.scrollTo({top:0,behavior:"smooth"}); } render();
+    });
 
     /* runway: hover cards + keyboard scrubbing */
     const card=root.querySelector(".rw-runway"), tip=root.querySelector(".rw-tip");
@@ -747,7 +783,11 @@ const RUNWAY = (() => {
     const jump=root.querySelector("[data-jump]"); if(jump) jump.onclick=()=>{ selected=today; render(); };
 
     root.querySelectorAll("[data-tog]").forEach(li=>li.onclick=()=>{ const r=rec(selected); const id=li.dataset.tog;
-      r.done[id]=!r.done[id]; syncNow(r, `trackhawk: study ${r.done[id]?"✓":"✗"} ${selected} ${id}`); render(); });
+      const before=comp(selected); r.done[id]=!r.done[id];
+      syncNow(r, `trackhawk: study ${r.done[id]?"✓":"✗"} ${selected} ${id}`);
+      justPopped = (before<0.999 && comp(selected)>=0.999) ? selected : null;  // full-day completion -> celebrate
+      render();
+    });
 
     // Inputs update memory (and the visual bar) on every keystroke, but only PERSIST
     // on change/blur — so no sync-driven re-render happens while you're typing.
