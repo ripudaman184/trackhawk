@@ -51,6 +51,15 @@ const RUNWAY = (() => {
       transition:width .55s cubic-bezier(.2,.8,.2,1)}
     .rw-meter .rw-now{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--paper);opacity:.75;border-radius:2px}
     .rw-meter .rw-now:after{content:"";position:absolute;top:-3px;left:-2px;width:6px;height:6px;border-radius:50%;background:var(--paper)}
+    .rw-meter{cursor:pointer;touch-action:none}
+    .rw-scrub{position:absolute;top:50%;width:15px;height:15px;border-radius:50%;background:var(--paper);
+      border:2px solid var(--canvas,#0A0A0C);transform:translate(-50%,-50%);cursor:grab;z-index:6;
+      box-shadow:0 2px 7px rgba(0,0,0,.65);transition:left .18s ease, transform .1s}
+    .rw-scrub:hover{transform:translate(-50%,-50%) scale(1.18)}
+    .rw-scrub.grabbing{cursor:grabbing;transition:none;transform:translate(-50%,-50%) scale(1.25);
+      box-shadow:0 0 0 6px rgba(242,242,244,.14),0 2px 7px rgba(0,0,0,.65)}
+    .rw-scrub:after{content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:50%;
+      background:var(--canvas,#0A0A0C);transform:translate(-50%,-50%)}
     .rw-plane{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:15px;filter:drop-shadow(0 0 6px rgba(200,255,50,.7));
       transition:left 1.1s cubic-bezier(.34,1.2,.5,1);pointer-events:none;z-index:3}
     .rw-flame{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);font-weight:700;
@@ -72,9 +81,10 @@ const RUNWAY = (() => {
     @keyframes rw-rip{to{width:60px;height:60px;opacity:0}}
 
     /* month band (single-strip mode only) */
-    .rw-months{display:none;grid-template-columns:repeat(53,1fr);gap:3px;margin-bottom:8px}
-    .rw-mo{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
-      color:var(--mute);border-left:1px solid var(--line2);padding-left:5px;white-space:nowrap;overflow:hidden}
+    .rw-months{display:none;grid-template-columns:repeat(var(--n,53),1fr);gap:3px;margin-bottom:8px}
+    .rw-mo{cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
+      color:var(--mute);border-left:1px solid var(--line2);padding-left:5px;white-space:nowrap;overflow:hidden;transition:color .12s}
+    .rw-mo:hover{color:var(--paper)}
 
     /* weekday header (calendar mode only) */
     .rw-dowhd{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:6px}
@@ -88,6 +98,7 @@ const RUNWAY = (() => {
     .rw-pip:hover{transform:translateY(-3px);border-color:#4c4c5c;box-shadow:0 8px 16px -6px rgba(0,0,0,.75);z-index:3}
     .rw-pip:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
     .rw-pip.wknd{background:#1d1830;border-color:#2c2444}
+    .rw-cap{position:absolute;top:0;left:0;right:0;height:3px;border-radius:7px 7px 0 0;background:var(--tint,#2c2c38);opacity:.9;z-index:2}
     .rw-fill{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(180deg,#d8ff63,var(--lime));
       transition:height .45s cubic-bezier(.2,.8,.2,1)}
     .rw-pip.full{border-color:var(--lime)}
@@ -291,7 +302,7 @@ const RUNWAY = (() => {
     @media(min-width:900px){
       .rw-two{grid-template-columns:1fr 1fr}
       .rw-tgrid{grid-template-columns:repeat(4,1fr)}
-      .rw-spine{grid-template-columns:repeat(53,1fr);gap:3px}
+      .rw-spine{grid-template-columns:repeat(var(--n,53),1fr);gap:3px}
       .rw-pip{height:42px;border-radius:5px}
       .rw-pip b{display:none}
       .rw-pad{display:none}
@@ -332,7 +343,7 @@ const RUNWAY = (() => {
   function syncNow(r, msg)  { TH.put("study", r, msg); }
 
   /* ---------------------------------------------------------------- state */
-  let keepSpineFocus = false, justPopped = null;
+  let keepSpineFocus = false, justPopped = null, meterDrag = false, rafPend = false, keepMeterGrab = false;
   const rt = () => { const n = new Date(); return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0"); };
   const clamp = iso => iso < START ? START : iso > END ? END : (byDate[iso] ? iso : START);
   const today = clamp(rt());
@@ -423,7 +434,7 @@ const RUNWAY = (() => {
     const months=[]; SCHEDULE.forEach(d=>{ const m=months[months.length-1];
       if (m && m.k===d.month) m.n++; else months.push({k:d.month,n:1}); });
     const FULL={Jul:"July",Aug:"August",Sep:"September",Oct:"October"};
-    const band = months.map(m=>`<div class="rw-mo" style="grid-column:span ${m.n}">${m.n>4?(FULL[m.k]||m.k):m.k}</div>`).join("");
+    const band = months.map(m=>`<div class="rw-mo" data-mk="${m.k}" style="grid-column:span ${m.n}">${m.n>4?(FULL[m.k]||m.k):m.k}</div>`).join("");
 
     const pad = DOWI[SCHEDULE[0].dow] || 0;
     let cells = ""; for (let i=0;i<pad;i++) cells += `<div class="rw-pip rw-pad"></div>`;
@@ -438,14 +449,16 @@ const RUNWAY = (() => {
       if (day.milestone) cls.push("mile");
       if (day.type==="weekday" && day.prep>=4) cls.push("hot");   // headline-prep days get a spark
       const tint = day.type==="weekday" ? PHASE_TINT[day.phase] : PHASE_TINT.PREP;
+      const capOn = c<1;   // hide cap once fully done so the green reads clean
       cells += `<button class="${cls.join(" ")}" data-goto="${day.date}" type="button"
         style="--tint:${tint}"
         aria-label="Day ${day.id}, ${day.dow} ${day.month} ${day.day}, ${Math.round(c*100)}% done">
-        ${c>0?`<i class="rw-fill" style="height:${Math.round(c*100)}%"></i>`:""}<b>${day.day}</b>${c>=0.999?'<em class="rw-tick">✓</em>':""}</button>`;
+        <i class="rw-cap"></i>${c>0?`<i class="rw-fill" style="height:${Math.round(c*100)}%"></i>`:""}<b>${day.day}</b>${c>=0.999?'<em class="rw-tick">✓</em>':""}</button>`;
     });
     const tail = (7 - ((pad + SCHEDULE.length) % 7)) % 7;
     for (let i=0;i<tail;i++) cells += `<div class="rw-pip rw-pad"></div>`;
 
+    const selFrac = SCHEDULE.findIndex(d=>d.date===selected)/(SCHEDULE.length-1);
     const behind = overall < elapsed - 0.02, ahead = overall > elapsed + 0.02;
     const quips = behind ? ["catch the tail","a little behind the line","the plan's ahead of you — reel it in"]
                 : ahead ? ["ahead of the line ✦","flying","you're beating the plan"]
@@ -459,10 +472,11 @@ const RUNWAY = (() => {
         ${flame}<span class="pct">${Math.round(overall*100)}%</span></div>
       <div class="rw-meter"><i style="width:${Math.round(overall*100)}%"></i>
         <span class="rw-now" style="left:${(elapsed*100).toFixed(1)}%" title="where the plan expects you today"></span>
-        <span class="rw-plane" style="left:${(overall*100).toFixed(1)}%" aria-hidden="true">✈</span></div>
-      <div class="rw-months">${band}</div>
+        <span class="rw-plane" style="left:${(overall*100).toFixed(1)}%" aria-hidden="true">✈</span>
+        <span class="rw-scrub" style="left:${(selFrac*100).toFixed(1)}%" title="drag to fly through the plan"></span></div>
+      <div class="rw-months" style="--n:${SCHEDULE.length}">${band}</div>
       <div class="rw-dowhd"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
-      <div class="rw-spine">${cells}</div>
+      <div class="rw-spine" style="--n:${SCHEDULE.length}" tabindex="0">${cells}</div>
       <div class="rw-legend">
         <span><i class="rw-dot" style="background:var(--lime)"></i>done</span>
         <span><i class="rw-dot" style="background:#191920;border:1px solid #24242d"></i>weekday</span>
@@ -727,6 +741,7 @@ const RUNWAY = (() => {
       if (keepSpineFocus) { const sp=root.querySelector(".rw-spine .sel"); if(sp) sp.focus({preventScroll:true}); keepSpineFocus=false; }
       if (justPopped) { const pp=root.querySelector('.rw-spine .rw-pip[data-goto="'+justPopped+'"]');
         if(pp){ pp.classList.add("just"); setTimeout(()=>pp.classList.remove("just"),450); } justPopped=null; }
+      if (keepMeterGrab) { const sc=root.querySelector(".rw-scrub"); if(sc) sc.classList.add("grabbing"); }
       if (activeNote && activeSel) { const n=root.querySelector(activeSel);
         if(n){ n.focus({preventScroll:true}); try{ if(caret!=null) n.setSelectionRange(caret,caret); }catch(e){} } }
     }
@@ -767,6 +782,31 @@ const RUNWAY = (() => {
         pip.onfocus=()=>show(pip);      pip.onblur=hide;
       });
       card.onmouseleave=hide;
+
+      // ---- draggable scrubber: grab the handle or press anywhere on the meter to fly ----
+      const meter=root.querySelector(".rw-meter"), scrub=root.querySelector(".rw-scrub");
+      if (meter) {
+        const idxFromX = clientX => { const r=meter.getBoundingClientRect();
+          const f=Math.max(0,Math.min(1,(clientX-r.left)/r.width)); return Math.round(f*(SCHEDULE.length-1)); };
+        const applyX = clientX => { const j=idxFromX(clientX);
+          if (SCHEDULE[j] && SCHEDULE[j].date!==selected){ selected=SCHEDULE[j].date;
+            if(!rafPend){ rafPend=true; requestAnimationFrame(()=>{ rafPend=false; keepMeterGrab=true; render(); }); } } };
+        const move = e => { if(!meterDrag) return; e.preventDefault(); applyX(e.touches?e.touches[0].clientX:e.clientX); };
+        const up = () => { meterDrag=false; keepMeterGrab=false;
+          document.removeEventListener("pointermove",move); document.removeEventListener("pointerup",up);
+          document.removeEventListener("touchmove",move); document.removeEventListener("touchend",up);
+          const sc=root.querySelector(".rw-scrub"); if(sc) sc.classList.remove("grabbing"); };
+        const down = e => { meterDrag=true; const sc=root.querySelector(".rw-scrub"); if(sc) sc.classList.add("grabbing");
+          applyX(e.touches?e.touches[0].clientX:e.clientX);
+          document.addEventListener("pointermove",move); document.addEventListener("pointerup",up);
+          document.addEventListener("touchmove",move,{passive:false}); document.addEventListener("touchend",up); };
+        meter.onpointerdown = down; meter.ontouchstart = e=>{ e.preventDefault(); down(e); };
+      }
+
+      // ---- click a month label to jump to its first day ----
+      root.querySelectorAll(".rw-months .rw-mo").forEach(mo=>mo.onclick=()=>{
+        const key=mo.dataset.mk; const d=SCHEDULE.find(x=>x.month===key); if(d){ selected=d.date; render(); } });
+
       const spine=root.querySelector(".rw-spine");
       if (spine) spine.onkeydown=e=>{
         const step={ArrowLeft:-1,ArrowRight:1,ArrowUp:-7,ArrowDown:7}[e.key];
