@@ -1,6 +1,6 @@
 /* TrackHawk service worker — caches the shell so the app opens instantly and
    works offline. Data is never cached here; it lives encrypted in the vault. */
-const CACHE = "trackhawk-v7";
+const CACHE = "trackhawk-v8";
 const SHELL = [
   "./", "./index.html", "./css/style.css",
   "./js/core.js", "./js/jobs.js", "./js/cards.js", "./js/roadmap.js", "./js/runway.js", "./js/main.js",
@@ -8,7 +8,9 @@ const SHELL = [
 ];
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE)
+    .then(c => c.addAll(SHELL.map(u => new Request(u, {cache: "reload"}))))
+    .then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", e => {
