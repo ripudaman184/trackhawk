@@ -11,7 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<script>window.TH_BUILD="9";</script>
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body>
 
@@ -267,7 +268,7 @@
         <h1 class="rm-title">TRACKHAWK <span>2.0</span></h1>
         <p class="rm-sub">JS toy → Java artifact · 3 weeks · ~44 focused hours</p>
       </div>
-      <div class="rm-window">Mon 5 Oct → Sun 25 Oct 2026</div>
+      <div class="rm-window">Mon 12 Oct → Sun 1 Nov 2026</div>
     </div>
 
     <div class="rm-progress">
@@ -517,15 +518,26 @@
 
 <div id="toast" class="toast is-hidden"></div>
 
-<script src="js/core.js"></script>
-<script src="js/jobs.js"></script>
-<script src="js/cards.js"></script>
-<script src="js/roadmap.js"></script>
-<script src="js/runway.js"></script>
-<script src="js/main.js"></script>
+<script src="js/core.js?v=9"></script>
+<script src="js/jobs.js?v=9"></script>
+<script src="js/cards.js?v=9"></script>
+<script src="js/roadmap.js?v=9"></script>
+<script src="js/runway.js?v=9"></script>
+<script src="js/main.js?v=9"></script>
 <script>
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+    /* A new build changes every ?v= on the page, so the browser HTTP cache and the
+       SW cache are both bypassed on load. But a tab that is ALREADY open keeps
+       running the old JS until something reloads it — which is why pushed changes
+       used to look like they never deployed. When the fresh worker takes control,
+       reload once (guarded, so the reload itself can't loop).                    */
+    let swapped = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (swapped) return; swapped = true; location.reload();
+    });
+    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js?v=9")
+      .then(reg => { reg.update(); setInterval(() => reg.update(), 60 * 60 * 1000); })
+      .catch(() => {}));
   }
 </script>
 </body>
