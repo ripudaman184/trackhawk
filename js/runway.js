@@ -538,21 +538,38 @@ const RUNWAY = (() => {
   function streak() { let s=0; for (const iso of SCHEDULE.map(d=>d.date).filter(d=>d<=today).reverse()) {
     if (comp(iso) > 0) s++; else break; } return s; }
 
-  /* ---- pace & projection ------------------------------------------------ */
+  /* ---- pace & projection -------------------------------------------------
+     Everything here is denominated in DAYS, not percentages. Percentages of a
+     day are hard to feel, and the old "needed daily" figure could never drop
+     below 100% by construction, so it read as a permanent scolding.
+
+     Two further corrections over the first cut:
+       - `earned` sums EVERY completed day, not just days up to today, so work
+         done ahead of schedule actually registers;
+       - the projection uses a trailing 7-day window that excludes today, so a
+         part-finished evening can't drag the forecast around, and it stays
+         silent until there are enough finished days to mean anything.        */
   function pace() {
-    const past = SCHEDULE.filter(d => d.date <= today);
-    const n = past.length || 1;
-    const earned = past.reduce((a,d) => a + comp(d.date), 0);   // day-equivalents banked
-    const rate = earned / n;
-    const remain = SCHEDULE.length - past.length;
-    const proj = (earned + rate * remain) / SCHEDULE.length;
-    const debt = past.length - earned;
-    const need = remain > 0 ? (SCHEDULE.length - earned) / remain : 0;
-    const tDone = comp(today);
-    const sEarned = earned - tDone, sRate = sEarned / n;
-    const skipProj = (sEarned + sRate * remain) / SCHEDULE.length;
-    const skipNeed = remain > 0 ? (SCHEDULE.length - sEarned) / remain : 0;
-    return {n, earned, rate, remain, proj, debt, need, tDone, skipProj, skipNeed};
+    const n = SCHEDULE.length;
+    const prior   = SCHEDULE.filter(d => d.date <  today);   // fully passed
+    const elapsed = SCHEDULE.filter(d => d.date <= today).length || 1;
+    const after   = n - elapsed;                             // days after today
+    const earned  = SCHEDULE.reduce((a,d) => a + comp(d.date), 0);
+    const tDone   = comp(today);
+
+    /* work banked on every day EXCEPT today, measured against the days that
+       have fully passed. Today is judged separately, at the end of it.       */
+    const balance = earned - tDone - prior.length;
+
+    const win  = prior.slice(-7);
+    const rate = win.length ? win.reduce((a,d) => a + comp(d.date), 0) / win.length : 0;
+    const settled = prior.length >= 3;
+    const short = Math.max(0, n - (earned + rate * after));
+
+    return {n, elapsed, after, earned, tDone, balance, rate,
+            win: win.length, settled, short,
+            endIfDone: balance,                 // finish tonight's list
+            endIfStop: balance + tDone - 1};    // stop where you are
   }
 
   function ring(pct,size,stroke,color) {
@@ -726,28 +743,40 @@ const RUNWAY = (() => {
   function paceHTML() {
     const p = pace();
     const pc = (cls,k,v,sub) => `<div class="rw-pc ${cls}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`;
-    const rateCls = p.rate>=.95?"good":p.rate>=.75?"warn":"bad";
-    const projCls = p.proj>=.9?"good":p.proj>=.7?"warn":"bad";
-    const balTxt  = p.debt>=.05 ? p.debt.toFixed(1)+" days owed"
-                  : p.debt<=-.05 ? (-p.debt).toFixed(1)+" days banked" : "dead level";
-    const impossible = p.need > 1;
+    const d1 = v => Math.abs(v).toFixed(1);
+    const level = v => Math.abs(v) < 0.05;
+
+    /* where you stand */
+    const balV = level(p.balance) ? "level" : (p.balance>0?"+":"\u2212") + d1(p.balance);
+    const balS = level(p.balance) ? "square with the plan"
+               : p.balance > 0 ? "days banked ahead" : "days of work owed";
+    const balC = level(p.balance) ? "" : p.balance > 0 ? "good" : p.balance < -1.5 ? "bad" : "warn";
+
+    /* the last week, as days rather than a rate */
+    const winV = p.win ? (p.rate*p.win).toFixed(1) + " / " + p.win : "\u2014";
+    const winC = !p.win ? "" : p.rate>=.9 ? "good" : p.rate>=.7 ? "warn" : "bad";
+
+    /* where this lands */
+    const shortV = !p.settled ? "\u2014" : level(p.short) ? "on target" : d1(p.short);
+    const shortS = !p.settled ? "needs a few finished days first"
+                 : level(p.short) ? "finishing the plan clean" : "days short at this rate";
+    const shortC = !p.settled ? "" : level(p.short) ? "good" : p.short > 4 ? "bad" : "warn";
+
+    const say = v => level(v) ? "<b>level with the plan</b>"
+              : v > 0 ? `<b>${d1(v)} days ahead</b>` : `<b>${d1(v)} days behind</b>`;
+
     let what;
-    if (p.remain <= 0) what = `The runway is finished \u2014 everything from here is review and interviews.`;
-    else if (impossible) what = `Finishing every task is out of reach now: it would take <span class="sw">${Math.round(p.need*100)}%</span>
-      of a day's work per day across the ${p.remain} left. Trim scope rather than chase it \u2014 push the low-value items
-      forward and protect the DSA and prep blocks.`;
-    else what = `Skip today and the projection slides from <b>${Math.round(p.proj*100)}%</b> to
-      <span class="sw">${Math.round(p.skipProj*100)}%</span>, and the bar to still finish clean rises to
-      <span class="sw">${Math.round(p.skipNeed*100)}%</span> a day across the remaining ${p.remain}.
-      Clear today instead and you hold at <span class="gd">${Math.round(p.need*100)}%</span> a day.`;
+    if (p.after <= 0 && p.tDone >= 0.999) what = `The runway is finished \u2014 everything from here is review and interviews.`;
+    else if (p.tDone >= 0.999) what = `Today is cleared. You end it ${say(p.endIfDone)}.`;
+    else what = `Finish tonight's list and you end the day ${say(p.endIfDone)}.
+      Stop where you are and it's <span class="sw">${level(p.endIfStop)?"level":d1(p.endIfStop)+" days "+(p.endIfStop>0?"ahead":"behind")}</span>.`;
+
     return `<div class="rw-card"><h3>Pace &amp; projection</h3>
-      <div class="rw-eyebrow" style="margin:-6px 0 12px">Measured over the ${p.n} days elapsed, not the whole plan</div>
+      <div class="rw-eyebrow" style="margin:-6px 0 12px">In days of work \u00b7 today is judged at the end of it</div>
       <div class="rw-pace">
-        ${pc(rateCls,"Current pace",Math.round(p.rate*100)+"%","of a full day, per day")}
-        ${pc(projCls,"Projected finish",Math.round(p.proj*100)+"%","if this pace holds")}
-        ${pc(p.debt>.5?"bad":p.debt<-.05?"good":"","Balance",(p.debt>0?"\u2212":"+")+Math.abs(p.debt).toFixed(1),balTxt)}
-        ${pc(impossible?"bad":p.need>.9?"warn":"good","Needed daily",p.remain?Math.round(p.need*100)+"%":"\u2014",
-             p.remain?(impossible?"more than a full day":"over "+p.remain+" days left"):"no days left")}
+        ${pc(balC,"Where you stand",balV,balS)}
+        ${pc(winC,"Last 7 days",winV,"days cleared")}
+        ${pc(shortC,"Lands you",shortV,shortS)}
       </div>
       <div class="rw-what">${what}</div></div>`;
   }
