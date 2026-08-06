@@ -11,7 +11,7 @@ const RUNWAY = (() => {
   const esc = s => String(s ?? "").replace(/[&<>"']/g,
     c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-  const SCHEDULE = [{"id":1,"date":"2026-08-05","dow":"Wed","month":"Aug","day":5,"prep":1,"weekStart":"2026-08-03","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S1\u20132 \u2014 Introduction & Setup","dsaTask":"[DSA] DSA S1 \u2014 Introduction","lcTask":"[LC] 1\u20132 problems \u00b7 Arrays/Strings","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["pw",1],["pw",2]],"dsaAdv":[1],"lcChapter":"Arrays/Strings","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":2,"date":"2026-08-06","dow":"Thu","month":"Aug","day":6,"prep":1,"weekStart":"2026-08-03","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S3 \u2014 Python basics (part 1)","dsaTask":"[DSA] DSA S2 \u2014 Big-O / run-time analysis","lcTask":"[LC] 1\u20132 problems \u00b7 Arrays/Strings","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["pw",3]],"dsaAdv":[2],"lcChapter":"Arrays/Strings","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":3,"date":"2026-08-07","dow":"Fri","month":"Aug","day":7,"prep":1,"weekStart":"2026-08-03","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S3 \u2014 Python basics (part 2)","dsaTask":"[DSA] DSA S3 \u2014 Array","lcTask":"[LC] 1\u20132 problems \u00b7 Arrays/Strings","morning":"[APPLY] Apply to fresh postings","adv":[["pw",3]],"dsaAdv":[3],"lcChapter":"Arrays/Strings","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":4,"date":"2026-08-08","dow":"Sat","month":"Aug","day":8,"prep":1,"weekStart":"2026-08-03","type":"weekend","phase":"PREP","mainTask":"[PREP] Resume & profile foundation","secondTask":"[JOB] Lock down resume + LinkedIn","prepTasks":["Tailor ATS resume \u2014 add Playwright / automation","Refresh LinkedIn headline & About","Pin GitHub repos, clean up profile"],"jobFocus":"Lock down resume + LinkedIn","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":5,"date":"2026-08-09","dow":"Sun","month":"Aug","day":9,"prep":1,"weekStart":"2026-08-03","type":"weekend","phase":"PREP","mainTask":"[PREP] Applications engine","secondTask":"[JOB] Queue next week's applications","prepTasks":["Build a target-company list for the week","Draft 2 tailored cover lines","Queue Monday-morning applications"],"jobFocus":"Queue next week's applications","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":6,"date":"2026-08-10","dow":"Mon","month":"Aug","day":10,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S4 \u2014 Pytest framework basics","dsaTask":"[DSA] DSA S3 \u2014 Array (cont.)","lcTask":"[LC] 1\u20132 problems \u00b7 Hashing","morning":"[APPLY] Apply + note recruiter contacts","adv":[["pw",4]],"dsaAdv":[3],"lcChapter":"Hashing","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":7,"date":"2026-08-11","dow":"Tue","month":"Aug","day":11,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S5 \u2014 Getting started with automation","dsaTask":"[DSA] DSA S4 \u2014 Linked List","lcTask":"[LC] 1\u20132 problems \u00b7 Hashing","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["pw",5]],"dsaAdv":[4],"lcChapter":"Hashing","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":8,"date":"2026-08-12","dow":"Wed","month":"Aug","day":12,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S6 \u2014 Deep dive into UI methods","dsaTask":"[DSA] DSA S4 \u2014 Linked List (cont.)","lcTask":"[LC] 1\u20132 problems \u00b7 Hashing","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["pw",6]],"dsaAdv":[4],"lcChapter":"Hashing","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":9,"date":"2026-08-13","dow":"Thu","month":"Aug","day":13,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S7 \u2014 UI functional validations & assertions","dsaTask":"[DSA] DSA S5 \u2014 Stack","lcTask":"[LC] 1\u20132 problems \u00b7 Linked Lists","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["pw",7]],"dsaAdv":[5],"lcChapter":"Linked Lists","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":10,"date":"2026-08-14","dow":"Fri","month":"Aug","day":14,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S8 \u2014 API testing (Web & API e2e)","dsaTask":"[DSA] DSA S6 \u2014 Queue","lcTask":"[LC] 1\u20132 problems \u00b7 Linked Lists","morning":"[APPLY] Apply to fresh postings","adv":[["pw",8]],"dsaAdv":[6],"lcChapter":"Linked Lists","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":11,"date":"2026-08-15","dow":"Sat","month":"Aug","day":15,"prep":1,"weekStart":"2026-08-10","type":"weekend","phase":"PREP","mainTask":"[PREP] Flashcards from the week","secondTask":"[JOB] Build flashcards + apply","prepTasks":["Turn this week's logged questions into flashcards","Add Python & Pytest Q&A cards","Drill the new deck once"],"jobFocus":"Build flashcards + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":12,"date":"2026-08-16","dow":"Sun","month":"Aug","day":16,"prep":1,"weekStart":"2026-08-10","type":"weekend","phase":"PREP","mainTask":"[PREP] Automation interview answers","secondTask":"[JOB] Automation Q&A + apply","prepTasks":["Write answers: Playwright locators & auto-waiting","Write answers: Pytest fixtures & POM","Mock: explain your framework design"],"jobFocus":"Automation Q&A + apply","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":13,"date":"2026-08-17","dow":"Mon","month":"Aug","day":17,"prep":1,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S9 \u2014 Network interception","dsaTask":"[DSA] DSA S7 \u2014 Binary Tree","lcTask":"[LC] 1\u20132 problems \u00b7 Linked Lists","morning":"[APPLY] Apply + note recruiter contacts","adv":[["pw",9]],"dsaAdv":[7],"lcChapter":"Linked Lists","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":14,"date":"2026-08-18","dow":"Tue","month":"Aug","day":18,"prep":1,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S10 \u2014 Framework part 1 (POM, data-driven)","dsaTask":"[DSA] DSA S7 \u2014 Binary Tree (cont.)","lcTask":"[LC] 1\u20132 problems \u00b7 Stacks/Queues","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["pw",10]],"dsaAdv":[7],"lcChapter":"Stacks/Queues","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":15,"date":"2026-08-19","dow":"Wed","month":"Aug","day":19,"prep":1,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S11 \u2014 Framework part 2 (config, parallel)","dsaTask":"[DSA] DSA S8 \u2014 Binary Search Tree","lcTask":"[LC] 1\u20132 problems \u00b7 Stacks/Queues","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["pw",11]],"dsaAdv":[8],"lcChapter":"Stacks/Queues","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":16,"date":"2026-08-20","dow":"Thu","month":"Aug","day":20,"prep":2,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S12 \u2014 Framework part 3 (BDD, CI/CD)","dsaTask":"[DSA] DSA S9 \u2014 Binary Heap","lcTask":"[LC] 1\u20132 problems \u00b7 Stacks/Queues","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["pw",12]],"dsaAdv":[9],"lcChapter":"Stacks/Queues","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":17,"date":"2026-08-21","dow":"Fri","month":"Aug","day":21,"prep":2,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S13 \u2014 AI at terminal (Claude Code & MCP)","dsaTask":"[DSA] DSA S10 \u2014 AVL Tree","lcTask":"[LC] 1\u20132 problems \u00b7 Trees/Graphs","morning":"[APPLY] Apply to fresh postings","adv":[["pw",13]],"dsaAdv":[10],"lcChapter":"Trees/Graphs","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":18,"date":"2026-08-22","dow":"Sat","month":"Aug","day":22,"prep":2,"weekStart":"2026-08-17","type":"weekend","phase":"PREP","mainTask":"[PREP] DSA patterns review","secondTask":"[JOB] DSA drilling + apply","prepTasks":["Flashcards: Two Pointers / Sliding Window","Re-solve 3 medium problems from memory","Log the ones you couldn't do"],"jobFocus":"DSA drilling + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":19,"date":"2026-08-23","dow":"Sun","month":"Aug","day":23,"prep":2,"weekStart":"2026-08-17","type":"weekend","phase":"PREP","mainTask":"[PREP] First mock interview","secondTask":"[JOB] Mock interview + apply: 5 roles","prepTasks":["Do 1 full mock interview (record it)","Note every question you fumbled","Turn fumbles into flashcards"],"jobFocus":"Mock interview + apply: 5 roles","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":20,"date":"2026-08-24","dow":"Mon","month":"Aug","day":24,"prep":2,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S14\u201315 \u2014 Interview Qs & wrap  \u25b8 PLAYWRIGHT DONE","dsaTask":"[DSA] DSA S11 \u2014 Trie","lcTask":"[LC] 1\u20132 problems \u00b7 Trees/Graphs","morning":"[APPLY] Apply + note recruiter contacts","adv":[["pw",14],["pw",15]],"dsaAdv":[11],"lcChapter":"Trees/Graphs","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"PW_DONE"},{"id":21,"date":"2026-08-25","dow":"Tue","month":"Aug","day":25,"prep":2,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S1 \u2014 Testing terminologies","dsaTask":"[DSA] DSA S12 \u2014 Searching  \u2726 Aug target","lcTask":"[LC] 1\u20132 problems \u00b7 Trees/Graphs","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["ai",1]],"dsaAdv":[12],"lcChapter":"Trees/Graphs","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"AUG_TARGET"},{"id":22,"date":"2026-08-26","dow":"Wed","month":"Aug","day":26,"prep":2,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S2 \u2014 Prompt engineering (3 C's)","dsaTask":"[DSA] DSA S13 \u2014 Sorting","lcTask":"[LC] 1\u20132 problems \u00b7 Heaps","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["ai",2]],"dsaAdv":[13],"lcChapter":"Heaps","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":23,"date":"2026-08-27","dow":"Thu","month":"Aug","day":27,"prep":2,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S3 \u2014 Test plan / cases with AI","dsaTask":"[DSA] DSA S14 \u2014 Recursion","lcTask":"[LC] 1\u20132 problems \u00b7 Heaps","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["ai",3]],"dsaAdv":[14],"lcChapter":"Heaps","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":24,"date":"2026-08-28","dow":"Fri","month":"Aug","day":28,"prep":2,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S4 \u2014 GitHub Copilot","dsaTask":"[DSA] DSA S15 \u2014 Hashing","lcTask":"[LC] 1\u20132 problems \u00b7 Heaps","morning":"[APPLY] Apply to fresh postings","adv":[["ai",4]],"dsaAdv":[15],"lcChapter":"Heaps","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":25,"date":"2026-08-29","dow":"Sat","month":"Aug","day":29,"prep":2,"weekStart":"2026-08-24","type":"weekend","phase":"PREP","mainTask":"[PREP] Core Java interview answers","secondTask":"[JOB] Java Q&A + apply","prepTasks":["Answers: OOP, collections, generics","Answers: exceptions & streams","Drill Core Java flashcards"],"jobFocus":"Java Q&A + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":26,"date":"2026-08-30","dow":"Sun","month":"Aug","day":30,"prep":3,"weekStart":"2026-08-24","type":"weekend","phase":"PREP","mainTask":"[PREP] Spring & REST answers","secondTask":"[JOB] Spring Q&A + apply","prepTasks":["Answers: IoC/DI, beans, auto-config","Answers: REST, status codes, JPA","Mock: design a small REST API"],"jobFocus":"Spring Q&A + apply","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":27,"date":"2026-08-31","dow":"Mon","month":"Aug","day":31,"prep":3,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S5 \u2014 MCP servers (part 1)","dsaTask":"[DSA] DSA S16 \u2014 Dynamic Programming","lcTask":"[LC] 1\u20132 problems \u00b7 Greedy","morning":"[APPLY] Apply + note recruiter contacts","adv":[["ai",5]],"dsaAdv":[16],"lcChapter":"Greedy","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":28,"date":"2026-09-01","dow":"Tue","month":"Sep","day":1,"prep":3,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S5 \u2014 MCP servers (part 2)","dsaTask":"[DSA] DSA S16 \u2014 DP (cont.)","lcTask":"[LC] 1\u20132 problems \u00b7 Greedy","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["ai",5]],"dsaAdv":[16],"lcChapter":"Greedy","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":29,"date":"2026-09-02","dow":"Wed","month":"Sep","day":2,"prep":3,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S6 \u2014 Multi-agent / agentic AI","dsaTask":"[DSA] DSA S17 \u2014 Graph","lcTask":"[LC] 1\u20132 problems \u00b7 Greedy","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["ai",6]],"dsaAdv":[17],"lcChapter":"Greedy","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":30,"date":"2026-09-03","dow":"Thu","month":"Sep","day":3,"prep":3,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S7 \u2014 Agentic AI for QE (part 1)","dsaTask":"[DSA] DSA S17 \u2014 Graph (cont.)","lcTask":"[LC] 1\u20132 problems \u00b7 Binary Search","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["ai",7]],"dsaAdv":[17],"lcChapter":"Binary Search","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":31,"date":"2026-09-04","dow":"Fri","month":"Sep","day":4,"prep":3,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S7 \u2014 Agentic AI for QE (part 2)","dsaTask":"[DSA] Revise Arrays & Hashing","lcTask":"[LC] 1\u20132 problems \u00b7 Binary Search","morning":"[APPLY] Apply to fresh postings","adv":[["ai",7]],"dsaAdv":[],"lcChapter":"Binary Search","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":32,"date":"2026-09-05","dow":"Sat","month":"Sep","day":5,"prep":3,"weekStart":"2026-08-31","type":"weekend","phase":"PREP","mainTask":"[PREP] Behavioural + system design lite","secondTask":"[JOB] Behavioural prep + apply","prepTasks":["Prep STAR answers for HR round","Sketch 1 system-design walkthrough","Review your logged questions end-to-end"],"jobFocus":"Behavioural prep + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":33,"date":"2026-09-06","dow":"Sun","month":"Sep","day":6,"prep":3,"weekStart":"2026-08-31","type":"weekend","phase":"PREP","mainTask":"[PREP] Full mock + gap-fill","secondTask":"[JOB] Mock #2 + apply: 5 roles","prepTasks":["Second full mock interview","List your 5 weakest topics","Make targeted flashcards for them"],"jobFocus":"Mock #2 + apply: 5 roles","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":34,"date":"2026-09-07","dow":"Mon","month":"Sep","day":7,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S8 \u2014 QA DevOps with AI agents","dsaTask":"[DSA] Revise Linked Lists & Stacks","lcTask":"[LC] 1\u20132 problems \u00b7 Binary Search","morning":"[APPLY] Apply + note recruiter contacts","adv":[["ai",8]],"dsaAdv":[],"lcChapter":"Binary Search","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":35,"date":"2026-09-08","dow":"Tue","month":"Sep","day":8,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S9 \u2014 n8n automation workflows","dsaTask":"[DSA] Revise Trees & BST","lcTask":"[LC] 1\u20132 problems \u00b7 Backtracking","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["ai",9]],"dsaAdv":[],"lcChapter":"Backtracking","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":36,"date":"2026-09-09","dow":"Wed","month":"Sep","day":9,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S10 \u2014 API test code generation","dsaTask":"[DSA] Revise Heaps & Greedy","lcTask":"[LC] 1\u20132 problems \u00b7 Backtracking","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["ai",10]],"dsaAdv":[],"lcChapter":"Backtracking","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":37,"date":"2026-09-10","dow":"Thu","month":"Sep","day":10,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S11 \u2014 Low-code testing tools","dsaTask":"[DSA] Revise Searching & Sorting","lcTask":"[LC] 1\u20132 problems \u00b7 Backtracking","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["ai",11]],"dsaAdv":[],"lcChapter":"Backtracking","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":38,"date":"2026-09-11","dow":"Fri","month":"Sep","day":11,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S12\u201313  \u25b8 AUTOMATION COMPLETE","dsaTask":"[DSA] Revise Recursion & Backtracking","lcTask":"[LC] 1\u20132 problems \u00b7 DP","morning":"[APPLY] Apply to fresh postings","adv":[["ai",12],["ai",13]],"dsaAdv":[],"lcChapter":"DP","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"AUTO_DONE"},{"id":39,"date":"2026-09-12","dow":"Sat","month":"Sep","day":12,"prep":4,"weekStart":"2026-09-07","type":"weekend","phase":"PREP","mainTask":"[PREP] Drill weak spots","secondTask":"[JOB] Weak-spot drilling + apply","prepTasks":["Drill the weak-topic flashcards","Re-solve 5 mixed LeetCode from memory","Review interview-question log"],"jobFocus":"Weak-spot drilling + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":40,"date":"2026-09-13","dow":"Sun","month":"Sep","day":13,"prep":4,"weekStart":"2026-09-07","type":"weekend","phase":"PREP","mainTask":"[PREP] Interview sprint","secondTask":"[JOB] Interview sprint + apply: 5 roles","prepTasks":["Third mock interview","Rapid-fire your full flashcard deck","Tailor resume to your top 3 target roles"],"jobFocus":"Interview sprint + apply: 5 roles","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":41,"date":"2026-09-14","dow":"Mon","month":"Sep","day":14,"prep":4,"weekStart":"2026-09-14","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S1\u20132 \u2014 Course intro + Core Java (start)","dsaTask":"[DSA] Revise DP patterns","lcTask":"[LC] 1\u20132 problems \u00b7 DP","morning":"[APPLY] Apply + note recruiter contacts","adv":[["sp",1],["sp",2]],"dsaAdv":[],"lcChapter":"DP","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":42,"date":"2026-09-15","dow":"Tue","month":"Sep","day":15,"prep":4,"weekStart":"2026-09-14","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S2 \u2014 Core Java","dsaTask":"[DSA] Revise Graphs (BFS/DFS)","lcTask":"[LC] 1\u20132 problems \u00b7 DP","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["sp",2]],"dsaAdv":[],"lcChapter":"DP","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":43,"date":"2026-09-16","dow":"Wed","month":"Sep","day":16,"prep":4,"weekStart":"2026-09-14","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S2 \u2014 Core Java (finish)","dsaTask":"[DSA] Mixed timed review","lcTask":"[LC] 1\u20132 problems \u00b7 Graphs (BFS/DFS)","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["sp",2]],"dsaAdv":[],"lcChapter":"Graphs (BFS/DFS)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":44,"date":"2026-09-17","dow":"Thu","month":"Sep","day":17,"prep":4,"weekStart":"2026-09-14","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S3 \u2014 Advance Java (start)","dsaTask":"[DSA] Mixed timed review","lcTask":"[LC] 1\u20132 problems \u00b7 Graphs (BFS/DFS)","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["sp",3]],"dsaAdv":[],"lcChapter":"Graphs (BFS/DFS)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":45,"date":"2026-09-18","dow":"Fri","month":"Sep","day":18,"prep":4,"weekStart":"2026-09-14","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S3 \u2014 Advance Java","dsaTask":"[DSA] Revise Arrays & Hashing","lcTask":"[LC] 1\u20132 problems \u00b7 Graphs (BFS/DFS)","morning":"[APPLY] Apply to fresh postings","adv":[["sp",3]],"dsaAdv":[],"lcChapter":"Graphs (BFS/DFS)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":46,"date":"2026-09-19","dow":"Sat","month":"Sep","day":19,"prep":4,"weekStart":"2026-09-14","type":"weekend","phase":"PREP","mainTask":"[PREP] Final polish","secondTask":"[JOB] Polish + follow-ups","prepTasks":["Full flashcard review + logged questions","Refine your 90-second pitch","Queue applications + follow-ups"],"jobFocus":"Polish + follow-ups","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":47,"date":"2026-09-20","dow":"Sun","month":"Sep","day":20,"prep":4,"weekStart":"2026-09-14","type":"weekend","phase":"PREP","mainTask":"[PREP] Consolidate & launch","secondTask":"[JOB] Consolidate + apply","prepTasks":["Two-month review \u2014 what clicked","Final resume + LinkedIn pass","Plan the interview-heavy weeks ahead"],"jobFocus":"Consolidate + apply","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":48,"date":"2026-09-21","dow":"Mon","month":"Sep","day":21,"prep":4,"weekStart":"2026-09-21","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S3 \u2014 Advance Java (finish)","dsaTask":"[DSA] Revise Linked Lists & Stacks","lcTask":"[LC] 1\u20132 problems \u00b7 Tools & tricks","morning":"[APPLY] Apply + note recruiter contacts","adv":[["sp",3]],"dsaAdv":[],"lcChapter":"Tools & tricks","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":49,"date":"2026-09-22","dow":"Tue","month":"Sep","day":22,"prep":4,"weekStart":"2026-09-21","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S4 \u2014 Maven","dsaTask":"[DSA] Revise Trees & BST","lcTask":"[LC] 1\u20132 problems \u00b7 Tools & tricks","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["sp",4]],"dsaAdv":[],"lcChapter":"Tools & tricks","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":50,"date":"2026-09-23","dow":"Wed","month":"Sep","day":23,"prep":4,"weekStart":"2026-09-21","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S5 \u2014 JDBC","dsaTask":"[DSA] Revise Heaps & Greedy","lcTask":"[LC] 1\u20132 problems \u00b7 Tools & tricks","morning":"[APPLY] Apply to fresh postings (2\u20133)","adv":[["sp",5]],"dsaAdv":[],"lcChapter":"Tools & tricks","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":51,"date":"2026-09-24","dow":"Thu","month":"Sep","day":24,"prep":4,"weekStart":"2026-09-21","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S6 \u2014 Hibernate (ORM basics)","dsaTask":"[DSA] Revise Searching & Sorting","lcTask":"[LC] 1\u20132 problems \u00b7 Tools & tricks","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["sp",6]],"dsaAdv":[],"lcChapter":"Tools & tricks","expected":{"course":90,"dsa":60,"prep":15,"job":15}}];
+  const SCHEDULE = [{"id":1,"date":"2026-08-10","dow":"Mon","month":"Aug","day":10,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S1–2 — Introduction & Setup","dsaTask":"[DSA] DSA S1 — Introduction","lcTask":"[LC] 1–2 problems · Arrays/Strings","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["pw",1],["pw",2]],"dsaAdv":[1],"lcChapter":"Arrays/Strings","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":2,"date":"2026-08-11","dow":"Tue","month":"Aug","day":11,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S3 — Python basics (part 1)","dsaTask":"[DSA] DSA S2 — Big-O / run-time analysis","lcTask":"[LC] 1–2 problems · Arrays/Strings","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["pw",3]],"dsaAdv":[2],"lcChapter":"Arrays/Strings","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":3,"date":"2026-08-12","dow":"Wed","month":"Aug","day":12,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S3 — Python basics (part 2)","dsaTask":"[DSA] DSA S3 — Array","lcTask":"[LC] 1–2 problems · Arrays/Strings","morning":"[APPLY] Apply to fresh postings","adv":[["pw",3]],"dsaAdv":[3],"lcChapter":"Arrays/Strings","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":4,"date":"2026-08-13","dow":"Thu","month":"Aug","day":13,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S4 — Pytest framework basics","dsaTask":"[DSA] DSA S3 — Array (cont.)","lcTask":"[LC] 1–2 problems · Hashing","morning":"[APPLY] Apply + note recruiter contacts","adv":[["pw",4]],"dsaAdv":[3],"lcChapter":"Hashing","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":5,"date":"2026-08-14","dow":"Fri","month":"Aug","day":14,"prep":1,"weekStart":"2026-08-10","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S5 — Getting started with automation","dsaTask":"[DSA] DSA S4 — Linked List","lcTask":"[LC] 1–2 problems · Hashing","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["pw",5]],"dsaAdv":[4],"lcChapter":"Hashing","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":6,"date":"2026-08-15","dow":"Sat","month":"Aug","day":15,"prep":1,"weekStart":"2026-08-10","type":"weekend","phase":"PREP","mainTask":"[PREP] Resume & profile foundation","secondTask":"[JOB] Lock down resume + LinkedIn","prepTasks":["Tailor ATS resume — add Playwright / automation","Refresh LinkedIn headline & About","Pin GitHub repos, clean up profile"],"jobFocus":"Lock down resume + LinkedIn","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":7,"date":"2026-08-16","dow":"Sun","month":"Aug","day":16,"prep":1,"weekStart":"2026-08-10","type":"weekend","phase":"PREP","mainTask":"[PREP] Applications engine","secondTask":"[JOB] Queue next week's applications","prepTasks":["Build a target-company list for the week","Draft 2 tailored cover lines","Queue Monday-morning applications"],"jobFocus":"Queue next week's applications","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":8,"date":"2026-08-17","dow":"Mon","month":"Aug","day":17,"prep":1,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S6 — Deep dive into UI methods","dsaTask":"[DSA] DSA S4 — Linked List (cont.)","lcTask":"[LC] 1–2 problems · Hashing","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["pw",6]],"dsaAdv":[4],"lcChapter":"Hashing","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":9,"date":"2026-08-18","dow":"Tue","month":"Aug","day":18,"prep":1,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S7 — UI functional validations & assertions","dsaTask":"[DSA] DSA S5 — Stack","lcTask":"[LC] 1–2 problems · Linked Lists","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["pw",7]],"dsaAdv":[5],"lcChapter":"Linked Lists","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":10,"date":"2026-08-19","dow":"Wed","month":"Aug","day":19,"prep":1,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S8 — API testing (Web & API e2e)","dsaTask":"[DSA] DSA S6 — Queue","lcTask":"[LC] 1–2 problems · Linked Lists","morning":"[APPLY] Apply to fresh postings","adv":[["pw",8]],"dsaAdv":[6],"lcChapter":"Linked Lists","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":11,"date":"2026-08-20","dow":"Thu","month":"Aug","day":20,"prep":1,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S9 — Network interception","dsaTask":"[DSA] DSA S7 — Binary Tree","lcTask":"[LC] 1–2 problems · Linked Lists","morning":"[APPLY] Apply + note recruiter contacts","adv":[["pw",9]],"dsaAdv":[7],"lcChapter":"Linked Lists","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":12,"date":"2026-08-21","dow":"Fri","month":"Aug","day":21,"prep":1,"weekStart":"2026-08-17","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S10 — Framework part 1 (POM, data-driven)","dsaTask":"[DSA] DSA S7 — Binary Tree (cont.)","lcTask":"[LC] 1–2 problems · Stacks/Queues","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["pw",10]],"dsaAdv":[7],"lcChapter":"Stacks/Queues","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":13,"date":"2026-08-22","dow":"Sat","month":"Aug","day":22,"prep":1,"weekStart":"2026-08-17","type":"weekend","phase":"PREP","mainTask":"[PREP] Flashcards from the week","secondTask":"[JOB] Build flashcards + apply","prepTasks":["Turn this week's logged questions into flashcards","Add Python & Pytest Q&A cards","Drill the new deck once"],"jobFocus":"Build flashcards + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":14,"date":"2026-08-23","dow":"Sun","month":"Aug","day":23,"prep":1,"weekStart":"2026-08-17","type":"weekend","phase":"PREP","mainTask":"[PREP] Automation interview answers","secondTask":"[JOB] Automation Q&A + apply","prepTasks":["Write answers: Playwright locators & auto-waiting","Write answers: Pytest fixtures & POM","Mock: explain your framework design"],"jobFocus":"Automation Q&A + apply","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":15,"date":"2026-08-24","dow":"Mon","month":"Aug","day":24,"prep":1,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S11 — Framework part 2 (config, parallel)","dsaTask":"[DSA] DSA S8 — Binary Search Tree","lcTask":"[LC] 1–2 problems · Stacks/Queues","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["pw",11]],"dsaAdv":[8],"lcChapter":"Stacks/Queues","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":16,"date":"2026-08-25","dow":"Tue","month":"Aug","day":25,"prep":2,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S12 — Framework part 3 (BDD, CI/CD)","dsaTask":"[DSA] DSA S9 — Binary Heap","lcTask":"[LC] 1–2 problems · Stacks/Queues","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["pw",12]],"dsaAdv":[9],"lcChapter":"Stacks/Queues","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":17,"date":"2026-08-26","dow":"Wed","month":"Aug","day":26,"prep":2,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S13 — AI at terminal (Claude Code & MCP)","dsaTask":"[DSA] DSA S10 — AVL Tree","lcTask":"[LC] 1–2 problems · Trees/Graphs","morning":"[APPLY] Apply to fresh postings","adv":[["pw",13]],"dsaAdv":[10],"lcChapter":"Trees/Graphs","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":18,"date":"2026-08-27","dow":"Thu","month":"Aug","day":27,"prep":2,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] Playwright S14–15 — Interview Qs & wrap  ▸ PLAYWRIGHT DONE","dsaTask":"[DSA] DSA S11 — Trie","lcTask":"[LC] 1–2 problems · Trees/Graphs","morning":"[APPLY] Apply + note recruiter contacts","adv":[["pw",14],["pw",15]],"dsaAdv":[11],"lcChapter":"Trees/Graphs","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"PW_DONE"},{"id":19,"date":"2026-08-28","dow":"Fri","month":"Aug","day":28,"prep":2,"weekStart":"2026-08-24","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S1 — Testing terminologies","dsaTask":"[DSA] DSA S12 — Searching  ✦ Aug target","lcTask":"[LC] 1–2 problems · Trees/Graphs","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["ai",1]],"dsaAdv":[12],"lcChapter":"Trees/Graphs","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"AUG_TARGET"},{"id":20,"date":"2026-08-29","dow":"Sat","month":"Aug","day":29,"prep":2,"weekStart":"2026-08-24","type":"weekend","phase":"PREP","mainTask":"[PREP] DSA patterns review","secondTask":"[JOB] DSA drilling + apply","prepTasks":["Flashcards: Two Pointers / Sliding Window","Re-solve 3 medium problems from memory","Log the ones you couldn't do"],"jobFocus":"DSA drilling + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":21,"date":"2026-08-30","dow":"Sun","month":"Aug","day":30,"prep":2,"weekStart":"2026-08-24","type":"weekend","phase":"PREP","mainTask":"[PREP] First mock interview","secondTask":"[JOB] Mock interview + apply: 5 roles","prepTasks":["Do 1 full mock interview (record it)","Note every question you fumbled","Turn fumbles into flashcards"],"jobFocus":"Mock interview + apply: 5 roles","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":22,"date":"2026-08-31","dow":"Mon","month":"Aug","day":31,"prep":2,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S2 — Prompt engineering (3 C's)","dsaTask":"[DSA] DSA S13 — Sorting","lcTask":"[LC] 1–2 problems · Heaps","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["ai",2]],"dsaAdv":[13],"lcChapter":"Heaps","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":23,"date":"2026-09-01","dow":"Tue","month":"Sep","day":1,"prep":2,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S3 — Test plan / cases with AI","dsaTask":"[DSA] DSA S14 — Recursion","lcTask":"[LC] 1–2 problems · Heaps","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["ai",3]],"dsaAdv":[14],"lcChapter":"Heaps","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":24,"date":"2026-09-02","dow":"Wed","month":"Sep","day":2,"prep":2,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S4 — GitHub Copilot","dsaTask":"[DSA] DSA S15 — Hashing","lcTask":"[LC] 1–2 problems · Heaps","morning":"[APPLY] Apply to fresh postings","adv":[["ai",4]],"dsaAdv":[15],"lcChapter":"Heaps","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":25,"date":"2026-09-03","dow":"Thu","month":"Sep","day":3,"prep":3,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S5 — MCP servers (part 1)","dsaTask":"[DSA] DSA S16 — Dynamic Programming","lcTask":"[LC] 1–2 problems · Greedy","morning":"[APPLY] Apply + note recruiter contacts","adv":[["ai",5]],"dsaAdv":[16],"lcChapter":"Greedy","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":26,"date":"2026-09-04","dow":"Fri","month":"Sep","day":4,"prep":3,"weekStart":"2026-08-31","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S5 — MCP servers (part 2)","dsaTask":"[DSA] DSA S16 — DP (cont.)","lcTask":"[LC] 1–2 problems · Greedy","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["ai",5]],"dsaAdv":[16],"lcChapter":"Greedy","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":27,"date":"2026-09-05","dow":"Sat","month":"Sep","day":5,"prep":2,"weekStart":"2026-08-31","type":"weekend","phase":"PREP","mainTask":"[PREP] Core Java interview answers","secondTask":"[JOB] Java Q&A + apply","prepTasks":["Answers: OOP, collections, generics","Answers: exceptions & streams","Drill Core Java flashcards"],"jobFocus":"Java Q&A + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":28,"date":"2026-09-06","dow":"Sun","month":"Sep","day":6,"prep":3,"weekStart":"2026-08-31","type":"weekend","phase":"PREP","mainTask":"[PREP] Spring & REST answers","secondTask":"[JOB] Spring Q&A + apply","prepTasks":["Answers: IoC/DI, beans, auto-config","Answers: REST, status codes, JPA","Mock: design a small REST API"],"jobFocus":"Spring Q&A + apply","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":29,"date":"2026-09-07","dow":"Mon","month":"Sep","day":7,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S6 — Multi-agent / agentic AI","dsaTask":"[DSA] DSA S17 — Graph","lcTask":"[LC] 1–2 problems · Greedy","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["ai",6]],"dsaAdv":[17],"lcChapter":"Greedy","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":30,"date":"2026-09-08","dow":"Tue","month":"Sep","day":8,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S7 — Agentic AI for QE (part 1)","dsaTask":"[DSA] DSA S17 — Graph (cont.)","lcTask":"[LC] 1–2 problems · Binary Search","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["ai",7]],"dsaAdv":[17],"lcChapter":"Binary Search","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":31,"date":"2026-09-09","dow":"Wed","month":"Sep","day":9,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S7 — Agentic AI for QE (part 2)","dsaTask":"[DSA] Revise Arrays & Hashing","lcTask":"[LC] 1–2 problems · Binary Search","morning":"[APPLY] Apply to fresh postings","adv":[["ai",7]],"dsaAdv":[],"lcChapter":"Binary Search","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":32,"date":"2026-09-10","dow":"Thu","month":"Sep","day":10,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S8 — QA DevOps with AI agents","dsaTask":"[DSA] Revise Linked Lists & Stacks","lcTask":"[LC] 1–2 problems · Binary Search","morning":"[APPLY] Apply + note recruiter contacts","adv":[["ai",8]],"dsaAdv":[],"lcChapter":"Binary Search","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":33,"date":"2026-09-11","dow":"Fri","month":"Sep","day":11,"prep":3,"weekStart":"2026-09-07","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S9 — n8n automation workflows","dsaTask":"[DSA] Revise Trees & BST","lcTask":"[LC] 1–2 problems · Backtracking","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["ai",9]],"dsaAdv":[],"lcChapter":"Backtracking","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":34,"date":"2026-09-12","dow":"Sat","month":"Sep","day":12,"prep":3,"weekStart":"2026-09-07","type":"weekend","phase":"PREP","mainTask":"[PREP] Behavioural + system design lite","secondTask":"[JOB] Behavioural prep + apply","prepTasks":["Prep STAR answers for HR round","Sketch 1 system-design walkthrough","Review your logged questions end-to-end"],"jobFocus":"Behavioural prep + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":35,"date":"2026-09-13","dow":"Sun","month":"Sep","day":13,"prep":3,"weekStart":"2026-09-07","type":"weekend","phase":"PREP","mainTask":"[PREP] Full mock + gap-fill","secondTask":"[JOB] Mock #2 + apply: 5 roles","prepTasks":["Second full mock interview","List your 5 weakest topics","Make targeted flashcards for them"],"jobFocus":"Mock #2 + apply: 5 roles","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":36,"date":"2026-09-14","dow":"Mon","month":"Sep","day":14,"prep":3,"weekStart":"2026-09-14","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S10 — API test code generation","dsaTask":"[DSA] Revise Heaps & Greedy","lcTask":"[LC] 1–2 problems · Backtracking","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["ai",10]],"dsaAdv":[],"lcChapter":"Backtracking","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":37,"date":"2026-09-15","dow":"Tue","month":"Sep","day":15,"prep":3,"weekStart":"2026-09-14","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S11 — Low-code testing tools","dsaTask":"[DSA] Revise Searching & Sorting","lcTask":"[LC] 1–2 problems · Backtracking","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["ai",11]],"dsaAdv":[],"lcChapter":"Backtracking","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":38,"date":"2026-09-16","dow":"Wed","month":"Sep","day":16,"prep":3,"weekStart":"2026-09-14","type":"weekday","phase":"AUTO","mainTask":"[AUTO] AI Automation S12–13  ▸ AUTOMATION COMPLETE","dsaTask":"[DSA] Revise Recursion & Backtracking","lcTask":"[LC] 1–2 problems · DP","morning":"[APPLY] Apply to fresh postings","adv":[["ai",12],["ai",13]],"dsaAdv":[],"lcChapter":"DP","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"AUTO_DONE"},{"id":39,"date":"2026-09-17","dow":"Thu","month":"Sep","day":17,"prep":4,"weekStart":"2026-09-14","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S1–2 — Course intro + Core Java (start)","dsaTask":"[DSA] Revise DP patterns","lcTask":"[LC] 1–2 problems · DP","morning":"[APPLY] Apply + note recruiter contacts","adv":[["sp",1],["sp",2]],"dsaAdv":[],"lcChapter":"DP","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":40,"date":"2026-09-18","dow":"Fri","month":"Sep","day":18,"prep":4,"weekStart":"2026-09-14","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S2 — Core Java","dsaTask":"[DSA] Revise Graphs (BFS/DFS)","lcTask":"[LC] 1–2 problems · DP","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["sp",2]],"dsaAdv":[],"lcChapter":"DP","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":41,"date":"2026-09-19","dow":"Sat","month":"Sep","day":19,"prep":4,"weekStart":"2026-09-14","type":"weekend","phase":"PREP","mainTask":"[PREP] Drill weak spots","secondTask":"[JOB] Weak-spot drilling + apply","prepTasks":["Drill the weak-topic flashcards","Re-solve 5 mixed LeetCode from memory","Review interview-question log"],"jobFocus":"Weak-spot drilling + apply","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":42,"date":"2026-09-20","dow":"Sun","month":"Sep","day":20,"prep":4,"weekStart":"2026-09-14","type":"weekend","phase":"PREP","mainTask":"[PREP] Interview sprint","secondTask":"[JOB] Interview sprint + apply: 5 roles","prepTasks":["Third mock interview","Rapid-fire your full flashcard deck","Tailor resume to your top 3 target roles"],"jobFocus":"Interview sprint + apply: 5 roles","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":43,"date":"2026-09-21","dow":"Mon","month":"Sep","day":21,"prep":4,"weekStart":"2026-09-21","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S2 — Core Java (finish)","dsaTask":"[DSA] Mixed timed review","lcTask":"[LC] 1–2 problems · Graphs (BFS/DFS)","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["sp",2]],"dsaAdv":[],"lcChapter":"Graphs (BFS/DFS)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":44,"date":"2026-09-22","dow":"Tue","month":"Sep","day":22,"prep":4,"weekStart":"2026-09-21","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S3 — Advance Java (start)","dsaTask":"[DSA] Mixed timed review","lcTask":"[LC] 1–2 problems · Graphs (BFS/DFS)","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["sp",3]],"dsaAdv":[],"lcChapter":"Graphs (BFS/DFS)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":45,"date":"2026-09-23","dow":"Wed","month":"Sep","day":23,"prep":4,"weekStart":"2026-09-21","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S3 — Advance Java","dsaTask":"[DSA] Revise Arrays & Hashing","lcTask":"[LC] 1–2 problems · Graphs (BFS/DFS)","morning":"[APPLY] Apply to fresh postings","adv":[["sp",3]],"dsaAdv":[],"lcChapter":"Graphs (BFS/DFS)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":46,"date":"2026-09-24","dow":"Thu","month":"Sep","day":24,"prep":4,"weekStart":"2026-09-21","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S3 — Advance Java (finish)","dsaTask":"[DSA] Revise Linked Lists & Stacks","lcTask":"[LC] 1–2 problems · Tools & tricks","morning":"[APPLY] Apply + note recruiter contacts","adv":[["sp",3]],"dsaAdv":[],"lcChapter":"Tools & tricks","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":47,"date":"2026-09-25","dow":"Fri","month":"Sep","day":25,"prep":4,"weekStart":"2026-09-21","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S4 — Maven","dsaTask":"[DSA] Revise Trees & BST","lcTask":"[LC] 1–2 problems · Tools & tricks","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["sp",4]],"dsaAdv":[],"lcChapter":"Tools & tricks","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":48,"date":"2026-09-26","dow":"Sat","month":"Sep","day":26,"prep":4,"weekStart":"2026-09-21","type":"weekend","phase":"PREP","mainTask":"[PREP] Final polish","secondTask":"[JOB] Polish + follow-ups","prepTasks":["Full flashcard review + logged questions","Refine your 90-second pitch","Queue applications + follow-ups"],"jobFocus":"Polish + follow-ups","isSunday":false,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":49,"date":"2026-09-27","dow":"Sun","month":"Sep","day":27,"prep":4,"weekStart":"2026-09-21","type":"weekend","phase":"PREP","mainTask":"[PREP] Consolidate & launch","secondTask":"[JOB] Consolidate + apply","prepTasks":["Two-month review — what clicked","Final resume + LinkedIn pass","Plan the interview-heavy weeks ahead"],"jobFocus":"Consolidate + apply","isSunday":true,"expected":{"course":0,"dsa":0,"prep":150,"job":90}},{"id":50,"date":"2026-09-28","dow":"Mon","month":"Sep","day":28,"prep":4,"weekStart":"2026-09-28","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S5 — JDBC","dsaTask":"[DSA] Revise Heaps & Greedy","lcTask":"[LC] 1–2 problems · Tools & tricks","morning":"[APPLY] Apply to fresh postings (2–3)","adv":[["sp",5]],"dsaAdv":[],"lcChapter":"Tools & tricks","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":51,"date":"2026-09-29","dow":"Tue","month":"Sep","day":29,"prep":4,"weekStart":"2026-09-28","type":"weekday","phase":"SPRING","mainTask":"[SPRING] Spring S6 — Hibernate (ORM basics)","dsaTask":"[DSA] Revise Searching & Sorting","lcTask":"[LC] 1–2 problems · Tools & tricks","morning":"[APPLY] Quick LinkedIn scan + apply","adv":[["sp",6]],"dsaAdv":[],"lcChapter":"Tools & tricks","expected":{"course":90,"dsa":60,"prep":15,"job":15}}];
   const byDate = Object.fromEntries(SCHEDULE.map(d => [d.date, d]));
   const START = SCHEDULE[0].date, END = SCHEDULE[SCHEDULE.length-1].date;
   const TOTALS = {pw:15, ai:13, sp:27, dsa:17, lc:13};
@@ -317,6 +317,59 @@ const RUNWAY = (() => {
       .rw-pip.wknd:hover{border-color:#2c2444}
       .rw-row:hover{border-color:var(--line)}
     }
+
+    /* ---------- deferral · timers · pace · pip peek ---------- */
+    .rw-tasks li{position:relative}
+    .rw-mv{position:absolute;right:8px;top:50%;transform:translateY(-50%);opacity:0;
+      background:#17171d;border:1px solid var(--line2);color:var(--mute);border-radius:7px;
+      font:600 11px/1 'Space Grotesk',sans-serif;padding:5px 7px;cursor:pointer;transition:.15s}
+    .rw-tasks li:hover .rw-mv,.rw-tasks li:focus-within .rw-mv{opacity:1}
+    .rw-mv:hover{color:var(--paper);border-color:var(--cyan)}
+    @media(hover:none){.rw-mv{opacity:.75}}
+    .rw-tasks li.moved{border-left:2px solid var(--cyan)}
+    .rw-from{font:600 10px/1 'JetBrains Mono',monospace;color:var(--cyan);opacity:.85;margin-left:7px;white-space:nowrap}
+    .rw-tasks li.rw-gone{opacity:.4}
+    .rw-tasks li.rw-gone .rw-tl{text-decoration:line-through;text-decoration-color:var(--mute)}
+    .rw-tasks li.rw-gone .rw-from{color:var(--amber)}
+    .rw-pop{position:absolute;right:6px;top:calc(50% + 15px);z-index:40;background:var(--panel2);
+      border:1px solid var(--line2);border-radius:10px;padding:8px;display:flex;flex-wrap:wrap;gap:5px;
+      box-shadow:0 14px 34px rgba(0,0,0,.6);max-width:268px}
+    .rw-pop button{background:#15151b;border:1px solid var(--line);color:var(--paper);border-radius:7px;
+      font:600 11px/1 'Space Grotesk',sans-serif;padding:6px 8px;cursor:pointer}
+    .rw-pop button:hover{border-color:var(--cyan);color:var(--cyan)}
+    .rw-pop .ttl{width:100%;font:700 9px/1 'Space Grotesk',sans-serif;letter-spacing:.09em;
+      text-transform:uppercase;color:var(--mute);margin-bottom:1px}
+    .rw-tasks li.drag{opacity:.35}
+    .rw-pip.drop{outline:2px solid var(--cyan);outline-offset:1px;transform:translateY(-2px)}
+    .rw-tm{background:#15151b;border:1px solid var(--line);color:var(--mute);border-radius:6px;
+      font:700 10px/1 'JetBrains Mono',monospace;padding:6px 7px;cursor:pointer;margin-left:5px;transition:.15s}
+    .rw-tm:hover{color:var(--paper);border-color:var(--line2)}
+    .rw-tm.run{color:#07070a;background:var(--lime);border-color:var(--lime)}
+    .rw-pace{display:grid;grid-template-columns:repeat(auto-fit,minmax(126px,1fr));gap:9px}
+    .rw-pc{background:#131319;border:1px solid var(--line);border-radius:11px;padding:10px 11px}
+    .rw-pc .k{font:700 9px/1 'Space Grotesk',sans-serif;letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+    .rw-pc .v{font:700 21px/1.1 'Space Grotesk',sans-serif;color:var(--paper);margin-top:6px}
+    .rw-pc .s{font:500 11px/1.35 'Space Grotesk',sans-serif;color:var(--mute);margin-top:4px}
+    .rw-pc.good .v{color:var(--lime)}.rw-pc.warn .v{color:var(--amber)}.rw-pc.bad .v{color:var(--marker)}
+    .rw-what{margin-top:11px;background:#101016;border:1px dashed var(--line2);border-radius:11px;
+      padding:11px 13px;font:500 12px/1.6 'Space Grotesk',sans-serif;color:var(--mute)}
+    .rw-what b{color:var(--paper)}.rw-what .sw{color:var(--amber)}.rw-what .gd{color:var(--lime)}
+    .rw-peek{margin:10px 0 2px;background:#12121a;border:1px solid var(--line2);border-radius:12px;padding:11px 12px}
+    .rw-peek .ph{display:flex;align-items:center;gap:9px;margin-bottom:9px;flex-wrap:wrap}
+    .rw-peek .ph b{font:700 13px/1 'Space Grotesk',sans-serif;color:var(--paper)}
+    .rw-peek .ph span{font:600 11px/1 'JetBrains Mono',monospace;color:var(--mute)}
+    .rw-peek .ph .go{margin-left:auto;background:none;border:1px solid var(--line2);color:var(--cyan);
+      border-radius:7px;font:600 11px/1 'Space Grotesk',sans-serif;padding:6px 9px;cursor:pointer}
+    .rw-peek .ph .go:hover{background:rgba(34,211,197,.09)}
+    .rw-chk{display:flex;flex-wrap:wrap;gap:6px}
+    .rw-chk button{display:flex;align-items:center;gap:7px;background:#16161c;border:1px solid var(--line);
+      color:var(--mute);border-radius:8px;font:500 11px/1.25 'Space Grotesk',sans-serif;padding:7px 9px;
+      cursor:pointer;text-align:left;transition:.15s}
+    .rw-chk button i{width:9px;height:9px;border-radius:2px;border:1px solid var(--line2);flex:none}
+    .rw-chk button:hover{border-color:var(--line2);color:var(--paper)}
+    .rw-chk button.on{color:var(--paper);border-color:rgba(200,255,50,.42)}
+    .rw-chk button.on i{background:var(--lime);border-color:var(--lime)}
+    
     /* iPad/iPhone PWA safe areas */
     @supports(padding:max(0px)){
       #view-runway .rw-wrap{padding-left:max(0px,env(safe-area-inset-left));padding-right:max(0px,env(safe-area-inset-right))}
@@ -333,7 +386,7 @@ const RUNWAY = (() => {
     const m = studyMap();
     let r = m[date];
     if (!r) { r = {id:date, done:{}, tmin:{}, note:"", problems:null, applied:0}; m[date] = r; }
-    if (!r.done) r.done = {}; if (!r.tmin) r.tmin = {};
+    if (!r.done) r.done = {}; if (!r.tmin) r.tmin = {}; if (!r.defer) r.defer = {};
     if (!Array.isArray(r.iq)) r.iq = ["", ""];
     return r;
   }
@@ -348,6 +401,41 @@ const RUNWAY = (() => {
   const clamp = iso => iso < START ? START : iso > END ? END : (byDate[iso] ? iso : START);
   const today = clamp(rt());
   let view = "today", selected = today, rollMode = "week";
+  let peeked = null;                       // date whose pip is expanded in the spine
+  let timerOn = null, timerIv = null;      // {date, cat, t0}
+
+  /* ---- live timer: ticks the button text only, never a full re-render ---- */
+  function paintTimer() {
+    const b = document.querySelector(".rw-tm.run"); if (!b || !timerOn) return;
+    const s = Math.floor((Date.now() - timerOn.t0) / 1000);
+    b.textContent = "\u25a0 " + String(Math.floor(s/60)).padStart(2,"0") + ":" + String(s%60).padStart(2,"0");
+  }
+  function stopTimer(commit) {
+    if (timerIv) { clearInterval(timerIv); timerIv = null; }
+    if (timerOn && commit) {
+      const mins = Math.round((Date.now() - timerOn.t0) / 60000);
+      if (mins > 0) { const r = rec(timerOn.date);
+        r.tmin[timerOn.cat] = (+r.tmin[timerOn.cat] || 0) + mins;
+        syncNow(r, "trackhawk: study timer " + timerOn.date); }
+    }
+    timerOn = null;
+  }
+  /* ---- moving work between days ---------------------------------------- */
+  function moveItem(fromISO, id, toISO) {
+    const r = rec(fromISO), wasDone = !!r.done[id];
+    r.defer[id] = toISO; delete r.done[id];
+    syncNow(r, "trackhawk: study move " + id + " " + fromISO + " \u2192 " + toISO);
+    if (wasDone) { const t = rec(toISO); t.done[fromISO + "#" + id] = true;
+      syncNow(t, "trackhawk: study move tick"); }
+  }
+  function returnItem(fromISO, id) {
+    const r = rec(fromISO), to = r.defer[id]; if (!to) return;
+    const t = rec(to);
+    if (t.done[fromISO + "#" + id]) { delete t.done[fromISO + "#" + id]; r.done[id] = true;
+      syncNow(t, "trackhawk: study return tick"); }
+    delete r.defer[id];
+    syncNow(r, "trackhawk: study return " + id + " \u2192 " + fromISO);
+  }
 
   /* ------------------------------------------------------------- helpers */
   const PREP_LABEL = {1:"background",2:"building",3:"significant",4:"headline priority"};
@@ -380,8 +468,46 @@ const RUNWAY = (() => {
     if (day.isSunday) a.push({id:"reflect", label:"Weekly reflection + plan next week", cat:"prep"});
     return a.filter(x=>x.label!=="");
   }
-  function comp(iso) { const d=byDate[iso]; if(!d) return 0; const it=itemsFor(d), dn=peek(iso).done;
-    return it.length ? it.filter(i=>dn[i.id]).length/it.length : 0; }
+  /* ---- deferral model ---------------------------------------------------
+     A task can be pushed to another day. The move is recorded on the SOURCE day
+     (defer[itemId] = targetISO); the tick for it then lives on the TARGET day
+     under the namespaced key `srcISO#itemId`. Two consequences:
+       - comp(iso) measures the work actually sitting on that calendar day, so
+         the runway pips reflect a re-planned week honestly;
+       - rollup() credits course/DSA sections to the day the content BELONGS to
+         via doneEff(), so moving a task never loses section progress.        */
+  const deferOf = iso => (peek(iso).defer) || {};
+  const doneMap = iso => (peek(iso).done) || {};
+  function doneEff(iso, id) {
+    const t = deferOf(iso)[id];
+    return t ? !!doneMap(t)[iso + "#" + id] : !!doneMap(iso)[id];
+  }
+  function effItems(iso) {
+    const day = byDate[iso]; if (!day) return [];
+    const df = deferOf(iso);
+    const own = itemsFor(day).filter(it => !df[it.id]).map(it => ({...it, key: it.id, src: iso}));
+    const inc = [];
+    SCHEDULE.forEach(s => {
+      if (s.date === iso) return;
+      const d2 = deferOf(s.date);
+      for (const id in d2) {
+        if (d2[id] !== iso) continue;
+        const it = itemsFor(s).find(x => x.id === id);
+        if (it) inc.push({...it, key: s.date + "#" + id, src: s.date, moved: true});
+      }
+    });
+    return own.concat(inc);
+  }
+  /* items this day used to own but has pushed elsewhere */
+  function goneFrom(iso) {
+    const df = deferOf(iso), day = byDate[iso]; if (!day) return [];
+    return itemsFor(day).filter(it => df[it.id]).map(it => ({...it, to: df[it.id]}));
+  }
+  function comp(iso) {
+    const it = effItems(iso); if (!it.length) return 0;
+    const dn = doneMap(iso);
+    return it.filter(i => dn[i.key]).length / it.length;
+  }
 
   function rollup(list) {
     const pw=new Set(),ai=new Set(),dsa=new Set(),lc=new Set(),sp=new Set();
@@ -393,11 +519,11 @@ const RUNWAY = (() => {
       time.course+=(+tm.course||0); time.dsa+=(+tm.dsa||0); time.prep+=(+tm.prep||0); time.job+=(+tm.job||0);
       cSum+=comp(day.date);
       if (day.type==="weekday") {
-        if (dn.main && day.adv) day.adv.forEach(([k,n]) => ({pw,ai,sp})[k].add(n));
-        if (dn.dsa && day.dsaAdv) day.dsaAdv.forEach(n=>dsa.add(n));
-        if (dn.lc && day.lcChapter) lc.add(day.lcChapter);
-        problems += (st.problems!=null ? (+st.problems||0) : (dn.lc?1:0));
-        applied  += (st.applied!=null ? (+st.applied||0) : (dn.apply?2:0));
+        if (doneEff(day.date,"main") && day.adv) day.adv.forEach(([k,n]) => ({pw,ai,sp})[k].add(n));
+        if (doneEff(day.date,"dsa")  && day.dsaAdv) day.dsaAdv.forEach(n=>dsa.add(n));
+        if (doneEff(day.date,"lc")   && day.lcChapter) lc.add(day.lcChapter);
+        problems += (st.problems!=null ? (+st.problems||0) : (doneEff(day.date,"lc")?1:0));
+        applied  += (st.applied!=null ? (+st.applied||0) : (doneEff(day.date,"apply")?2:0));
       } else {
         problems += (st.problems!=null ? (+st.problems||0) : 0);
         applied  += (+st.applied||0);
@@ -407,8 +533,27 @@ const RUNWAY = (() => {
   }
   const cumTo = iso => rollup(SCHEDULE.filter(d=>d.date<=iso));
   const cumAll = () => rollup(SCHEDULE);
+  /* any progress on a day keeps the flame; the old test only looked at weekday
+     item ids, so every weekend silently reset the streak to zero.            */
   function streak() { let s=0; for (const iso of SCHEDULE.map(d=>d.date).filter(d=>d<=today).reverse()) {
-    const dn=peek(iso).done; if (dn.lc||dn.main||dn.dsa) s++; else break; } return s; }
+    if (comp(iso) > 0) s++; else break; } return s; }
+
+  /* ---- pace & projection ------------------------------------------------ */
+  function pace() {
+    const past = SCHEDULE.filter(d => d.date <= today);
+    const n = past.length || 1;
+    const earned = past.reduce((a,d) => a + comp(d.date), 0);   // day-equivalents banked
+    const rate = earned / n;
+    const remain = SCHEDULE.length - past.length;
+    const proj = (earned + rate * remain) / SCHEDULE.length;
+    const debt = past.length - earned;
+    const need = remain > 0 ? (SCHEDULE.length - earned) / remain : 0;
+    const tDone = comp(today);
+    const sEarned = earned - tDone, sRate = sEarned / n;
+    const skipProj = (sEarned + sRate * remain) / SCHEDULE.length;
+    const skipNeed = remain > 0 ? (SCHEDULE.length - sEarned) / remain : 0;
+    return {n, earned, rate, remain, proj, debt, need, tDone, skipProj, skipNeed};
+  }
 
   function ring(pct,size,stroke,color) {
     const r=(size-stroke)/2, c=2*Math.PI*r, off=c*(1-pct);
@@ -420,6 +565,7 @@ const RUNWAY = (() => {
   const fmtH = m => (m/60).toFixed(m%60?1:0)+"h";
   const longDate = iso => new Date(iso+"T00:00:00").toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
   const stripTag = s => s.replace(/^\[[A-Z]+\]\s*/,"");
+  const shortD = iso => { const d = byDate[iso]; return d ? d.dow + " " + d.day + " " + d.month : iso; };
 
   /* ------------------------------------------------------------ sub-views */
   const DOWI = {Mon:0,Tue:1,Wed:2,Thu:3,Fri:4,Sat:5,Sun:6};
@@ -500,10 +646,18 @@ const RUNWAY = (() => {
     if (day.milestone==="AUTO_DONE") chips+=`<span class="rw-chip mile">✦ Automation complete</span>`;
     if (day.milestone==="AUG_TARGET") chips+=`<span class="rw-chip mile">✦ August DSA target</span>`;
 
-    const items=itemsFor(day);
-    const liFor = it => `<li class="${it.main?"main":""} ${st.done[it.id]?"on":""}" data-tog="${it.id}">
+    const items=effItems(selected), gone=goneFrom(selected), dnS=doneMap(selected);
+    const liFor = it => `<li class="${it.main?"main":""} ${dnS[it.key]?"on":""} ${it.moved?"moved":""}"
+        data-tog="${it.key}" draggable="true" data-drag="${it.key}">
         <span class="rw-flag" style="${it.cat?"background:"+CAT[it.cat]:""}"></span>
-        <span class="rw-box"></span><span class="rw-tl">${esc(it.label)}</span></li>`;
+        <span class="rw-box"></span><span class="rw-tl">${esc(it.label)}${
+          it.moved?`<span class="rw-from">\u21a9 from ${shortD(it.src)}</span>`:""}</span>
+        <button class="rw-mv" type="button" ${it.moved?`data-ret="${it.src}|${it.id}"`:`data-mv="${it.id}"`}
+          title="${it.moved?"Send back to its own day":"Move to another day"}">${it.moved?"\u21a9":"\u2192"}</button></li>`;
+    const goneLi = g => `<li class="rw-gone">
+        <span class="rw-flag" style="${g.cat?"background:"+CAT[g.cat]:""}"></span>
+        <span class="rw-box"></span><span class="rw-tl">${esc(g.label)}<span class="rw-from">\u2192 ${shortD(g.to)}</span></span>
+        <button class="rw-mv" type="button" data-ret="${selected}|${g.id}" title="Bring it back">\u21a9</button></li>`;
     let tasks="";
     if (!isW) {
       const morning=items.filter(i=>i.morning), evening=items.filter(i=>!i.morning);
@@ -514,6 +668,7 @@ const RUNWAY = (() => {
       tasks = `<div class="rw-grp">✦ Interview prep &amp; flashcards</div>` + prep.map(liFor).join("")
             + `<div class="rw-grp">💼 Job hunt</div>` + job.map(liFor).join("");
     }
+    if (gone.length) tasks += `<div class="rw-grp">⤴ Pushed to other days</div>` + gone.map(goneLi).join("");
 
     const cats = isW ? [["prep","Prep / flashcards"],["job","Job hunt"]]
                      : [["course","Course (1.5h)"],["dsa","DSA study (1h)"],["prep","Interview prep"],["job","Apply"]];
@@ -522,7 +677,10 @@ const RUNWAY = (() => {
       const val=st.tmin[k]!=null?st.tmin[k]:"", e=day.expected[k], act=+val||0, p=e?Math.min(1,act/e):(act>0?1:0);
       tcells += `<div class="rw-tcell"><div class="lab"><span class="rw-dot" style="background:${CAT[k]}"></span>${lab}</div>
         <div class="row"><input class="rw-in" type="number" min="0" step="5" placeholder="0" value="${val}" data-time="${k}"/>
-          <span class="exp">/ ${e}m</span></div>
+          <span class="exp">/ ${e}m</span>
+          <button class="rw-tm ${timerOn&&timerOn.date===selected&&timerOn.cat===k?"run":""}" type="button"
+            data-tm="${k}" title="${timerOn&&timerOn.date===selected&&timerOn.cat===k?"Stop and bank the time":"Start a timer"}"
+            >${timerOn&&timerOn.date===selected&&timerOn.cat===k?"■ 00:00":"▶"}</button></div>
         <div class="rw-tbar"><i style="width:${Math.round(p*100)}%;background:${CAT[k]}"></i></div></div>`;
     });
     const numrow=`<div class="rw-numrow">
@@ -549,6 +707,8 @@ const RUNWAY = (() => {
             <div class="rw-subtask">${isW?"Turn the week's learning into interview-ready material":esc(stripTag(day.dsaTask))+" · "+esc(stripTag(day.lcTask))}</div></div></div>
         <ul class="rw-tasks">${tasks}</ul></div>
 
+      ${paceHTML()}
+
       <div class="rw-card"><h3>Time spent — actual vs planned</h3>
         <div class="rw-tgrid">${tcells}</div>${numrow}</div>
 
@@ -561,6 +721,46 @@ const RUNWAY = (() => {
       <div class="rw-card"><h3>Notes, blockers &amp; what to revisit</h3>
         <textarea class="rw-note" id="rw-note" placeholder="Problem numbers, what confused you, what to redo…">${esc(st.note||"")}</textarea>
         <div class="rw-hint">✓ saved to your encrypted vault &amp; synced</div></div>`;
+  }
+
+  function paceHTML() {
+    const p = pace();
+    const pc = (cls,k,v,sub) => `<div class="rw-pc ${cls}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`;
+    const rateCls = p.rate>=.95?"good":p.rate>=.75?"warn":"bad";
+    const projCls = p.proj>=.9?"good":p.proj>=.7?"warn":"bad";
+    const balTxt  = p.debt>=.05 ? p.debt.toFixed(1)+" days owed"
+                  : p.debt<=-.05 ? (-p.debt).toFixed(1)+" days banked" : "dead level";
+    const impossible = p.need > 1;
+    let what;
+    if (p.remain <= 0) what = `The runway is finished \u2014 everything from here is review and interviews.`;
+    else if (impossible) what = `Finishing every task is out of reach now: it would take <span class="sw">${Math.round(p.need*100)}%</span>
+      of a day's work per day across the ${p.remain} left. Trim scope rather than chase it \u2014 push the low-value items
+      forward and protect the DSA and prep blocks.`;
+    else what = `Skip today and the projection slides from <b>${Math.round(p.proj*100)}%</b> to
+      <span class="sw">${Math.round(p.skipProj*100)}%</span>, and the bar to still finish clean rises to
+      <span class="sw">${Math.round(p.skipNeed*100)}%</span> a day across the remaining ${p.remain}.
+      Clear today instead and you hold at <span class="gd">${Math.round(p.need*100)}%</span> a day.`;
+    return `<div class="rw-card"><h3>Pace &amp; projection</h3>
+      <div class="rw-eyebrow" style="margin:-6px 0 12px">Measured over the ${p.n} days elapsed, not the whole plan</div>
+      <div class="rw-pace">
+        ${pc(rateCls,"Current pace",Math.round(p.rate*100)+"%","of a full day, per day")}
+        ${pc(projCls,"Projected finish",Math.round(p.proj*100)+"%","if this pace holds")}
+        ${pc(p.debt>.5?"bad":p.debt<-.05?"good":"","Balance",(p.debt>0?"\u2212":"+")+Math.abs(p.debt).toFixed(1),balTxt)}
+        ${pc(impossible?"bad":p.need>.9?"warn":"good","Needed daily",p.remain?Math.round(p.need*100)+"%":"\u2014",
+             p.remain?(impossible?"more than a full day":"over "+p.remain+" days left"):"no days left")}
+      </div>
+      <div class="rw-what">${what}</div></div>`;
+  }
+
+  function peekHTML() {
+    if (!peeked || !byDate[peeked]) return "";
+    const d = byDate[peeked], its = effItems(peeked), dn = doneMap(peeked), c = comp(peeked);
+    const chips = its.map(it => `<button type="button" class="${dn[it.key]?"on":""}" data-pk="${it.key}"
+      title="${esc(it.label)}"><i></i>${esc(stripTag(it.label))}</button>`).join("");
+    return `<div class="rw-peek"><div class="ph"><b>${longDate(peeked)}</b>
+        <span>${Math.round(c*100)}% \u00b7 day ${d.id} of ${SCHEDULE.length}</span>
+        <button class="go" type="button" data-goto="${peeked}" data-open="1">Open this day \u2192</button></div>
+      <div class="rw-chk">${chips}</div></div>`;
   }
 
   function timelineHTML() {
@@ -721,7 +921,7 @@ const RUNWAY = (() => {
     const caret = activeNote ? ae.selectionStart : null;
 
     let panel;
-    if (view==="today") panel=spineHTML()+todayHTML();
+    if (view==="today") panel=spineHTML()+peekHTML()+todayHTML();
     else if (view==="timeline") panel=timelineHTML();
     else if (view==="rollups") panel=rollupsHTML();
     else panel=dashHTML();
@@ -745,6 +945,9 @@ const RUNWAY = (() => {
       if (activeNote && activeSel) { const n=root.querySelector(activeSel);
         if(n){ n.focus({preventScroll:true}); try{ if(caret!=null) n.setSelectionRange(caret,caret); }catch(e){} } }
     }
+    /* the timer button is re-created on every render, so re-attach the tick */
+    if (timerIv) { clearInterval(timerIv); timerIv=null; }
+    if (timerOn) { timerIv=setInterval(paintTimer,1000); paintTimer(); }
   }
 
   function wire(root) {
@@ -756,6 +959,7 @@ const RUNWAY = (() => {
           const rip=document.createElement("span"); rip.className="rw-ripple"; rip.style.width=rip.style.height="8px";
           rip.style.left=(br.left-r.left+br.width/2)+"px"; rip.style.top=(br.top-r.top+br.height/2)+"px";
           host.appendChild(rip); setTimeout(()=>rip.remove(),480); } }
+      if (b.classList.contains("rw-pip")) peeked = (peeked===b.dataset.goto) ? null : b.dataset.goto;
       selected=b.dataset.goto;
       if (b.dataset.open){ view="today"; window.scrollTo({top:0,behavior:"smooth"}); } render();
     });
@@ -822,10 +1026,74 @@ const RUNWAY = (() => {
       if(i>=0&&i<SCHEDULE.length){ selected=SCHEDULE[i].date; render(); } });
     const jump=root.querySelector("[data-jump]"); if(jump) jump.onclick=()=>{ selected=today; render(); };
 
-    root.querySelectorAll("[data-tog]").forEach(li=>li.onclick=()=>{ const r=rec(selected); const id=li.dataset.tog;
-      const before=comp(selected); r.done[id]=!r.done[id];
-      syncNow(r, `trackhawk: study ${r.done[id]?"✓":"✗"} ${selected} ${id}`);
+    root.querySelectorAll("[data-tog]").forEach(li=>li.onclick=ev=>{
+      if (ev.target.closest("[data-mv],[data-ret],.rw-pop")) return;   // the move affordances live inside the row
+      const r=rec(selected), id=li.dataset.tog, before=comp(selected);
+      r.done[id]=!r.done[id];
+      syncNow(r, `trackhawk: study ${r.done[id]?"\u2713":"\u2717"} ${selected} ${id}`);
       justPopped = (before<0.999 && comp(selected)>=0.999) ? selected : null;  // full-day completion -> celebrate
+      render();
+    });
+
+    /* ---- move a task to another day ------------------------------------ */
+    const closePop = () => { const q=root.querySelector(".rw-pop"); if(q) q.remove(); };
+    root.querySelectorAll("[data-mv]").forEach(btn=>btn.onclick=ev=>{
+      ev.stopPropagation();
+      const li=btn.closest("li"), already=!!li.querySelector(".rw-pop");
+      closePop(); if (already) return;
+      const id=btn.dataset.mv, i=SCHEDULE.findIndex(d=>d.date===selected);
+      const opts=SCHEDULE.slice(i+1, i+6);
+      const pop=document.createElement("div"); pop.className="rw-pop";
+      pop.innerHTML = opts.length
+        ? `<div class="ttl">Push to</div>` + opts.map(d=>`<button type="button" data-to="${d.date}">${d.dow} ${d.day} ${d.month}</button>`).join("")
+        : `<div class="ttl">No later day left in the plan</div>`;
+      li.appendChild(pop);
+      pop.querySelectorAll("[data-to]").forEach(b2=>b2.onclick=e2=>{
+        e2.stopPropagation(); moveItem(selected, id, b2.dataset.to); render(); });
+    });
+    root.querySelectorAll("[data-ret]").forEach(btn=>btn.onclick=ev=>{
+      ev.stopPropagation();
+      const [src,id]=btn.dataset.ret.split("|");
+      returnItem(src, id); render();
+    });
+    document.addEventListener("click", closePop, {once:true});
+
+    /* ---- drag a task onto any pip on the runway ------------------------- */
+    root.querySelectorAll("[data-drag]").forEach(li=>{
+      li.ondragstart=e=>{ e.dataTransfer.setData("text/plain", li.dataset.drag);
+        e.dataTransfer.effectAllowed="move"; li.classList.add("drag"); };
+      li.ondragend=()=>li.classList.remove("drag");
+    });
+    root.querySelectorAll(".rw-spine .rw-pip[data-goto]").forEach(pip=>{
+      pip.ondragover=e=>{ e.preventDefault(); e.dataTransfer.dropEffect="move"; pip.classList.add("drop"); };
+      pip.ondragleave=()=>pip.classList.remove("drop");
+      pip.ondrop=e=>{
+        e.preventDefault(); pip.classList.remove("drop");
+        const key=e.dataTransfer.getData("text/plain"); if(!key) return;
+        const to=pip.dataset.goto;
+        if (key.indexOf("#")>=0) {                       // a task already borrowed from elsewhere
+          const src=key.slice(0,key.indexOf("#")), id=key.slice(key.indexOf("#")+1);
+          if (to===src) returnItem(src,id); else if (to!==selected) moveItem(src,id,to);
+        } else if (to!==selected) moveItem(selected,key,to);
+        render();
+      };
+    });
+
+    /* ---- per-block timers ---------------------------------------------- */
+    root.querySelectorAll("[data-tm]").forEach(b=>b.onclick=ev=>{
+      ev.stopPropagation();
+      const k=b.dataset.tm, live = timerOn && timerOn.date===selected && timerOn.cat===k;
+      stopTimer(true);                                   // banking any timer already running
+      if (!live) timerOn={date:selected, cat:k, t0:Date.now()};
+      render();
+    });
+
+    /* ---- tick straight from the expanded pip ---------------------------- */
+    root.querySelectorAll("[data-pk]").forEach(b=>b.onclick=()=>{
+      if (!peeked) return;
+      const r=rec(peeked), k=b.dataset.pk;
+      r.done[k]=!r.done[k];
+      syncNow(r, `trackhawk: study ${r.done[k]?"\u2713":"\u2717"} ${peeked} ${k}`);
       render();
     });
 

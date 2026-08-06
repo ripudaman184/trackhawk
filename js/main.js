@@ -129,6 +129,7 @@ const UI = (() => {
       mode <b>${TH.S.mode === "github" ? "GitHub sync" : "this device only"}</b><br>
       ${TH.S.mode === "github" ? `repo <b>${c.owner}/${c.repo}</b><br>file <b>${c.path}</b><br>` : ""}
       encryption <b>AES-256-GCM · PBKDF2 310k</b><br>
+      build <b>v${window.TH_BUILD || "?"}</b><br>
       ${jobs} jobs · ${cards} cards · ${docs} library items`;
     UI.openModal("#settings-modal");
   };
