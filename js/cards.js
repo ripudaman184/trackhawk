@@ -134,14 +134,23 @@ const CARDS = (() => {
   }
 
   /* ----------------------------------------------------------- import */
-  function importCards(arr, section, deckId) {
+  function importCards(arr, section, deckId, meta) {
     if (!Array.isArray(arr)) throw new Error("That JSON isn't an array of cards.");
     let n = 0;
+    /* Every import gets a batch id so the whole upload can be undone later as a
+       unit. Cards imported before this existed carry no batch — the section and
+       deck tools are the way to clear those.                                   */
+    /* ensureDeck() normally runs from render(). If an import happens before the
+       deck view has drawn, st.deck is still null and every card lands with
+       deckId:null — orphaned, and invisible in every deck. Guarantee a deck. */
+    ensureDeck();
+    const batch = TH.uid(), when = TH.now(), from = (meta && meta.fileName) || "pasted JSON";
     arr.forEach(c => {
       if (!c.q) return;
       const id = TH.uid();
       TH.S.data.cards[id] = {
         id, deckId: deckId || st.deck,
+        importId: batch, importAt: when, importFrom: from,
         /* decks from chat use `topic`; the app calls it `section` */
         section: section || c.section || c.topic || "General",
         q: c.q, hint: c.hint || "", idea: c.idea || "",
@@ -156,6 +165,110 @@ const CARDS = (() => {
     TH.save(`trackhawk: import ${n} cards`).catch(() => {});
     buildOrder(); render();
     return n;
+  }
+
+  /* Cards whose deck is missing or was deleted. These render nowhere, so they
+     have to be findable from Manage or they are simply stuck in the vault.   */
+  function orphans() {
+    return TH.list("cards").filter(c => !c.deckId || !TH.S.data.decks[c.deckId]
+      || TH.S.data.decks[c.deckId].del);
+  }
+
+  /* ------------------------------------------------- deck management */
+  const isBlank = c => !((c.idea && c.idea.trim()) || (c.code && c.code.trim()) ||
+                         (c.steps && c.steps.length) || (c.extra && c.extra.trim()));
+
+  function dropCards(list, msg) {
+    list.forEach(c => {
+      if (TH.S.data.progress[c.id]) TH.drop("progress", c.id);
+      TH.drop("cards", c.id);
+    });
+    TH.save(msg).catch(() => {});
+    buildOrder(); render(); renderManage();
+    return list.length;
+  }
+
+  function importBatches() {
+    const by = {};
+    deckCards().forEach(c => {
+      if (!c.importId) return;
+      (by[c.importId] = by[c.importId] || {id: c.importId, from: c.importFrom,
+        at: c.importAt || 0, cards: []}).cards.push(c);
+    });
+    return Object.values(by).sort((a, b) => b.at - a.at);
+  }
+
+  function renderManage() {
+    const out = $("#mg-out"); if (out) out.textContent = "";
+    const none = t => `<div class="mg-none">${t}</div>`;
+    const when = t => t ? new Date(t).toLocaleString(undefined,
+      {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"}) : "";
+
+    const b = importBatches();
+    $("#mg-imports").innerHTML = b.length ? b.map(x =>
+      `<div class="mg-row"><div class="nm">${esc(x.from || "upload")}<span>${when(x.at)}</span></div>
+       <div class="ct">${x.cards.length}</div>
+       <button class="btn danger" data-undo="${x.id}">Undo</button></div>`).join("")
+      : none("No tagged uploads in this deck yet.");
+
+    const secs = [...new Set(deckCards().map(c => c.section).filter(Boolean))].sort();
+    $("#mg-sections").innerHTML = secs.length ? secs.map(sn => {
+      const n = deckCards().filter(c => c.section === sn).length;
+      return `<div class="mg-row"><div class="nm">${esc(sn)}</div><div class="ct">${n}</div>
+        <button class="btn danger" data-delsec="${esc(sn)}">Delete</button></div>`;
+    }).join("") : none("This deck has no sections.");
+
+    const orph = orphans();
+    const oh = $("#mg-orphans");
+    if (oh) oh.innerHTML = orph.length
+      ? `<div class="mg-row"><div class="nm">Cards not attached to any deck
+         <span>invisible while they stay orphaned</span></div>
+         <div class="ct">${orph.length}</div>
+         <button class="btn ghost" id="mg-rescue">Move here</button>
+         <button class="btn danger" id="mg-del-orph">Delete</button></div>`
+      : none("No stranded cards.");
+
+    const blanks = deckCards().filter(isBlank);
+    $("#mg-empty").innerHTML = blanks.length
+      ? `<div class="mg-row"><div class="nm">Cards with no answer content</div>
+         <div class="ct">${blanks.length}</div>
+         <button class="btn danger" id="mg-del-blank">Delete all</button></div>`
+      : none("Every card in this deck has content.");
+
+    $$("#mg-imports [data-undo]").forEach(btn => btn.onclick = () => {
+      const x = importBatches().find(y => y.id === btn.dataset.undo); if (!x) return;
+      if (!confirm(`Remove all ${x.cards.length} cards from "${x.from}"?`)) return;
+      const n = dropCards(x.cards, "trackhawk: undo import");
+      UI.toast(`${n} cards removed`);
+    });
+    $$("#mg-sections [data-delsec]").forEach(btn => btn.onclick = () => {
+      const sn = btn.dataset.delsec;
+      const list = deckCards().filter(c => c.section === sn);
+      if (!confirm(`Delete all ${list.length} cards in "${sn}"?`)) return;
+      if (st.section === sn) st.section = "All";
+      UI.toast(`${dropCards(list, "trackhawk: delete section")} cards removed`);
+    });
+    const rb = $("#mg-rescue");
+    if (rb) rb.onclick = () => {
+      const list = orphans();
+      list.forEach(c => TH.put("cards", {...c, deckId: st.deck}, "trackhawk: rescue card"));
+      TH.save("trackhawk: rescue orphaned cards").catch(() => {});
+      buildOrder(); render(); renderManage();
+      UI.toast(`${list.length} cards moved into this deck`);
+    };
+    const ob = $("#mg-del-orph");
+    if (ob) ob.onclick = () => {
+      const list = orphans();
+      if (!confirm(`Delete ${list.length} stranded cards?`)) return;
+      UI.toast(`${dropCards(list, "trackhawk: delete orphaned cards")} cards removed`);
+    };
+
+    const db = $("#mg-del-blank");
+    if (db) db.onclick = () => {
+      const list = deckCards().filter(isBlank);
+      if (!confirm(`Delete ${list.length} cards that have no answer content?`)) return;
+      UI.toast(`${dropCards(list, "trackhawk: delete blank cards")} cards removed`);
+    };
   }
 
   /* --------------------------------------------- parse a deck .html file */
@@ -239,9 +352,14 @@ const CARDS = (() => {
     }
 
     const topics = [...new Set(staged.cards.map(c => c.section || c.topic).filter(Boolean))];
+    /* a file with no topics silently collapses into one "General" section, so say so
+       up front rather than after the cards are already in the deck                  */
+    const blanks = staged.cards.filter(c => !(c.idea || c.code || (c.steps||[]).length || c.extra)).length;
     sum.innerHTML = `
       <b>${staged.cards.length}</b> cards
-      ${topics.length ? `· sections: ${topics.map(t => `<span class="tech">${esc(t)}</span>`).join(" ")}` : ""}
+      ${topics.length ? `· sections: ${topics.map(t => `<span class="tech">${esc(t)}</span>`).join(" ")}`
+        : `· <b style="color:var(--amber)">no topics in this file</b> — everything lands in one section`}
+      ${blanks ? `<br><b style="color:var(--amber)">${blanks}</b> of these have no answer content` : ""}
       ${staged.pages.length ? `<br><b>${staged.pages.length}</b> handwritten source pages found` : ""}`;
     sum.classList.remove("is-hidden");
     $("#import-opts").classList.remove("is-hidden");
@@ -256,7 +374,7 @@ const CARDS = (() => {
       const raw = $("#import-text").value.trim();
       if (!raw) { out.textContent = "Choose a file, or paste some JSON."; return; }
       try {
-        const n = importCards(JSON.parse(raw));
+        const n = importCards(JSON.parse(raw), null, null, {fileName: "pasted JSON"});
         UI.closeModals(); UI.toast(`${n} cards added`);
       } catch (e) { out.textContent = e.message; }
       return;
@@ -296,7 +414,7 @@ const CARDS = (() => {
     }
 
     out.textContent = "Saving…";
-    const n = importCards(cards, section, deckId);
+    const n = importCards(cards, section, deckId, {fileName: staged.fileName});
     st.deck = deckId; st.section = "All"; buildOrder(); render();
     UI.closeModals();
     if (failed.length) {
@@ -369,6 +487,20 @@ const CARDS = (() => {
       if (!confirm("Reset known/unknown for this deck?")) return;
       deckCards().forEach(c => { if (TH.S.data.progress[c.id]) TH.drop("progress", c.id); });
       render();
+    };
+
+    $("#manage-cards").onclick = () => { renderManage(); UI.openModal("#manage-modal"); };
+    $("#mg-del-deck").onclick = () => {
+      const d = TH.S.data.decks[st.deck]; if (!d) return;
+      const list = deckCards();
+      if (!confirm(`Delete the deck "${d.name}" and all ${list.length} of its cards?`)) return;
+      list.forEach(c => { if (TH.S.data.progress[c.id]) TH.drop("progress", c.id);
+        TH.drop("cards", c.id); });
+      TH.drop("decks", st.deck);
+      TH.save("trackhawk: delete deck").catch(() => {});
+      st.deck = null; st.section = "All";
+      ensureDeck(); buildOrder(); UI.closeModals(); render();
+      UI.toast("Deck deleted");
     };
 
     $("#import-cards").onclick = openImport;
