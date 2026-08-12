@@ -11,8 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script>window.TH_BUILD="11";</script>
-<link rel="stylesheet" href="css/style.css?v=11">
+<script>window.TH_BUILD="12";</script>
+<link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body>
 
@@ -203,6 +203,7 @@
       <div class="grow"></div>
       <button class="btn pink" id="import-cards">↑ Upload flashcards (.html)</button>
       <button class="btn ghost" id="add-card">+ Card</button>
+      <button class="btn ghost" id="manage-cards">⚙ Manage</button>
     </div>
 
     <div id="deck-empty" class="deck-empty is-hidden">
@@ -445,6 +446,47 @@
   </form>
 </div>
 
+<div class="modal is-hidden" id="manage-modal">
+  <div class="mhead"><h2>Manage this deck</h2><button class="icon-btn" data-close>×</button></div>
+  <div class="mbody">
+    <div class="mg-sec">
+      <h3>Recent uploads</h3>
+      <p class="mg-note">Each upload can be undone as a batch. Only files imported from this
+         build onward are listed — anything added earlier has no batch tag, so use the
+         section or deck tools below for those.</p>
+      <div id="mg-imports"></div>
+    </div>
+
+    <div class="mg-sec">
+      <h3>Sections</h3>
+      <p class="mg-note">Deletes every card in that section of this deck.</p>
+      <div id="mg-sections"></div>
+    </div>
+
+    <div class="mg-sec">
+      <h3>Stranded cards</h3>
+      <p class="mg-note">Cards left without a deck — usually from an import that ran before a
+         deck existed. They don't show up anywhere until they're moved or removed.</p>
+      <div id="mg-orphans"></div>
+    </div>
+
+    <div class="mg-sec">
+      <h3>Incomplete cards</h3>
+      <p class="mg-note">Cards with no answer content — usually the sign of a file that
+         didn't parse the way it should have.</p>
+      <div id="mg-empty"></div>
+    </div>
+
+    <div class="mg-sec danger-zone">
+      <h3>Delete this deck</h3>
+      <p class="mg-note">Removes the deck and every card in it. This syncs to your repo like
+         any other change, so it will apply on your other devices too.</p>
+      <button class="btn danger" id="mg-del-deck">Delete deck and all its cards</button>
+    </div>
+    <div class="msg" id="mg-out"></div>
+  </div>
+</div>
+
 <div class="modal is-hidden" id="import-modal">
   <div class="mhead"><h2>Import a deck</h2><button class="icon-btn" data-close>×</button></div>
   <div class="mbody">
@@ -518,12 +560,12 @@
 
 <div id="toast" class="toast is-hidden"></div>
 
-<script src="js/core.js?v=11"></script>
-<script src="js/jobs.js?v=11"></script>
-<script src="js/cards.js?v=11"></script>
-<script src="js/roadmap.js?v=11"></script>
-<script src="js/runway.js?v=11"></script>
-<script src="js/main.js?v=11"></script>
+<script src="js/core.js?v=12"></script>
+<script src="js/jobs.js?v=12"></script>
+<script src="js/cards.js?v=12"></script>
+<script src="js/roadmap.js?v=12"></script>
+<script src="js/runway.js?v=12"></script>
+<script src="js/main.js?v=12"></script>
 <script>
   if ("serviceWorker" in navigator) {
     /* A new build changes every ?v= on the page, so the browser HTTP cache and the
@@ -535,7 +577,7 @@
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (swapped) return; swapped = true; location.reload();
     });
-    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js?v=11")
+    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js?v=12")
       .then(reg => { reg.update(); setInterval(() => reg.update(), 60 * 60 * 1000); })
       .catch(() => {}));
   }
