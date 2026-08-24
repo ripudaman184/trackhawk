@@ -1,6 +1,6 @@
 /* TrackHawk service worker — caches the shell so the app opens instantly and
    works offline. Data is never cached here; it lives encrypted in the vault. */
-const CACHE = "trackhawk-v18";
+const CACHE = "trackhawk-v19";
 const V = "18";
 /* Asset URLs carry ?v=<build>, matching index.html exactly. A build bump therefore
    produces different cache keys, so nothing stale can survive a deploy.        */
