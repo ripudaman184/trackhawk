@@ -11,9 +11,24 @@ const RUNWAY = (() => {
   const esc = s => String(s ?? "").replace(/[&<>"']/g,
     c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-  const SCHEDULE = [{"id":1,"date":"2026-08-19","dow":"Wed","month":"Aug","day":19,"prep":1,"weekStart":"2026-08-17","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S1 — Core Java — collections deep-dive (1/2)","adv":[],"dsaTask":"[DSA] Barik S1 — Big-O & runtime analysis","dsaAdv":[1],"lcTask":"[LC] Ch1 — Intro & Big-O — solve 1–2 problems","lcChapter":1,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":2,"date":"2026-08-20","dow":"Thu","month":"Aug","day":20,"prep":1,"weekStart":"2026-08-17","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S1 — Core Java — collections deep-dive (2/2)","adv":[["sp",1]],"dsaTask":"[DSA] Barik S1 — Big-O & runtime analysis","dsaAdv":[1],"lcTask":"[LC] Ch1 — Intro & Big-O — solve 1–2 problems","lcChapter":1,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":3,"date":"2026-08-21","dow":"Fri","month":"Aug","day":21,"prep":1,"weekStart":"2026-08-17","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S2 — Core Java — generics, equals/hashCode (1/2)","adv":[],"dsaTask":"[DSA] Barik S1 — Big-O & runtime analysis","dsaAdv":[1],"lcTask":"[LC] Ch1 — Intro & Big-O — solve 1–2 problems","lcChapter":1,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":4,"date":"2026-08-22","dow":"Sat","month":"Aug","day":22,"prep":1,"weekStart":"2026-08-17","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Resume & flashcards","prepTasks":["Tailor ATS resume — lead with Java & Spring","Turn this week's logged questions into flashcards","Write answers for 2 logged questions"],"jobFocus":"Java backend + Java-heavy SDET","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":5,"date":"2026-08-23","dow":"Sun","month":"Aug","day":23,"prep":1,"weekStart":"2026-08-17","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Resume & flashcards","prepTasks":["Tailor ATS resume — lead with Java & Spring","Turn this week's logged questions into flashcards","Write answers for 2 logged questions"],"jobFocus":"Java backend + Java-heavy SDET","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":6,"date":"2026-08-24","dow":"Mon","month":"Aug","day":24,"prep":1,"weekStart":"2026-08-24","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S2 — Core Java — generics, equals/hashCode (2/2)","adv":[["sp",2]],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":7,"date":"2026-08-25","dow":"Tue","month":"Aug","day":25,"prep":1,"weekStart":"2026-08-24","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S3 — Core Java — streams & lambdas (1/2)","adv":[],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":8,"date":"2026-08-26","dow":"Wed","month":"Aug","day":26,"prep":1,"weekStart":"2026-08-24","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S3 — Core Java — streams & lambdas (2/2)","adv":[["sp",3]],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":9,"date":"2026-08-27","dow":"Thu","month":"Aug","day":27,"prep":1,"weekStart":"2026-08-24","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S4 — Core Java — threads & concurrency (1/2)","adv":[],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":10,"date":"2026-08-28","dow":"Fri","month":"Aug","day":28,"prep":1,"weekStart":"2026-08-24","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S4 — Core Java — threads & concurrency (2/2)","adv":[["sp",4]],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":11,"date":"2026-08-29","dow":"Sat","month":"Aug","day":29,"prep":1,"weekStart":"2026-08-24","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Resume & flashcards","prepTasks":["Tailor ATS resume — lead with Java & Spring","Turn this week's logged questions into flashcards","Write answers for 2 logged questions"],"jobFocus":"Java backend + Java-heavy SDET","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":12,"date":"2026-08-30","dow":"Sun","month":"Aug","day":30,"prep":1,"weekStart":"2026-08-24","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Resume & flashcards","prepTasks":["Tailor ATS resume — lead with Java & Spring","Turn this week's logged questions into flashcards","Write answers for 2 logged questions"],"jobFocus":"Java backend + Java-heavy SDET","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":13,"date":"2026-08-31","dow":"Mon","month":"Aug","day":31,"prep":1,"weekStart":"2026-08-31","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S5 — Exceptions, I/O & files","adv":[["sp",5]],"dsaTask":"[DSA] Barik S3 — Linked lists","dsaAdv":[3],"lcTask":"[LC] Ch3 — Linked Lists — solve 1–2 problems","lcChapter":3,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":14,"date":"2026-09-01","dow":"Tue","month":"Sep","day":1,"prep":1,"weekStart":"2026-08-31","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — Core Java katas — no tutorial, just code","adv":[],"dsaTask":"[DSA] Barik S3 — Linked lists","dsaAdv":[3],"lcTask":"[LC] Ch3 — Linked Lists — solve 1–2 problems","lcChapter":3,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":15,"date":"2026-09-02","dow":"Wed","month":"Sep","day":2,"prep":1,"weekStart":"2026-08-31","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S6 — Maven, project layout & dependency scopes","adv":[["sp",6]],"dsaTask":"[DSA] Barik S3 — Linked lists","dsaAdv":[3],"lcTask":"[LC] Ch3 — Linked Lists — solve 1–2 problems","lcChapter":3,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":16,"date":"2026-09-03","dow":"Thu","month":"Sep","day":3,"prep":1,"weekStart":"2026-08-31","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S7 — JUnit 5 + Mockito (1/2)","adv":[],"dsaTask":"[DSA] Barik S3 — Linked lists","dsaAdv":[3],"lcTask":"[LC] Ch3 — Linked Lists — solve 1–2 problems","lcChapter":3,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":17,"date":"2026-09-04","dow":"Fri","month":"Sep","day":4,"prep":1,"weekStart":"2026-08-31","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S7 — JUnit 5 + Mockito (2/2)","adv":[["sp",7]],"dsaTask":"[DSA] Barik S4 — Stacks & queues","dsaAdv":[4],"lcTask":"[LC] Ch4 — Stacks & Queues — solve 1–2 problems","lcChapter":4,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"SCAFFOLD"},{"id":18,"date":"2026-09-05","dow":"Sat","month":"Sep","day":5,"prep":1,"weekStart":"2026-08-31","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Resume & flashcards","prepTasks":["Tailor ATS resume — lead with Java & Spring","Turn this week's logged questions into flashcards","Write answers for 2 logged questions"],"jobFocus":"Java backend + Java-heavy SDET","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":19,"date":"2026-09-06","dow":"Sun","month":"Sep","day":6,"prep":1,"weekStart":"2026-08-31","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Resume & flashcards","prepTasks":["Tailor ATS resume — lead with Java & Spring","Turn this week's logged questions into flashcards","Write answers for 2 logged questions"],"jobFocus":"Java backend + Java-heavy SDET","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":20,"date":"2026-09-07","dow":"Mon","month":"Sep","day":7,"prep":1,"weekStart":"2026-09-07","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — Write tests for yesterday's katas","adv":[],"dsaTask":"[DSA] Barik S4 — Stacks & queues","dsaAdv":[4],"lcTask":"[LC] Ch4 — Stacks & Queues — solve 1–2 problems","lcChapter":4,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":21,"date":"2026-09-08","dow":"Tue","month":"Sep","day":8,"prep":1,"weekStart":"2026-09-07","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S8 — Spring Core — IoC & DI (1/2)","adv":[],"dsaTask":"[DSA] Barik S4 — Stacks & queues","dsaAdv":[4],"lcTask":"[LC] Ch4 — Stacks & Queues — solve 1–2 problems","lcChapter":4,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":22,"date":"2026-09-09","dow":"Wed","month":"Sep","day":9,"prep":1,"weekStart":"2026-09-07","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S8 — Spring Core — IoC & DI (2/2)","adv":[["sp",8]],"dsaTask":"[DSA] Barik S4 — Stacks & queues","dsaAdv":[4],"lcTask":"[LC] Ch4 — Stacks & Queues — solve 1–2 problems","lcChapter":4,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":23,"date":"2026-09-10","dow":"Thu","month":"Sep","day":10,"prep":1,"weekStart":"2026-09-07","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S9 — Spring Core — bean scopes & lifecycle","adv":[["sp",9]],"dsaTask":"[DSA] Barik S5 — Hashing & hash tables","dsaAdv":[5],"lcTask":"[LC] Ch5 — Hashing — solve 1–2 problems","lcChapter":5,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":24,"date":"2026-09-11","dow":"Fri","month":"Sep","day":11,"prep":1,"weekStart":"2026-09-07","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S10 — Spring Boot — starters & autoconfiguration (1/2)","adv":[],"dsaTask":"[DSA] Barik S5 — Hashing & hash tables","dsaAdv":[5],"lcTask":"[LC] Ch5 — Hashing — solve 1–2 problems","lcChapter":5,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":25,"date":"2026-09-12","dow":"Sat","month":"Sep","day":12,"prep":1,"weekStart":"2026-09-07","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Resume & flashcards","prepTasks":["Tailor ATS resume — lead with Java & Spring","Turn this week's logged questions into flashcards","Write answers for 2 logged questions"],"jobFocus":"Java backend + Java-heavy SDET","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":26,"date":"2026-09-13","dow":"Sun","month":"Sep","day":13,"prep":1,"weekStart":"2026-09-07","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Resume & flashcards","prepTasks":["Tailor ATS resume — lead with Java & Spring","Turn this week's logged questions into flashcards","Write answers for 2 logged questions"],"jobFocus":"Java backend + Java-heavy SDET","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":27,"date":"2026-09-14","dow":"Mon","month":"Sep","day":14,"prep":1,"weekStart":"2026-09-14","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S10 — Spring Boot — starters & autoconfiguration (2/2)","adv":[["sp",10]],"dsaTask":"[DSA] Barik S5 — Hashing & hash tables","dsaAdv":[5],"lcTask":"[LC] Ch5 — Hashing — solve 1–2 problems","lcChapter":5,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"BOOT"},{"id":28,"date":"2026-09-15","dow":"Tue","month":"Sep","day":15,"prep":1,"weekStart":"2026-09-14","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — First Boot app — hello endpoint, wired by hand","adv":[],"dsaTask":"[DSA] Barik S5 — Hashing & hash tables","dsaAdv":[5],"lcTask":"[LC] Ch5 — Hashing — solve 1–2 problems","lcChapter":5,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":29,"date":"2026-09-16","dow":"Wed","month":"Sep","day":16,"prep":1,"weekStart":"2026-09-14","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S11 — REST controllers & request mapping (1/2)","adv":[],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"morning":"Apply to 1 fresh role (~9–10am)","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"id":30,"date":"2026-09-17","dow":"Thu","month":"Sep","day":17,"prep":2,"weekStart":"2026-09-14","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S11 — REST controllers & request mapping (2/2)","adv":[["sp",11]],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"id":31,"date":"2026-09-18","dow":"Fri","month":"Sep","day":18,"prep":2,"weekStart":"2026-09-14","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S12 — DTOs, validation & mapping","adv":[["sp",12]],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"id":32,"date":"2026-09-19","dow":"Sat","month":"Sep","day":19,"prep":2,"weekStart":"2026-09-14","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Answers & flashcards","prepTasks":["Tailor ATS resume for a specific role","Build flashcards from this week's questions","Rehearse 2 answers out loud, no notes"],"jobFocus":"Java backend roles","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":33,"date":"2026-09-20","dow":"Sun","month":"Sep","day":20,"prep":2,"weekStart":"2026-09-14","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Answers & flashcards","prepTasks":["Tailor ATS resume for a specific role","Build flashcards from this week's questions","Rehearse 2 answers out loud, no notes"],"jobFocus":"Java backend roles","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":34,"date":"2026-09-21","dow":"Mon","month":"Sep","day":21,"prep":2,"weekStart":"2026-09-21","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S13 — Global error handling (@ControllerAdvice)","adv":[["sp",13]],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15},"milestone":"REST"},{"id":35,"date":"2026-09-22","dow":"Tue","month":"Sep","day":22,"prep":2,"weekStart":"2026-09-21","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — Full REST resource: GET/POST/PUT/DELETE + validation","adv":[],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"id":36,"date":"2026-09-23","dow":"Wed","month":"Sep","day":23,"prep":2,"weekStart":"2026-09-21","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S14 — JDBC & DataSource","adv":[["sp",14]],"dsaTask":"[DSA] Barik S7 — Heaps & priority queues","dsaAdv":[7],"lcTask":"[LC] Ch7 — Heaps — solve 1–2 problems","lcChapter":7,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"id":37,"date":"2026-09-24","dow":"Thu","month":"Sep","day":24,"prep":2,"weekStart":"2026-09-21","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S15 — Spring Data JPA — entities & repositories (1/2)","adv":[],"dsaTask":"[DSA] Barik S7 — Heaps & priority queues","dsaAdv":[7],"lcTask":"[LC] Ch7 — Heaps — solve 1–2 problems","lcChapter":7,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"id":38,"date":"2026-09-25","dow":"Fri","month":"Sep","day":25,"prep":2,"weekStart":"2026-09-21","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S15 — Spring Data JPA — entities & repositories (2/2)","adv":[["sp",15]],"dsaTask":"[DSA] Barik S7 — Heaps & priority queues","dsaAdv":[7],"lcTask":"[LC] Ch7 — Heaps — solve 1–2 problems","lcChapter":7,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15},"milestone":"DB"},{"id":39,"date":"2026-09-26","dow":"Sat","month":"Sep","day":26,"prep":2,"weekStart":"2026-09-21","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Answers & flashcards","prepTasks":["Tailor ATS resume for a specific role","Build flashcards from this week's questions","Rehearse 2 answers out loud, no notes"],"jobFocus":"Java backend roles","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":40,"date":"2026-09-27","dow":"Sun","month":"Sep","day":27,"prep":2,"weekStart":"2026-09-21","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Answers & flashcards","prepTasks":["Tailor ATS resume for a specific role","Build flashcards from this week's questions","Rehearse 2 answers out loud, no notes"],"jobFocus":"Java backend roles","expected":{"course":0,"dsa":0,"prep":60,"job":45}},{"id":41,"date":"2026-09-28","dow":"Mon","month":"Sep","day":28,"prep":2,"weekStart":"2026-09-28","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — Wire a repository over a real Postgres","adv":[],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"id":42,"date":"2026-09-29","dow":"Tue","month":"Sep","day":29,"prep":2,"weekStart":"2026-09-28","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S16 — JPA relationships & fetch strategies (1/2)","adv":[],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"id":43,"date":"2026-09-30","dow":"Wed","month":"Sep","day":30,"prep":2,"weekStart":"2026-09-28","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S16 — JPA relationships & fetch strategies (2/2)","adv":[["sp",16]],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"id":44,"date":"2026-10-01","dow":"Thu","month":"Oct","day":1,"prep":2,"weekStart":"2026-09-28","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S17 — Transactions & @Transactional (1/2)","adv":[],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"id":45,"date":"2026-10-02","dow":"Fri","month":"Oct","day":2,"prep":3,"weekStart":"2026-09-28","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S17 — Transactions & @Transactional (2/2)","adv":[["sp",17]],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"id":46,"date":"2026-10-03","dow":"Sat","month":"Oct","day":3,"prep":3,"weekStart":"2026-09-28","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Mock interviews & walkthrough","prepTasks":["Tailor resume + cover note for a target role","Flashcards + review weak decks","Mock: 30 min, timed, out loud"],"jobFocus":"Java backend — volume week","expected":{"course":0,"dsa":0,"prep":90,"job":45}},{"id":47,"date":"2026-10-04","dow":"Sun","month":"Oct","day":4,"prep":3,"weekStart":"2026-09-28","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Mock interviews & walkthrough","prepTasks":["Tailor resume + cover note for a target role","Flashcards + review weak decks","Mock: 30 min, timed, out loud"],"jobFocus":"Java backend — volume week","expected":{"course":0,"dsa":0,"prep":90,"job":45}},{"id":48,"date":"2026-10-05","dow":"Mon","month":"Oct","day":5,"prep":3,"weekStart":"2026-10-05","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S18 — JPQL, query methods & pagination","adv":[["sp",18]],"dsaTask":"[DSA] Barik S9 — Sorting algorithms","dsaAdv":[9],"lcTask":"[LC] Ch9 — Sorting — solve 1–2 problems","lcChapter":9,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15},"milestone":"BUILDABLE"},{"id":49,"date":"2026-10-06","dow":"Tue","month":"Oct","day":6,"prep":3,"weekStart":"2026-10-05","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — Model relationships — then break them on purpose","adv":[],"dsaTask":"[DSA] Barik S9 — Sorting algorithms","dsaAdv":[9],"lcTask":"[LC] Ch9 — Sorting — solve 1–2 problems","lcChapter":9,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"id":50,"date":"2026-10-07","dow":"Wed","month":"Oct","day":7,"prep":3,"weekStart":"2026-10-05","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S19 — Hibernate performance — N+1, caching","adv":[["sp",19]],"dsaTask":"[DSA] Barik S9 — Sorting algorithms","dsaAdv":[9],"lcTask":"[LC] Ch9 — Sorting — solve 1–2 problems","lcChapter":9,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"id":51,"date":"2026-10-08","dow":"Thu","month":"Oct","day":8,"prep":3,"weekStart":"2026-10-05","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S20 — Spring Security — authentication (1/2)","adv":[],"dsaTask":"[DSA] Barik S9 — Sorting algorithms","dsaAdv":[9],"lcTask":"[LC] Ch9 — Sorting — solve 1–2 problems","lcChapter":9,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"id":52,"date":"2026-10-09","dow":"Fri","month":"Oct","day":9,"prep":3,"weekStart":"2026-10-05","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S20 — Spring Security — authentication (2/2)","adv":[["sp",20]],"dsaTask":"[DSA] Barik S10 — Searching & binary search","dsaAdv":[10],"lcTask":"[LC] Ch10 — Binary Search — solve 1–2 problems","lcChapter":10,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"id":53,"date":"2026-10-10","dow":"Sat","month":"Oct","day":10,"prep":3,"weekStart":"2026-10-05","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Mock interviews & walkthrough","prepTasks":["Tailor resume + cover note for a target role","Flashcards + review weak decks","Mock: 30 min, timed, out loud"],"jobFocus":"Java backend — volume week","expected":{"course":0,"dsa":0,"prep":90,"job":45}},{"id":54,"date":"2026-10-11","dow":"Sun","month":"Oct","day":11,"prep":3,"weekStart":"2026-10-05","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Mock interviews & walkthrough","prepTasks":["Tailor resume + cover note for a target role","Flashcards + review weak decks","Mock: 30 min, timed, out loud"],"jobFocus":"Java backend — volume week","expected":{"course":0,"dsa":0,"prep":90,"job":45}},{"id":55,"date":"2026-10-12","dow":"Mon","month":"Oct","day":12,"prep":3,"weekStart":"2026-10-12","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S21 — Spring Security — JWT & method authorization (1/2)","adv":[],"dsaTask":"[DSA] Barik S10 — Searching & binary search","dsaAdv":[10],"lcTask":"[LC] Ch10 — Binary Search — solve 1–2 problems","lcChapter":10,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"id":56,"date":"2026-10-13","dow":"Tue","month":"Oct","day":13,"prep":3,"weekStart":"2026-10-12","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S21 — Spring Security — JWT & method authorization (2/2)","adv":[["sp",21]],"dsaTask":"[DSA] Barik S10 — Searching & binary search","dsaAdv":[10],"lcTask":"[LC] Ch10 — Binary Search — solve 1–2 problems","lcChapter":10,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15},"milestone":"AUTH"},{"id":57,"date":"2026-10-14","dow":"Wed","month":"Oct","day":14,"prep":3,"weekStart":"2026-10-12","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — Lock the endpoints down, then try to break in","adv":[],"dsaTask":"[DSA] Barik S11 — Recursion & backtracking","dsaAdv":[11],"lcTask":"[LC] Ch11 — Backtracking — solve 1–2 problems","lcChapter":11,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"id":58,"date":"2026-10-15","dow":"Thu","month":"Oct","day":15,"prep":3,"weekStart":"2026-10-12","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S22 — Testing — MockMvc & slice tests (1/2)","adv":[],"dsaTask":"[DSA] Barik S11 — Recursion & backtracking","dsaAdv":[11],"lcTask":"[LC] Ch11 — Backtracking — solve 1–2 problems","lcChapter":11,"morning":"Apply to 2 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"id":59,"date":"2026-10-16","dow":"Fri","month":"Oct","day":16,"prep":4,"weekStart":"2026-10-12","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S22 — Testing — MockMvc & slice tests (2/2)","adv":[["sp",22]],"dsaTask":"[DSA] Barik S11 — Recursion & backtracking","dsaAdv":[11],"lcTask":"[LC] Ch11 — Backtracking — solve 1–2 problems","lcChapter":11,"morning":"Apply to 3 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"id":60,"date":"2026-10-17","dow":"Sat","month":"Oct","day":17,"prep":4,"weekStart":"2026-10-12","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Full mocks — headline priority","prepTasks":["Tailor resume for each application","Drill weak flashcard decks","Full mock interview — timed and recorded"],"jobFocus":"Java backend — final push","expected":{"course":0,"dsa":0,"prep":90,"job":45}},{"id":61,"date":"2026-10-18","dow":"Sun","month":"Oct","day":18,"prep":4,"weekStart":"2026-10-12","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Full mocks — headline priority","prepTasks":["Tailor resume for each application","Drill weak flashcard decks","Full mock interview — timed and recorded"],"jobFocus":"Java backend — final push","expected":{"course":0,"dsa":0,"prep":90,"job":45}},{"id":62,"date":"2026-10-19","dow":"Mon","month":"Oct","day":19,"prep":4,"weekStart":"2026-10-19","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S23 — Testing — Testcontainers","adv":[["sp",23]],"dsaTask":"[DSA] Barik S11 — Recursion & backtracking","dsaAdv":[11],"lcTask":"[LC] Ch11 — Backtracking — solve 1–2 problems","lcChapter":11,"morning":"Apply to 3 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":60,"job":15},"milestone":"TESTS"},{"id":63,"date":"2026-10-20","dow":"Tue","month":"Oct","day":20,"prep":4,"weekStart":"2026-10-19","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — Integration test the whole slice","adv":[],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"morning":"Apply to 3 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"id":64,"date":"2026-10-21","dow":"Wed","month":"Oct","day":21,"prep":4,"weekStart":"2026-10-19","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S24 — Caching with Redis","adv":[["sp",24]],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"morning":"Apply to 3 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"id":65,"date":"2026-10-22","dow":"Thu","month":"Oct","day":22,"prep":4,"weekStart":"2026-10-19","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S25 — Docker — containerising the service","adv":[["sp",25]],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"morning":"Apply to 3 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"id":66,"date":"2026-10-23","dow":"Fri","month":"Oct","day":23,"prep":4,"weekStart":"2026-10-19","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — docker-compose the stack end to end","adv":[],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"morning":"Apply to 3 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"id":67,"date":"2026-10-24","dow":"Sat","month":"Oct","day":24,"prep":4,"weekStart":"2026-10-19","phase":"SPRING","type":"weekend","isSunday":false,"mainTask":"[PREP] Full mocks — headline priority","prepTasks":["Tailor resume for each application","Drill weak flashcard decks","Full mock interview — timed and recorded"],"jobFocus":"Java backend — final push","expected":{"course":0,"dsa":0,"prep":90,"job":45}},{"id":68,"date":"2026-10-25","dow":"Sun","month":"Oct","day":25,"prep":4,"weekStart":"2026-10-19","phase":"SPRING","type":"weekend","isSunday":true,"mainTask":"[PREP] Full mocks — headline priority","prepTasks":["Tailor resume for each application","Drill weak flashcard decks","Full mock interview — timed and recorded"],"jobFocus":"Java backend — final push","expected":{"course":0,"dsa":0,"prep":90,"job":45}},{"id":69,"date":"2026-10-26","dow":"Mon","month":"Oct","day":26,"prep":4,"weekStart":"2026-10-26","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S26 — CI with GitHub Actions","adv":[["sp",26]],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"morning":"Apply to 3 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"id":70,"date":"2026-10-27","dow":"Tue","month":"Oct","day":27,"prep":4,"weekStart":"2026-10-26","phase":"SPRING","type":"weekday","mainTask":"[JAVA] S27 — Actuator, logging & metrics","adv":[["sp",27]],"dsaTask":"[DSA] Barik S13 — Greedy algorithms","dsaAdv":[13],"lcTask":"[LC] Ch13 — Greedy & review — solve 1–2 problems","lcChapter":13,"morning":"Apply to 3 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":60,"job":15},"milestone":"COURSE_DONE"},{"id":71,"date":"2026-10-28","dow":"Wed","month":"Oct","day":28,"prep":4,"weekStart":"2026-10-26","phase":"SPRING","type":"weekday","mainTask":"[JAVA] Build day — Ship it — README, endpoints, one diagram","adv":[],"dsaTask":"[DSA] Barik S13 — Greedy algorithms","dsaAdv":[13],"lcTask":"[LC] Ch13 — Greedy & review — solve 1–2 problems","lcChapter":13,"morning":"Apply to 3 fresh roles (~9–10am)","expected":{"course":90,"dsa":60,"prep":60,"job":15}}];
-  const byDate = Object.fromEntries(SCHEDULE.map(d => [d.date, d]));
-  const START = SCHEDULE[0].date, END = SCHEDULE[SCHEDULE.length-1].date;
+  const SESSIONS = [{"n":1,"mainTask":"[JAVA] S1 — Core Java — collections deep-dive (1/2)","adv":[],"dsaTask":"[DSA] Barik S1 — Big-O & runtime analysis","dsaAdv":[1],"lcTask":"[LC] Ch1 — Intro & Big-O — solve 1–2 problems","lcChapter":1,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":2,"mainTask":"[JAVA] S1 — Core Java — collections deep-dive (2/2)","adv":[["sp",1]],"dsaTask":"[DSA] Barik S1 — Big-O & runtime analysis","dsaAdv":[1],"lcTask":"[LC] Ch1 — Intro & Big-O — solve 1–2 problems","lcChapter":1,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":3,"mainTask":"[JAVA] S2 — Core Java — generics, equals/hashCode (1/2)","adv":[],"dsaTask":"[DSA] Barik S1 — Big-O & runtime analysis","dsaAdv":[1],"lcTask":"[LC] Ch1 — Intro & Big-O — solve 1–2 problems","lcChapter":1,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":4,"mainTask":"[JAVA] S2 — Core Java — generics, equals/hashCode (2/2)","adv":[["sp",2]],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":5,"mainTask":"[JAVA] S3 — Core Java — streams & lambdas (1/2)","adv":[],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":6,"mainTask":"[JAVA] S3 — Core Java — streams & lambdas (2/2)","adv":[["sp",3]],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":7,"mainTask":"[JAVA] S4 — Core Java — threads & concurrency (1/2)","adv":[],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":8,"mainTask":"[JAVA] S4 — Core Java — threads & concurrency (2/2)","adv":[["sp",4]],"dsaTask":"[DSA] Barik S2 — Arrays & 2-D arrays","dsaAdv":[2],"lcTask":"[LC] Ch2 — Arrays & Strings — solve 1–2 problems","lcChapter":2,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":9,"mainTask":"[JAVA] S5 — Exceptions, I/O & files","adv":[["sp",5]],"dsaTask":"[DSA] Barik S3 — Linked lists","dsaAdv":[3],"lcTask":"[LC] Ch3 — Linked Lists — solve 1–2 problems","lcChapter":3,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":10,"mainTask":"[JAVA] Build day — Core Java katas — no tutorial, just code","adv":[],"dsaTask":"[DSA] Barik S3 — Linked lists","dsaAdv":[3],"lcTask":"[LC] Ch3 — Linked Lists — solve 1–2 problems","lcChapter":3,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":11,"mainTask":"[JAVA] S6 — Maven, project layout & dependency scopes","adv":[["sp",6]],"dsaTask":"[DSA] Barik S3 — Linked lists","dsaAdv":[3],"lcTask":"[LC] Ch3 — Linked Lists — solve 1–2 problems","lcChapter":3,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":12,"mainTask":"[JAVA] S7 — JUnit 5 + Mockito (1/2)","adv":[],"dsaTask":"[DSA] Barik S3 — Linked lists","dsaAdv":[3],"lcTask":"[LC] Ch3 — Linked Lists — solve 1–2 problems","lcChapter":3,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":13,"mainTask":"[JAVA] S7 — JUnit 5 + Mockito (2/2)","adv":[["sp",7]],"dsaTask":"[DSA] Barik S4 — Stacks & queues","dsaAdv":[4],"lcTask":"[LC] Ch4 — Stacks & Queues — solve 1–2 problems","lcChapter":4,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"SCAFFOLD"},{"n":14,"mainTask":"[JAVA] Build day — Write tests for yesterday's katas","adv":[],"dsaTask":"[DSA] Barik S4 — Stacks & queues","dsaAdv":[4],"lcTask":"[LC] Ch4 — Stacks & Queues — solve 1–2 problems","lcChapter":4,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":15,"mainTask":"[JAVA] S8 — Spring Core — IoC & DI (1/2)","adv":[],"dsaTask":"[DSA] Barik S4 — Stacks & queues","dsaAdv":[4],"lcTask":"[LC] Ch4 — Stacks & Queues — solve 1–2 problems","lcChapter":4,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":16,"mainTask":"[JAVA] S8 — Spring Core — IoC & DI (2/2)","adv":[["sp",8]],"dsaTask":"[DSA] Barik S4 — Stacks & queues","dsaAdv":[4],"lcTask":"[LC] Ch4 — Stacks & Queues — solve 1–2 problems","lcChapter":4,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":17,"mainTask":"[JAVA] S9 — Spring Core — bean scopes & lifecycle","adv":[["sp",9]],"dsaTask":"[DSA] Barik S5 — Hashing & hash tables","dsaAdv":[5],"lcTask":"[LC] Ch5 — Hashing — solve 1–2 problems","lcChapter":5,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":18,"mainTask":"[JAVA] S10 — Spring Boot — starters & autoconfiguration (1/2)","adv":[],"dsaTask":"[DSA] Barik S5 — Hashing & hash tables","dsaAdv":[5],"lcTask":"[LC] Ch5 — Hashing — solve 1–2 problems","lcChapter":5,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":19,"mainTask":"[JAVA] S10 — Spring Boot — starters & autoconfiguration (2/2)","adv":[["sp",10]],"dsaTask":"[DSA] Barik S5 — Hashing & hash tables","dsaAdv":[5],"lcTask":"[LC] Ch5 — Hashing — solve 1–2 problems","lcChapter":5,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15},"milestone":"BOOT"},{"n":20,"mainTask":"[JAVA] Build day — First Boot app — hello endpoint, wired by hand","adv":[],"dsaTask":"[DSA] Barik S5 — Hashing & hash tables","dsaAdv":[5],"lcTask":"[LC] Ch5 — Hashing — solve 1–2 problems","lcChapter":5,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":21,"mainTask":"[JAVA] S11 — REST controllers & request mapping (1/2)","adv":[],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"prep":1,"morning":"Apply to 1 fresh role","expected":{"course":90,"dsa":60,"prep":15,"job":15}},{"n":22,"mainTask":"[JAVA] S11 — REST controllers & request mapping (2/2)","adv":[["sp",11]],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"n":23,"mainTask":"[JAVA] S12 — DTOs, validation & mapping","adv":[["sp",12]],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"n":24,"mainTask":"[JAVA] S13 — Global error handling (@ControllerAdvice)","adv":[["sp",13]],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15},"milestone":"REST"},{"n":25,"mainTask":"[JAVA] Build day — Full REST resource: GET/POST/PUT/DELETE + validation","adv":[],"dsaTask":"[DSA] Barik S6 — Trees & binary search trees","dsaAdv":[6],"lcTask":"[LC] Ch6 — Trees — solve 1–2 problems","lcChapter":6,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"n":26,"mainTask":"[JAVA] S14 — JDBC & DataSource","adv":[["sp",14]],"dsaTask":"[DSA] Barik S7 — Heaps & priority queues","dsaAdv":[7],"lcTask":"[LC] Ch7 — Heaps — solve 1–2 problems","lcChapter":7,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"n":27,"mainTask":"[JAVA] S15 — Spring Data JPA — entities & repositories (1/2)","adv":[],"dsaTask":"[DSA] Barik S7 — Heaps & priority queues","dsaAdv":[7],"lcTask":"[LC] Ch7 — Heaps — solve 1–2 problems","lcChapter":7,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"n":28,"mainTask":"[JAVA] S15 — Spring Data JPA — entities & repositories (2/2)","adv":[["sp",15]],"dsaTask":"[DSA] Barik S7 — Heaps & priority queues","dsaAdv":[7],"lcTask":"[LC] Ch7 — Heaps — solve 1–2 problems","lcChapter":7,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15},"milestone":"DB"},{"n":29,"mainTask":"[JAVA] Build day — Wire a repository over a real Postgres","adv":[],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"n":30,"mainTask":"[JAVA] S16 — JPA relationships & fetch strategies (1/2)","adv":[],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"n":31,"mainTask":"[JAVA] S16 — JPA relationships & fetch strategies (2/2)","adv":[["sp",16]],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"n":32,"mainTask":"[JAVA] S17 — Transactions & @Transactional (1/2)","adv":[],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"prep":2,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":30,"job":15}},{"n":33,"mainTask":"[JAVA] S17 — Transactions & @Transactional (2/2)","adv":[["sp",17]],"dsaTask":"[DSA] Barik S8 — Graphs & representations","dsaAdv":[8],"lcTask":"[LC] Ch8 — Graphs (BFS/DFS) — solve 1–2 problems","lcChapter":8,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"n":34,"mainTask":"[JAVA] S18 — JPQL, query methods & pagination","adv":[["sp",18]],"dsaTask":"[DSA] Barik S9 — Sorting algorithms","dsaAdv":[9],"lcTask":"[LC] Ch9 — Sorting — solve 1–2 problems","lcChapter":9,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15},"milestone":"BUILDABLE"},{"n":35,"mainTask":"[JAVA] Build day — Model relationships — then break them on purpose","adv":[],"dsaTask":"[DSA] Barik S9 — Sorting algorithms","dsaAdv":[9],"lcTask":"[LC] Ch9 — Sorting — solve 1–2 problems","lcChapter":9,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"n":36,"mainTask":"[JAVA] S19 — Hibernate performance — N+1, caching","adv":[["sp",19]],"dsaTask":"[DSA] Barik S9 — Sorting algorithms","dsaAdv":[9],"lcTask":"[LC] Ch9 — Sorting — solve 1–2 problems","lcChapter":9,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"n":37,"mainTask":"[JAVA] S20 — Spring Security — authentication (1/2)","adv":[],"dsaTask":"[DSA] Barik S9 — Sorting algorithms","dsaAdv":[9],"lcTask":"[LC] Ch9 — Sorting — solve 1–2 problems","lcChapter":9,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"n":38,"mainTask":"[JAVA] S20 — Spring Security — authentication (2/2)","adv":[["sp",20]],"dsaTask":"[DSA] Barik S10 — Searching & binary search","dsaAdv":[10],"lcTask":"[LC] Ch10 — Binary Search — solve 1–2 problems","lcChapter":10,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"n":39,"mainTask":"[JAVA] S21 — Spring Security — JWT & method authorization (1/2)","adv":[],"dsaTask":"[DSA] Barik S10 — Searching & binary search","dsaAdv":[10],"lcTask":"[LC] Ch10 — Binary Search — solve 1–2 problems","lcChapter":10,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"n":40,"mainTask":"[JAVA] S21 — Spring Security — JWT & method authorization (2/2)","adv":[["sp",21]],"dsaTask":"[DSA] Barik S10 — Searching & binary search","dsaAdv":[10],"lcTask":"[LC] Ch10 — Binary Search — solve 1–2 problems","lcChapter":10,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15},"milestone":"AUTH"},{"n":41,"mainTask":"[JAVA] Build day — Lock the endpoints down, then try to break in","adv":[],"dsaTask":"[DSA] Barik S11 — Recursion & backtracking","dsaAdv":[11],"lcTask":"[LC] Ch11 — Backtracking — solve 1–2 problems","lcChapter":11,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"n":42,"mainTask":"[JAVA] S22 — Testing — MockMvc & slice tests (1/2)","adv":[],"dsaTask":"[DSA] Barik S11 — Recursion & backtracking","dsaAdv":[11],"lcTask":"[LC] Ch11 — Backtracking — solve 1–2 problems","lcChapter":11,"prep":3,"morning":"Apply to 2 fresh roles","expected":{"course":90,"dsa":60,"prep":45,"job":15}},{"n":43,"mainTask":"[JAVA] S22 — Testing — MockMvc & slice tests (2/2)","adv":[["sp",22]],"dsaTask":"[DSA] Barik S11 — Recursion & backtracking","dsaAdv":[11],"lcTask":"[LC] Ch11 — Backtracking — solve 1–2 problems","lcChapter":11,"prep":4,"morning":"Apply to 3 fresh roles","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"n":44,"mainTask":"[JAVA] S23 — Testing — Testcontainers","adv":[["sp",23]],"dsaTask":"[DSA] Barik S11 — Recursion & backtracking","dsaAdv":[11],"lcTask":"[LC] Ch11 — Backtracking — solve 1–2 problems","lcChapter":11,"prep":4,"morning":"Apply to 3 fresh roles","expected":{"course":90,"dsa":60,"prep":60,"job":15},"milestone":"TESTS"},{"n":45,"mainTask":"[JAVA] Build day — Integration test the whole slice","adv":[],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"prep":4,"morning":"Apply to 3 fresh roles","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"n":46,"mainTask":"[JAVA] S24 — Caching with Redis","adv":[["sp",24]],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"prep":4,"morning":"Apply to 3 fresh roles","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"n":47,"mainTask":"[JAVA] S25 — Docker — containerising the service","adv":[["sp",25]],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"prep":4,"morning":"Apply to 3 fresh roles","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"n":48,"mainTask":"[JAVA] Build day — docker-compose the stack end to end","adv":[],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"prep":4,"morning":"Apply to 3 fresh roles","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"n":49,"mainTask":"[JAVA] S26 — CI with GitHub Actions","adv":[["sp",26]],"dsaTask":"[DSA] Barik S12 — Dynamic programming","dsaAdv":[12],"lcTask":"[LC] Ch12 — Dynamic Programming — solve 1–2 problems","lcChapter":12,"prep":4,"morning":"Apply to 3 fresh roles","expected":{"course":90,"dsa":60,"prep":60,"job":15}},{"n":50,"mainTask":"[JAVA] S27 — Actuator, logging & metrics","adv":[["sp",27]],"dsaTask":"[DSA] Barik S13 — Greedy algorithms","dsaAdv":[13],"lcTask":"[LC] Ch13 — Greedy & review — solve 1–2 problems","lcChapter":13,"prep":4,"morning":"Apply to 3 fresh roles","expected":{"course":90,"dsa":60,"prep":60,"job":15},"milestone":"COURSE_DONE"},{"n":51,"mainTask":"[JAVA] Build day — Ship it — README, endpoints, one diagram","adv":[],"dsaTask":"[DSA] Barik S13 — Greedy algorithms","dsaAdv":[13],"lcTask":"[LC] Ch13 — Greedy & review — solve 1–2 problems","lcChapter":13,"prep":4,"morning":"Apply to 3 fresh roles","expected":{"course":90,"dsa":60,"prep":60,"job":15}}];
+  /* the old calendar plan, kept only to migrate existing ticks once */
+  const LEGACY_DATES = ["2026-08-24","2026-08-25","2026-08-26","2026-08-27","2026-08-28","2026-08-31","2026-09-01","2026-09-02","2026-09-03","2026-09-04","2026-09-07","2026-09-08","2026-09-09","2026-09-10","2026-09-11","2026-09-14","2026-09-15","2026-09-16","2026-09-17","2026-09-18","2026-09-21","2026-09-22","2026-09-23","2026-09-24","2026-09-25","2026-09-28","2026-09-29","2026-09-30","2026-10-01","2026-10-02","2026-10-05","2026-10-06","2026-10-07","2026-10-08","2026-10-09","2026-10-12","2026-10-13","2026-10-14","2026-10-15","2026-10-16","2026-10-19","2026-10-20","2026-10-21","2026-10-22","2026-10-23","2026-10-26","2026-10-27","2026-10-28","2026-10-29","2026-10-30","2026-11-02"];
+  const SESS = Object.fromEntries(SESSIONS.map(x => [x.n, x]));
+  const LAST = SESSIONS.length;
+
+  /* ---------------------------------------------------------------------
+     The runway is indexed by SESSION, not by calendar date. Session 1 is
+     whatever you do first; the plan advances only when you complete work,
+     so a missed evening delays the finish rather than invalidating the plan.
+     Calendar dates appear only as (a) the day you started, (b) projections,
+     and (c) weekend prep, which genuinely is calendar-bound.
+     --------------------------------------------------------------------- */
+  const KEY = n => "s" + n;                       // study session record key
+  const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  const todayISO = () => iso(new Date());
+  const isWeekend = (dt) => { const w = (dt||new Date()).getDay(); return w===0 || w===6; };
+
   const TOTALS = {sp:27, dsa:13, lc:13};
   const CAT = {course:"var(--amber)", auto:"var(--amber)", spring:"var(--lime)", dsa:"var(--violet)", prep:"var(--cyan)", job:"var(--marker)"};
   const GOOD = "var(--lime)";
@@ -318,6 +333,26 @@ const RUNWAY = (() => {
       .rw-row:hover{border-color:var(--line)}
     }
 
+    /* ---------- session timeline list ---------- */
+    .rw-slist{display:flex;flex-direction:column;gap:4px}
+    .rw-srow{display:grid;grid-template-columns:38px 1fr auto;grid-template-rows:auto auto;
+      gap:2px 10px;align-items:center;width:100%;text-align:left;cursor:pointer;
+      background:#12121a;border:1px solid var(--line);border-radius:10px;padding:9px 11px;transition:.15s}
+    .rw-srow:hover{border-color:var(--line2);background:#16161f}
+    .rw-srow.now{border-color:var(--amber);box-shadow:0 0 0 1px rgba(255,176,32,.2)}
+    .rw-srow.done{opacity:.72}
+    .rw-srow .sn{grid-row:1/3;font:700 12px/1 'JetBrains Mono',monospace;color:var(--mute)}
+    .rw-srow.done .sn{color:var(--lime)}
+    .rw-srow.now .sn{color:var(--amber)}
+    .rw-srow .st{font:500 13px/1.35 'Space Grotesk',sans-serif;color:var(--paper);min-width:0}
+    .rw-srow.done .st{text-decoration:line-through;text-decoration-color:rgba(200,255,50,.4)}
+    .rw-srow .sp{font:700 11px/1 'JetBrains Mono',monospace;color:var(--mute)}
+    .rw-srow .sp .sd{display:inline-block;margin-left:5px;font-style:normal;font-size:9px;
+      color:var(--amber);background:rgba(255,176,32,.13);border-radius:4px;padding:2px 4px;vertical-align:middle}
+    .rw-srow .sb{grid-column:2/4;height:3px;border-radius:2px;background:#1d1d25;overflow:hidden}
+    .rw-srow .sb i{display:block;height:100%;background:var(--lime);border-radius:2px}
+    @media(max-width:560px){.rw-srow .st{font-size:12px}}
+
     /* ---------- deferral · timers · pace · pip peek ---------- */
     .rw-tasks li{position:relative}
     .rw-mv{position:absolute;right:8px;top:50%;transform:translateY(-50%);opacity:0;
@@ -382,27 +417,98 @@ const RUNWAY = (() => {
   /* ------------------------------------------------------------ vault I/O */
   /* self-heal: works even if an older core.js (no study map yet) is briefly cached */
   function studyMap() { if (!TH.S || !TH.S.data) return {}; if (!TH.S.data.study) TH.S.data.study = {}; return TH.S.data.study; }
-  function rec(date) {
+  function rec(key) {
     const m = studyMap();
-    let r = m[date];
-    if (!r) { r = {id:date, done:{}, tmin:{}, note:"", problems:null, applied:0}; m[date] = r; }
+    let r = m[key];
+    if (!r) { r = {id:key, done:{}, tmin:{}, note:"", problems:null, applied:0}; m[key] = r; }
     if (!r.done) r.done = {}; if (!r.tmin) r.tmin = {}; if (!r.defer) r.defer = {};
     if (!Array.isArray(r.iq)) r.iq = ["", ""];
     return r;
   }
-  const peek = date => studyMap()[date] || {done:{}, tmin:{}, iq:[]};
+  const peek = key => studyMap()[key] || {done:{}, tmin:{}, iq:[]};
+
+  /* ---- session time -----------------------------------------------------
+     Two numbers, answering different questions:
+       mins(n) — minutes logged on that session (timers + manual). Effort.
+       span(n) — calendar days from first activity to completion. A session
+                 done in one sitting spans 1; one picked at over a week
+                 spans 8. This is drag, usually the more revealing figure.  */
+  function mins(n) {
+    const t = peek(KEY(n)).tmin || {};
+    return ["course","dsa","prep","job"].reduce((a,k) => a + (+t[k] || 0), 0);
+  }
+  function span(n) {
+    const r = peek(KEY(n));
+    if (!r.t0) return null;
+    return Math.max(1, Math.round(((r.t1 || Date.now()) - r.t0) / 86400000) + 1);
+  }
+  const doneSessions = () => SESSIONS.filter(x => comp(x.n) >= 0.999);
+  function avgMins() {
+    const d = doneSessions().filter(x => mins(x.n) > 0);
+    return d.length ? d.reduce((a,x) => a + mins(x.n), 0) / d.length : 0;
+  }
+  function avgSpan() {
+    const v = doneSessions().map(x => span(x.n)).filter(Boolean);
+    return v.length ? v.reduce((a,b) => a + b, 0) / v.length : 0;
+  }
+  const fmtM = m => m >= 60 ? Math.floor(m/60) + "h" + (Math.round(m%60) ? String(Math.round(m%60)).padStart(2,"0") : "")
+                            : Math.round(m) + "m";
+
+  /* ---- one-time migration from the old date-keyed plan ------------------ */
+  function migrate() {
+    const p = prefs(); if (p.migrated) return;
+    const m = studyMap(); let moved = 0, first = null;
+    LEGACY_DATES.forEach((d, i) => {
+      const old = m[d]; if (!old) return;
+      const k = KEY(i + 1);
+      if (!m[k]) { m[k] = {...old, id:k}; moved++; }
+      delete m[d];
+      if (!first || d < first) first = d;
+    });
+    p.migrated = true;
+    if (moved && !p.startedAt) p.startedAt = first;
+    TH.put("prefs", p, "trackhawk: runway migrated to sessions");
+    if (moved) TH.save("trackhawk: migrate " + moved + " study days to sessions").catch(() => {});
+  }
   let syncTimer = null;
   function syncSoon(r, msg) { clearTimeout(syncTimer); syncTimer = setTimeout(() => TH.put("study", r, msg), 900); }
   function syncNow(r, msg)  { TH.put("study", r, msg); }
 
   /* ---------------------------------------------------------------- state */
   let keepSpineFocus = false, justPopped = null, meterDrag = false, rafPend = false, keepMeterGrab = false;
-  const rt = () => { const n = new Date(); return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0"); };
-  const clamp = iso => iso < START ? START : iso > END ? END : (byDate[iso] ? iso : START);
-  const today = clamp(rt());
-  let view = "today", selected = today, rollMode = "week";
-  let peeked = null;                       // date whose pip is expanded in the spine
-  let timerOn = null, timerIv = null;      // {date, cat, t0}
+  /* ---- anchor & progress ------------------------------------------------ */
+  function prefs() {
+    if (!TH.S.data.prefs) TH.S.data.prefs = {};
+    let p = TH.S.data.prefs.runway;
+    if (!p) { p = TH.S.data.prefs.runway = {id:"runway", startedAt:null, migrated:false}; }
+    return p;
+  }
+  /* t0 = the moment a session first sees activity; t1 = when it is finished.
+     Un-ticking back below 100% clears t1 so the clock stays honest.          */
+  function stamp(r, before, n) {
+    if (!r.t0) r.t0 = Date.now();
+    const after = comp(n);
+    if (before < 0.999 && after >= 0.999) r.t1 = Date.now();
+    else if (after < 0.999 && r.t1) delete r.t1;
+  }
+  function markStarted() {
+    const p = prefs();
+    if (!p.startedAt) { p.startedAt = todayISO(); TH.put("prefs", p, "trackhawk: runway started"); }
+  }
+  /* current session = the first one not yet finished */
+  function current() {
+    for (let n = 1; n <= LAST; n++) if (comp(n) < 0.999) return n;
+    return LAST;
+  }
+  function doneCount() { let c = 0; for (let n = 1; n <= LAST; n++) if (comp(n) >= 0.999) c++; return c; }
+  const daysSinceStart = () => {
+    const p = prefs(); if (!p.startedAt) return 0;
+    return Math.max(1, Math.round((new Date(todayISO()) - new Date(p.startedAt)) / 86400000) + 1);
+  };
+
+  let view = "today", selected = 0, rollMode = "block";
+  let peeked = null;                       // session whose pip is expanded
+  let timerOn = null, timerIv = null;      // {n, cat, t0}
 
   /* ---- live timer: ticks the button text only, never a full re-render ---- */
   function paintTimer() {
@@ -414,122 +520,108 @@ const RUNWAY = (() => {
     if (timerIv) { clearInterval(timerIv); timerIv = null; }
     if (timerOn && commit) {
       const mins = Math.round((Date.now() - timerOn.t0) / 60000);
-      if (mins > 0) { const r = rec(timerOn.date);
+      if (mins > 0) { const r = rec(KEY(timerOn.n));
         r.tmin[timerOn.cat] = (+r.tmin[timerOn.cat] || 0) + mins;
-        syncNow(r, "trackhawk: study timer " + timerOn.date); }
+        if (!r.t0) r.t0 = Date.now(); markStarted();
+        syncNow(r, "trackhawk: timer S" + timerOn.n); }
     }
     timerOn = null;
   }
   /* ---- moving work between days ---------------------------------------- */
-  function moveItem(fromISO, id, toISO) {
-    const r = rec(fromISO), wasDone = !!r.done[id];
-    r.defer[id] = toISO; delete r.done[id];
-    syncNow(r, "trackhawk: study move " + id + " " + fromISO + " \u2192 " + toISO);
-    if (wasDone) { const t = rec(toISO); t.done[fromISO + "#" + id] = true;
-      syncNow(t, "trackhawk: study move tick"); }
+  function moveItem(from, id, to) {
+    const r = rec(KEY(from)), wasDone = !!r.done[id];
+    r.defer[id] = to; delete r.done[id];
+    syncNow(r, `trackhawk: move ${id} S${from} \u2192 S${to}`);
+    if (wasDone) { const t = rec(KEY(to)); t.done[from + "#" + id] = true;
+      syncNow(t, "trackhawk: move tick"); }
   }
-  function returnItem(fromISO, id) {
-    const r = rec(fromISO), to = r.defer[id]; if (!to) return;
-    const t = rec(to);
-    if (t.done[fromISO + "#" + id]) { delete t.done[fromISO + "#" + id]; r.done[id] = true;
-      syncNow(t, "trackhawk: study return tick"); }
+  function returnItem(from, id) {
+    const r = rec(KEY(from)), to = r.defer[id]; if (!to) return;
+    const t = rec(KEY(+to));
+    if (t.done[from + "#" + id]) { delete t.done[from + "#" + id]; r.done[id] = true;
+      syncNow(t, "trackhawk: return tick"); }
     delete r.defer[id];
-    syncNow(r, "trackhawk: study return " + id + " \u2192 " + fromISO);
+    syncNow(r, `trackhawk: return ${id} \u2192 S${from}`);
   }
 
   /* ------------------------------------------------------------- helpers */
   const PREP_LABEL = {1:"background",2:"building",3:"significant",4:"headline priority"};
+  /* Every session is a study session. Weekend prep is handled separately by
+     weekendHTML(), keyed to the real calendar, and never gates the runway.  */
   function itemsFor(day) {
-    if (day.type === "weekday") {
-      const arr = [
-        {id:"apply", label:day.morning, main:false, cat:"job", morning:true},
-        {id:"main",  label:day.mainTask, main:true,  cat:day.phase==="SPRING"?"spring":"auto"},
-        {id:"dsa",   label:day.dsaTask,  main:false, cat:"dsa"},
-        {id:"lc",    label:day.lcTask,   cat:"dsa"},
-        {id:"iqlog", label:"Logged 2 interview questions asked today", cat:"prep"},
-        {id:"notes", label:"Jotted key takeaways", },
-      ];
-      /* The two logged questions are constant from day one. What ramps from
-         15 Sep is everything built around them.                            */
-      if (day.prep>=2) arr.push({id:"drill",   label:"20 min \u2014 answered a logged question out loud", cat:"prep", prep:true});
-      if (day.prep>=3) arr.push({id:"answers", label:"30 min \u2014 rehearsed answers, timed", cat:"prep", prep:true});
-      if (day.prep>=3) arr.push({id:"walk",    label:"Rehearsed the project walkthrough", cat:"prep", prep:true});
-      if (day.prep>=4) arr.push({id:"mock",    label:"45 min \u2014 full mock, timed and recorded", cat:"prep", prep:true});
-      if (day.prep>=4) arr.push({id:"sysd",    label:"20 min system-design prompt", cat:"prep", prep:true});
-      return arr;
-    }
-    // weekend — deep prep + job hunt, no course study
-    const t = day.prepTasks || [];
-    const a = [
-      {id:"pmain", label:day.mainTask, main:true, cat:"prep"},
-      {id:"p0", label:t[0]||"", cat:"prep"},
-      {id:"p1", label:t[1]||"", cat:"prep"},
-      {id:"p2", label:t[2]||"", cat:"prep"},
-      {id:"iqlog", label:"Logged 2 interview questions asked today", cat:"prep"},
-      {id:"cards", label:"Turned this week's logged questions into flashcards", cat:"prep"},
-      {id:"resume", label:"Tailored resume for a specific role", cat:"job"},
-      {id:"linkedin", label:"LinkedIn / networking touch", cat:"job"},
-      {id:"queue", label:"Queued Monday-morning applications — "+(day.jobFocus||""), cat:"job"},
+    const arr = [
+      {id:"apply", label:day.morning, main:false, cat:"job", morning:true},
+      {id:"main",  label:day.mainTask, main:true,  cat:"spring"},
+      {id:"dsa",   label:day.dsaTask,  main:false, cat:"dsa"},
+      {id:"lc",    label:day.lcTask,   cat:"dsa"},
+      {id:"iqlog", label:"Logged 2 interview questions asked", cat:"prep"},
+      {id:"notes", label:"Jotted key takeaways"},
     ];
-    if (day.isSunday) a.push({id:"reflect", label:"Weekly reflection + plan next week", cat:"prep"});
-    return a.filter(x=>x.label!=="");
+    /* The two logged questions are constant from session one. What ramps as
+       you advance is everything built around them.                          */
+    if (day.prep>=2) arr.push({id:"drill",   label:"20 min \u2014 answered a logged question out loud", cat:"prep", prep:true});
+    if (day.prep>=3) arr.push({id:"answers", label:"30 min \u2014 rehearsed answers, timed", cat:"prep", prep:true});
+    if (day.prep>=3) arr.push({id:"walk",    label:"Rehearsed the project walkthrough", cat:"prep", prep:true});
+    if (day.prep>=4) arr.push({id:"mock",    label:"45 min \u2014 full mock, timed and recorded", cat:"prep", prep:true});
+    if (day.prep>=4) arr.push({id:"sysd",    label:"20 min system-design prompt", cat:"prep", prep:true});
+    return arr;
   }
   /* ---- deferral model ---------------------------------------------------
      A task can be pushed to another day. The move is recorded on the SOURCE day
      (defer[itemId] = targetISO); the tick for it then lives on the TARGET day
      under the namespaced key `srcISO#itemId`. Two consequences:
-       - comp(iso) measures the work actually sitting on that calendar day, so
-         the runway pips reflect a re-planned week honestly;
+       - comp(n) measures the work actually sitting on that session, so the
+         runway pips reflect a re-planned sequence honestly;
        - rollup() credits course/DSA sections to the day the content BELONGS to
          via doneEff(), so moving a task never loses section progress.        */
-  const deferOf = iso => (peek(iso).defer) || {};
-  const doneMap = iso => (peek(iso).done) || {};
-  function doneEff(iso, id) {
-    const t = deferOf(iso)[id];
-    return t ? !!doneMap(t)[iso + "#" + id] : !!doneMap(iso)[id];
+  const deferOf = n => (peek(KEY(n)).defer) || {};
+  const doneMap = n => (peek(KEY(n)).done) || {};
+  function doneEff(n, id) {
+    const t = deferOf(n)[id];
+    return t ? !!doneMap(+t)[n + "#" + id] : !!doneMap(n)[id];
   }
-  function effItems(iso) {
-    const day = byDate[iso]; if (!day) return [];
-    const df = deferOf(iso);
-    const own = itemsFor(day).filter(it => !df[it.id]).map(it => ({...it, key: it.id, src: iso}));
+  function effItems(n) {
+    const day = SESS[n]; if (!day) return [];
+    const df = deferOf(n);
+    const own = itemsFor(day).filter(it => !df[it.id]).map(it => ({...it, key: it.id, src: n}));
     const inc = [];
-    SCHEDULE.forEach(s => {
-      if (s.date === iso) return;
-      const d2 = deferOf(s.date);
+    SESSIONS.forEach(o => {
+      if (o.n === n) return;
+      const d2 = deferOf(o.n);
       for (const id in d2) {
-        if (d2[id] !== iso) continue;
-        const it = itemsFor(s).find(x => x.id === id);
-        if (it) inc.push({...it, key: s.date + "#" + id, src: s.date, moved: true});
+        if (+d2[id] !== n) continue;
+        const it = itemsFor(o).find(x => x.id === id);
+        if (it) inc.push({...it, key: o.n + "#" + id, src: o.n, moved: true});
       }
     });
     return own.concat(inc);
   }
   /* items this day used to own but has pushed elsewhere */
-  function goneFrom(iso) {
-    const df = deferOf(iso), day = byDate[iso]; if (!day) return [];
-    return itemsFor(day).filter(it => df[it.id]).map(it => ({...it, to: df[it.id]}));
+  function goneFrom(n) {
+    const df = deferOf(n), day = SESS[n]; if (!day) return [];
+    return itemsFor(day).filter(it => df[it.id]).map(it => ({...it, to: +df[it.id]}));
   }
-  function comp(iso) {
-    const it = effItems(iso); if (!it.length) return 0;
-    const dn = doneMap(iso);
+  function comp(n) {
+    const it = effItems(n); if (!it.length) return 0;
+    const dn = doneMap(n);
     return it.filter(i => dn[i.key]).length / it.length;
   }
 
-  function rollup(list) {
+  function rollup(list) {   /* list of SESSION objects */
     const dsa=new Set(),lc=new Set(),sp=new Set();
     const time={course:0,dsa:0,prep:0,job:0}, exp={course:0,dsa:0,prep:0,job:0};
     let problems=0, applied=0, cSum=0;
     list.forEach(day => {
-      const st=peek(day.date), dn=st.done||{}, tm=st.tmin||{};
+      const st=peek(KEY(day.n)), dn=st.done||{}, tm=st.tmin||{};
       exp.course+=day.expected.course; exp.dsa+=day.expected.dsa; exp.prep+=day.expected.prep; exp.job+=day.expected.job;
       time.course+=(+tm.course||0); time.dsa+=(+tm.dsa||0); time.prep+=(+tm.prep||0); time.job+=(+tm.job||0);
-      cSum+=comp(day.date);
+      cSum+=comp(day.n);
       if (day.type==="weekday") {
-        if (doneEff(day.date,"main") && day.adv) day.adv.forEach(([k,n]) => ({sp})[k].add(n));
-        if (doneEff(day.date,"dsa")  && day.dsaAdv) day.dsaAdv.forEach(n=>dsa.add(n));
-        if (doneEff(day.date,"lc")   && day.lcChapter) lc.add(day.lcChapter);
-        problems += (st.problems!=null ? (+st.problems||0) : (doneEff(day.date,"lc")?1:0));
-        applied  += (st.applied!=null ? (+st.applied||0) : (doneEff(day.date,"apply")?2:0));
+        if (doneEff(day.n,"main") && day.adv) day.adv.forEach(([k,v]) => ({sp})[k].add(v));
+        if (doneEff(day.n,"dsa")  && day.dsaAdv) day.dsaAdv.forEach(v=>dsa.add(v));
+        if (doneEff(day.n,"lc")   && day.lcChapter) lc.add(day.lcChapter);
+        problems += (st.problems!=null ? (+st.problems||0) : (doneEff(day.n,"lc")?1:0));
+        applied  += (st.applied!=null ? (+st.applied||0) : (doneEff(day.n,"apply")?2:0));
       } else {
         problems += (st.problems!=null ? (+st.problems||0) : 0);
         applied  += (+st.applied||0);
@@ -537,12 +629,12 @@ const RUNWAY = (() => {
     });
     return {dsa,lc,sp,time,exp,problems,applied,avgComp:list.length?cSum/list.length:0,count:list.length};
   }
-  const cumTo = iso => rollup(SCHEDULE.filter(d=>d.date<=iso));
-  const cumAll = () => rollup(SCHEDULE);
+  const cumTo = n => rollup(SESSIONS.filter(d=>d.n<=n));
+  const cumAll = () => rollup(SESSIONS);
   /* any progress on a day keeps the flame; the old test only looked at weekday
      item ids, so every weekend silently reset the streak to zero.            */
-  function streak() { let s=0; for (const iso of SCHEDULE.map(d=>d.date).filter(d=>d<=today).reverse()) {
-    if (comp(iso) > 0) s++; else break; } return s; }
+  /* consecutive completed sessions, counting back from the last finished one */
+  function streak() { let s=0; for (let n=current()-1; n>=1; n--) { if (comp(n)>=0.999) s++; else break; } return s; }
 
   /* ---- pace & projection -------------------------------------------------
      Everything here is denominated in DAYS, not percentages. Percentages of a
@@ -550,32 +642,24 @@ const RUNWAY = (() => {
      below 100% by construction, so it read as a permanent scolding.
 
      Two further corrections over the first cut:
-       - `earned` sums EVERY completed day, not just days up to today, so work
-         done ahead of schedule actually registers;
-       - the projection uses a trailing 7-day window that excludes today, so a
-         part-finished evening can't drag the forecast around, and it stays
-         silent until there are enough finished days to mean anything.        */
+       - progress is counted in finished sessions, so there is no such thing
+         as being "behind"; a slow week moves the projected finish date only. */
   function pace() {
-    const n = SCHEDULE.length;
-    const prior   = SCHEDULE.filter(d => d.date <  today);   // fully passed
-    const elapsed = SCHEDULE.filter(d => d.date <= today).length || 1;
-    const after   = n - elapsed;                             // days after today
-    const earned  = SCHEDULE.reduce((a,d) => a + comp(d.date), 0);
-    const tDone   = comp(today);
-
-    /* work banked on every day EXCEPT today, measured against the days that
-       have fully passed. Today is judged separately, at the end of it.       */
-    const balance = earned - tDone - prior.length;
-
-    const win  = prior.slice(-7);
-    const rate = win.length ? win.reduce((a,d) => a + comp(d.date), 0) / win.length : 0;
-    const settled = prior.length >= 3;
-    const short = Math.max(0, n - (earned + rate * after));
-
-    return {n, elapsed, after, earned, tDone, balance, rate,
-            win: win.length, settled, short,
-            endIfDone: balance,                 // finish tonight's list
-            endIfStop: balance + tDone - 1};    // stop where you are
+    const done = doneCount(), left = LAST - done, days = daysSinceStart();
+    const started = !!prefs().startedAt;
+    /* rate is sessions per calendar week since you started — the only honest
+       measure once the plan no longer assumes a session every weekday.      */
+    const rate = started && days ? done / (days / 7) : 0;
+    const settled = done >= 3;
+    let finish = null, weeksLeft = null;
+    if (settled && rate > 0.05) {
+      weeksLeft = left / rate;
+      const d = new Date(); d.setDate(d.getDate() + Math.round(weeksLeft * 7));
+      finish = d;
+    }
+    const cur = current();
+    return {done, left, days, rate, settled, finish, weeksLeft, started, cur,
+            curDone: comp(cur), pct: done / LAST};
   }
 
   function ring(pct,size,stroke,color) {
@@ -586,84 +670,75 @@ const RUNWAY = (() => {
         stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}"/></svg>`;
   }
   const fmtH = m => (m/60).toFixed(m%60?1:0)+"h";
-  const longDate = iso => new Date(iso+"T00:00:00").toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
+
   const stripTag = s => s.replace(/^\[[A-Z]+\]\s*/,"");
-  const shortD = iso => { const d = byDate[iso]; return d ? d.dow + " " + d.day + " " + d.month : iso; };
+  const shortD = n => "S" + n;
 
   /* ------------------------------------------------------------ sub-views */
-  const DOWI = {Mon:0,Tue:1,Wed:2,Thu:3,Fri:4,Sat:5,Sun:6};
+
   const PHASE_TINT = {SPRING:"rgba(200,255,50,.5)", PREP:"rgba(34,211,197,.5)"};
   function spineHTML() {
-    const doneN = SCHEDULE.filter(d=>comp(d.date)>=0.999).length;
-    const idx = SCHEDULE.findIndex(d=>d.date===today)+1;
-    const overall = SCHEDULE.reduce((a,d)=>a+comp(d.date),0)/SCHEDULE.length;
-    const elapsed = Math.max(0,Math.min(1, idx/SCHEDULE.length));
-    const cur = streak();
+    const doneN = doneCount(), cur = current();
+    const overall = SESSIONS.reduce((a,x)=>a+comp(x.n),0)/LAST;
+    const st = streak();
 
-    const months=[]; SCHEDULE.forEach(d=>{ const m=months[months.length-1];
-      if (m && m.k===d.month) m.n++; else months.push({k:d.month,n:1}); });
-    const FULL={Jul:"July",Aug:"August",Sep:"September",Oct:"October"};
-    const band = months.map(m=>`<div class="rw-mo" data-mk="${m.k}" style="grid-column:span ${m.n}">${m.n>4?(FULL[m.k]||m.k):m.k}</div>`).join("");
+    /* grouped in blocks of ten so the eye has something to hold onto; there is
+       no week grid any more because sessions aren't pinned to weekdays.      */
+    const BLOCK = 10;
+    const blocks = [];
+    for (let i=0;i<LAST;i+=BLOCK) blocks.push({from:i+1, to:Math.min(LAST,i+BLOCK)});
+    const band = blocks.map(b=>`<div class="rw-mo" style="grid-column:span ${b.to-b.from+1}">S${b.from}\u2013${b.to}</div>`).join("");
 
-    const pad = DOWI[SCHEDULE[0].dow] || 0;
-    let cells = ""; for (let i=0;i<pad;i++) cells += `<div class="rw-pip rw-pad"></div>`;
-
-    SCHEDULE.forEach(day => {
-      const c=comp(day.date);
-      const cls = ["rw-pip"];
-      if (day.type==="weekend") cls.push("wknd");
+    let cells = "";
+    SESSIONS.forEach(day => {
+      const c=comp(day.n);
+      const cls=["rw-pip"];
       if (c>=0.999) cls.push("full"); else if (c>=0.5) cls.push("half");
-      if (day.date===today) cls.push("today");
-      if (day.date===selected) cls.push("sel");
+      if (day.n===cur) cls.push("today");
+      if (day.n===selected) cls.push("sel");
       if (day.milestone) cls.push("mile");
-      if (day.type==="weekday" && day.prep>=4) cls.push("hot");   // headline-prep days get a spark
-      const tint = day.type==="weekday" ? PHASE_TINT[day.phase] : PHASE_TINT.PREP;
-      const capOn = c<1;   // hide cap once fully done so the green reads clean
-      cells += `<button class="${cls.join(" ")}" data-goto="${day.date}" type="button"
-        style="--tint:${tint}"
-        aria-label="Day ${day.id}, ${day.dow} ${day.month} ${day.day}, ${Math.round(c*100)}% done">
-        <i class="rw-cap"></i>${c>0?`<i class="rw-fill" style="height:${Math.round(c*100)}%"></i>`:""}<b>${day.day}</b>${c>=0.999?'<em class="rw-tick">✓</em>':""}</button>`;
+      if (day.prep>=4) cls.push("hot");
+      const capOn = c<1;
+      cells += `<button class="${cls.join(" ")}" data-goto="${day.n}" type="button"
+        style="--tint:${PHASE_TINT.SPRING}"
+        aria-label="Session ${day.n} of ${LAST}, ${Math.round(c*100)}% done">
+        <i class="rw-cap"></i>${c>0?`<i class="rw-fill" style="height:${Math.round(c*100)}%"></i>`:""}<b>${day.n}</b>${c>=0.999?'<em class="rw-tick">\u2713</em>':""}</button>`;
     });
-    const tail = (7 - ((pad + SCHEDULE.length) % 7)) % 7;
-    for (let i=0;i<tail;i++) cells += `<div class="rw-pip rw-pad"></div>`;
 
-    const selFrac = SCHEDULE.findIndex(d=>d.date===selected)/(SCHEDULE.length-1);
-    const behind = overall < elapsed - 0.02, ahead = overall > elapsed + 0.02;
-    const quips = behind ? ["catch the tail","a little behind the line","the plan's ahead of you — reel it in"]
-                : ahead ? ["ahead of the line ✦","flying","you're beating the plan"]
-                : ["dead on the line","right on schedule","locked in"];
-    const quip = quips[idx % quips.length];
-    const flame = cur>0 ? `<span class="rw-flame" title="${cur}-day streak">🔥 ${cur}</span>` : "";
+    const selFrac = LAST>1 ? (selected-1)/(LAST-1) : 0;
+    const quips = doneN===0 ? ["not started \u2014 tick anything to begin"]
+      : doneN>=LAST ? ["finished \u2726"]
+      : st>=5 ? ["on a roll","strong run","keep it rolling"]
+      : st>0 ? ["moving","in motion","going"]
+      : ["pick it back up","next session is waiting"];
+    const quip = quips[doneN % quips.length];
+    const flame = st>0 ? `<span class="rw-flame" title="${st} sessions in a row">\ud83d\udd25 ${st}</span>` : "";
 
     return `<div class="rw-runway">
       <div class="rw-rtop"><h2>The runway</h2>
-        <span class="sub">Day ${idx} of ${SCHEDULE.length} · ${doneN} complete · ${quip}</span>
+        <span class="sub">Session ${cur} of ${LAST} \u00b7 ${doneN} complete \u00b7 ${quip}</span>
         ${flame}<span class="pct">${Math.round(overall*100)}%</span></div>
       <div class="rw-meter"><i style="width:${Math.round(overall*100)}%"></i>
-        <span class="rw-now" style="left:${(elapsed*100).toFixed(1)}%" title="where the plan expects you today"></span>
-        <span class="rw-plane" style="left:${(overall*100).toFixed(1)}%" aria-hidden="true">✈</span>
-        <span class="rw-scrub" style="left:${(selFrac*100).toFixed(1)}%" title="drag to fly through the plan"></span></div>
-      <div class="rw-months" style="--n:${SCHEDULE.length}">${band}</div>
-      <div class="rw-dowhd"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
-      <div class="rw-spine" style="--n:${SCHEDULE.length}" tabindex="0">${cells}</div>
+        <span class="rw-plane" style="left:${(overall*100).toFixed(1)}%" aria-hidden="true">\u2708</span>
+        <span class="rw-scrub" style="left:${(selFrac*100).toFixed(1)}%" title="drag to move through the plan"></span></div>
+      <div class="rw-months" style="--n:${LAST}">${band}</div>
+      <div class="rw-spine" style="--n:${LAST}" tabindex="0">${cells}</div>
       <div class="rw-legend">
         <span><i class="rw-dot" style="background:var(--lime)"></i>done</span>
-        <span><i class="rw-dot" style="background:#191920;border:1px solid #24242d"></i>weekday</span>
-        <span><i class="rw-dot" style="background:#1d1830;border:1px solid #2c2444"></i>weekend</span>
-        <span><i class="rw-dot" style="border:1px solid var(--amber)"></i>today</span>
+        <span><i class="rw-dot" style="background:#191920;border:1px solid #24242d"></i>not yet</span>
+        <span><i class="rw-dot" style="border:1px solid var(--amber)"></i>current</span>
         <span><i class="rw-dot" style="background:var(--amber);transform:rotate(45deg);border-radius:1px;width:7px;height:7px"></i>milestone</span>
-        <span style="margin-left:auto;opacity:.7">✈ = your progress · │ = today's target</span></div>
+        <span style="margin-left:auto;opacity:.7">sessions advance when you finish them, not when the day ends</span></div>
       <div class="rw-tip"></div></div>`;
   }
 
   function todayHTML() {
-    const day=byDate[selected], st=peek(selected), c=comp(selected);
-    const di=SCHEDULE.findIndex(d=>d.date===selected);
-    const rel = selected===today?"Today":(selected<today?"Past · review":"Upcoming");
-    const isW=day.type==="weekend";
-    let chips=`<span class="rw-chip ${isW?"prep":(day.phase==="SPRING"?"spring":"auto")}">${
-      isW?"Weekend · prep only — no course study":"Weekday · Java & Spring"}</span>`;
-    chips += `<span class="rw-chip">${isW?"~2.5h prep":"morning apply · ~2.5h eve"}</span>`;
+    const cur=current();
+    const day=SESS[selected], st=peek(KEY(selected)), c=comp(selected);
+    const rel = selected===cur?"Up next":(selected<cur?"Done · review":"Later");
+    const isW=false;                       // every session is a study session now
+    let chips=`<span class="rw-chip spring">Java &amp; Spring \u00b7 ~2.5h</span>`;
+    chips += `<span class="rw-chip">apply \u00b7 study \u00b7 log 2 questions</span>`;
     chips += `<span class="rw-chip prep" title="Interview-prep priority rises through the plan">prep: ${PREP_LABEL[day.prep]}</span>`;
     const MILE_TXT = {SCAFFOLD:"Scaffolding ready", BOOT:"Boot app boots", REST:"REST layer complete",
       DB:"Database layer live", BUILDABLE:"CRUD service buildable", AUTH:"Auth done",
@@ -677,7 +752,7 @@ const RUNWAY = (() => {
         <span class="rw-box"></span><span class="rw-tl">${esc(it.label)}${
           it.moved?`<span class="rw-from">\u21a9 from ${shortD(it.src)}</span>`:""}</span>
         <button class="rw-mv" type="button" ${it.moved?`data-ret="${it.src}|${it.id}"`:`data-mv="${it.id}"`}
-          title="${it.moved?"Send back to its own day":"Move to another day"}">${it.moved?"\u21a9":"\u2192"}</button></li>`;
+          title="${it.moved?"Send back to its own session":"Move to another session"}">${it.moved?"\u21a9":"\u2192"}</button></li>`;
     const goneLi = g => `<li class="rw-gone">
         <span class="rw-flag" style="${g.cat?"background:"+CAT[g.cat]:""}"></span>
         <span class="rw-box"></span><span class="rw-tl">${esc(g.label)}<span class="rw-from">\u2192 ${shortD(g.to)}</span></span>
@@ -692,7 +767,7 @@ const RUNWAY = (() => {
       tasks = `<div class="rw-grp">✦ Interview prep &amp; flashcards</div>` + prep.map(liFor).join("")
             + `<div class="rw-grp">💼 Job hunt</div>` + job.map(liFor).join("");
     }
-    if (gone.length) tasks += `<div class="rw-grp">⤴ Pushed to other days</div>` + gone.map(goneLi).join("");
+    if (gone.length) tasks += `<div class="rw-grp">\u2934 Pushed to later sessions</div>` + gone.map(goneLi).join("");
 
     const cats = isW ? [["prep","Prep / flashcards"],["job","Job hunt"]]
                      : [["course","Course (1.5h)"],["dsa","DSA study (1h)"],["prep","Interview prep"],["job","Apply"]];
@@ -702,9 +777,9 @@ const RUNWAY = (() => {
       tcells += `<div class="rw-tcell"><div class="lab"><span class="rw-dot" style="background:${CAT[k]}"></span>${lab}</div>
         <div class="row"><input class="rw-in" type="number" min="0" step="5" placeholder="0" value="${val}" data-time="${k}"/>
           <span class="exp">/ ${e}m</span>
-          <button class="rw-tm ${timerOn&&timerOn.date===selected&&timerOn.cat===k?"run":""}" type="button"
-            data-tm="${k}" title="${timerOn&&timerOn.date===selected&&timerOn.cat===k?"Stop and bank the time":"Start a timer"}"
-            >${timerOn&&timerOn.date===selected&&timerOn.cat===k?"■ 00:00":"▶"}</button></div>
+          <button class="rw-tm ${timerOn&&timerOn.n===selected&&timerOn.cat===k?"run":""}" type="button"
+            data-tm="${k}" title="${timerOn&&timerOn.n===selected&&timerOn.cat===k?"Stop and bank the time":"Start a timer"}"
+            >${timerOn&&timerOn.n===selected&&timerOn.cat===k?"■ 00:00":"▶"}</button></div>
         <div class="rw-tbar"><i style="width:${Math.round(p*100)}%;background:${CAT[k]}"></i></div></div>`;
     });
     const numrow=`<div class="rw-numrow">
@@ -716,11 +791,11 @@ const RUNWAY = (() => {
         <span class="exp">${isW?"queue for Monday":"fresh postings"}</span></div></div></div>`;
 
     return `<div class="rw-daynav">
-        <button class="rw-arrow" data-nav="-1" ${di<=0?"disabled":""}>‹</button>
-        <div class="rw-dtitle"><div class="d1">${longDate(selected)}</div>
-          <div class="d2">Day ${day.id} of ${SCHEDULE.length} · ${rel}</div></div>
-        <button class="rw-arrow" data-nav="1" ${di>=SCHEDULE.length-1?"disabled":""}>›</button></div>
-      <button class="rw-jump" data-jump>Jump to today</button>
+        <button class="rw-arrow" data-nav="-1" ${selected<=1?"disabled":""}>\u2039</button>
+        <div class="rw-dtitle"><div class="d1">Session ${day.n}</div>
+          <div class="d2">${day.n} of ${LAST} \u00b7 ${rel}</div></div>
+        <button class="rw-arrow" data-nav="1" ${selected>=LAST?"disabled":""}>\u203a</button></div>
+      <button class="rw-jump" data-jump>Jump to current session</button>
 
       <div class="rw-card">
         <div class="rw-head">
@@ -728,16 +803,20 @@ const RUNWAY = (() => {
             <span class="v" style="font-size:16px;color:var(--paper)">${Math.round(c*100)}%</span></div>
           <div><div class="rw-chips">${chips}</div>
             <div class="rw-maintask">${esc(stripTag(day.mainTask))}</div>
-            <div class="rw-subtask">${isW?"Turn the week's learning into interview-ready material":esc(stripTag(day.dsaTask))+" · "+esc(stripTag(day.lcTask))}</div></div></div>
+            <div class="rw-subtask">${esc(stripTag(day.dsaTask))+" \u00b7 "+esc(stripTag(day.lcTask))}</div></div></div>
         <ul class="rw-tasks">${tasks}</ul></div>
 
       ${paceHTML()}
 
+      ${clockHTML()}
+
       <div class="rw-card"><h3>Time spent — actual vs planned</h3>
         <div class="rw-tgrid">${tcells}</div>${numrow}</div>
 
-      <div class="rw-card"><h3>Interview questions seen today</h3>
-        <div class="rw-eyebrow" style="margin:-6px 0 11px">Two a day — jot them the moment you meet them</div>
+      ${weekendHTML()}
+
+      <div class="rw-card"><h3>Interview questions seen</h3>
+        <div class="rw-eyebrow" style="margin:-6px 0 11px">Two per session \u2014 jot them the moment you meet them</div>
         <div class="rw-qn"><span class="rw-qi">1</span><input class="rw-q" data-iq="0" placeholder="e.g. HashMap vs ConcurrentHashMap — how does resizing work?" value="${esc((st.iq||[])[0]||"")}"/></div>
         <div class="rw-qn"><span class="rw-qi">2</span><input class="rw-q" data-iq="1" placeholder="e.g. How does @Transactional behave with a checked exception?" value="${esc((st.iq||[])[1]||"")}"/></div>
       </div>
@@ -747,76 +826,134 @@ const RUNWAY = (() => {
         <div class="rw-hint">✓ saved to your encrypted vault &amp; synced</div></div>`;
   }
 
+  /* Prep work stays tied to the real calendar: tailoring a resume and running
+     mocks belong to a weekend, not to "session 12". It is keyed by date and is
+     entirely optional \u2014 skipping it never blocks the runway.                */
+  const WPREP = {
+    1:["Tailor ATS resume \u2014 lead with Java & Spring","Turn this week's logged questions into flashcards","Write answers for 2 logged questions"],
+    2:["Tailor ATS resume for a specific role","Build flashcards from this week's questions","Rehearse 2 answers out loud, no notes"],
+    3:["Tailor resume + cover note for a target role","Flashcards + review weak decks","Mock: 30 min, timed, out loud"],
+    4:["Tailor resume for each application","Drill weak flashcard decks","Full mock interview \u2014 timed and recorded"]};
+  function weekendHTML() {
+    const now = new Date(); if (!isWeekend(now)) return "";
+    const d = todayISO(), r = peek(d), tier = SESS[current()].prep;
+    const tasks = WPREP[tier].concat(["Logged 2 interview questions asked today",
+      "Applied to roles from the week's queue"]);
+    const li = tasks.map((t,i) => `<li class="${r.done && r.done["w"+i] ? "on":""}" data-wtog="w${i}">
+        <span class="rw-flag" style="background:${CAT.prep}"></span>
+        <span class="rw-box"></span><span class="rw-tl">${esc(t)}</span></li>`).join("");
+    const dn = tasks.filter((t,i)=>r.done && r.done["w"+i]).length;
+    return `<div class="rw-card"><h3>Weekend prep \u00b7 ${now.toLocaleDateString(undefined,{weekday:"long"})}</h3>
+      <div class="rw-eyebrow" style="margin:-6px 0 11px">Calendar work, not a session \u2014 ${dn}/${tasks.length} done.
+        Skipping this never puts the runway behind.</div>
+      <ul class="rw-tasks">${li}</ul></div>`;
+  }
+
+  /* How long THIS session has taken, and how it sits against your own average. */
+  function clockHTML() {
+    const n = selected, m = mins(n), sp = span(n), r = peek(KEY(n));
+    const plan = Object.values(SESS[n].expected).reduce((a,b) => a + b, 0);
+    const am = avgMins(), asp = avgSpan(), done = comp(n) >= 0.999;
+    if (!r.t0 && !m) {
+      return `<div class="rw-card"><h3>Session clock</h3>
+        <div class="rw-eyebrow" style="margin:-6px 0 0">Starts when you tick something or run a timer \u00b7
+          planned length ${fmtM(plan)}</div></div>`;
+    }
+    const pc = (cls,k,v,sb) => `<div class="rw-pc ${cls}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sb}</div></div>`;
+    const vs = m && plan ? Math.round((m/plan)*100) : 0;
+    const spanCls = sp>=4 ? "bad" : sp>=2 ? "warn" : "good";
+    const note = !done
+      ? `Running \u2014 <b>${fmtM(m)}</b> logged against a planned ${fmtM(plan)}${
+          sp>1 ? `, open for <span class="sw">${sp} days</span> now` : ""}.`
+      : `Took <b>${fmtM(m)}</b>${sp>1 ? ` across <span class="sw">${sp} days</span>`
+          : ` in <span class="gd">one sitting</span>`}${
+          am ? ` \u00b7 your average is ${fmtM(am)}${asp>1.05 ? ` over ${asp.toFixed(1)} days` : ""}` : ""}.`;
+    return `<div class="rw-card"><h3>Session clock</h3>
+      <div class="rw-eyebrow" style="margin:-6px 0 12px">Time logged here, and how long this session has been open</div>
+      <div class="rw-pace">
+        ${pc(m?"good":"","Logged",m?fmtM(m):"\u2014","of " + fmtM(plan) + " planned")}
+        ${pc(vs>=90?"good":vs>=50?"warn":"","Against plan",m?vs+"%":"\u2014","of planned time")}
+        ${pc(sp?spanCls:"","Open for",sp?sp+(sp===1?" day":" days"):"\u2014",done?"first tick \u2192 finish":"still running")}
+      </div>
+      <div class="rw-what">${note}</div></div>`;
+  }
+
   function paceHTML() {
     const p = pace();
     const pc = (cls,k,v,sub) => `<div class="rw-pc ${cls}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${sub}</div></div>`;
-    const d1 = v => Math.abs(v).toFixed(1);
-    const level = v => Math.abs(v) < 0.05;
+    const fmtDate = d => d.toLocaleDateString(undefined, {day:"numeric", month:"short", year:"numeric"});
 
-    /* where you stand */
-    const balV = level(p.balance) ? "level" : (p.balance>0?"+":"\u2212") + d1(p.balance);
-    const balS = level(p.balance) ? "square with the plan"
-               : p.balance > 0 ? "days banked ahead" : "days of work owed";
-    const balC = level(p.balance) ? "" : p.balance > 0 ? "good" : p.balance < -1.5 ? "bad" : "warn";
+    if (!p.started) {
+      return `<div class="rw-card"><h3>Pace &amp; projection</h3>
+        <div class="rw-eyebrow" style="margin:-6px 0 12px">Starts counting when you tick your first task</div>
+        <div class="rw-pace">
+          ${pc("","Sessions done","0","of " + LAST)}
+          ${pc("","Pace","\u2014","measured once you begin")}
+          ${pc("","Finishes","\u2014","projected from your own pace")}
+        </div>
+        <div class="rw-what">Nothing is late and nothing is owed \u2014 the runway hasn't started yet.
+          Tick anything in today's session and day one is today.</div></div>`;
+    }
 
-    /* the last week, as days rather than a rate */
-    const winV = p.win ? (p.rate*p.win).toFixed(1) + " / " + p.win : "\u2014";
-    const winC = !p.win ? "" : p.rate>=.9 ? "good" : p.rate>=.7 ? "warn" : "bad";
+    const rateCls = p.rate>=4.5?"good":p.rate>=3?"warn":"bad";
+    const rateV = p.settled ? p.rate.toFixed(1) : "\u2014";
+    const finV = p.finish ? fmtDate(p.finish) : "\u2014";
+    const finS = p.finish ? `about ${Math.round(p.weeksLeft)} weeks out` : "needs a few sessions first";
 
-    /* where this lands */
-    const shortV = !p.settled ? "\u2014" : level(p.short) ? "on target" : d1(p.short);
-    const shortS = !p.settled ? "needs a few finished days first"
-                 : level(p.short) ? "finishing the plan clean" : "days short at this rate";
-    const shortC = !p.settled ? "" : level(p.short) ? "good" : p.short > 4 ? "bad" : "warn";
-
-    const say = v => level(v) ? "<b>level with the plan</b>"
-              : v > 0 ? `<b>${d1(v)} days ahead</b>` : `<b>${d1(v)} days behind</b>`;
+    /* average effort and drag, appended to the projection when known */
+    const am = avgMins(), asp = avgSpan();
+    const timeBit = am ? ` Each finished session has taken about <b>${fmtM(am)}</b>${
+      asp > 1.05 ? ` spread over ${asp.toFixed(1)} days` : `, usually in one sitting`}.` : "";
 
     let what;
-    if (p.after <= 0 && p.tDone >= 0.999) what = `The runway is finished \u2014 everything from here is review and interviews.`;
-    else if (p.tDone >= 0.999) what = `Today is cleared. You end it ${say(p.endIfDone)}.`;
-    else what = `Finish tonight's list and you end the day ${say(p.endIfDone)}.
-      Stop where you are and it's <span class="sw">${level(p.endIfStop)?"level":d1(p.endIfStop)+" days "+(p.endIfStop>0?"ahead":"behind")}</span>.`;
+    if (p.left === 0) what = `Every session is done \u2014 the runway is finished.`;
+    else if (!p.settled) what = `<b>${p.done}</b> of ${LAST} sessions done.
+      A couple more and this will start projecting a finish date from your own pace rather than a guess.`;
+    else what = `At <b>${p.rate.toFixed(1)} sessions a week</b> the remaining <b>${p.left}</b> land around
+      <b>${fmtDate(p.finish)}</b>. One extra session a week pulls that in by about
+      <span class="gd">${Math.max(1, Math.round(p.left/p.rate - p.left/(p.rate+1)))} week${Math.round(p.left/p.rate - p.left/(p.rate+1))===1?"":"s"}</span>.
+      Nothing here expires \u2014 a quiet week moves the date, it doesn't put you behind.` + timeBit;
 
     return `<div class="rw-card"><h3>Pace &amp; projection</h3>
-      <div class="rw-eyebrow" style="margin:-6px 0 12px">In days of work \u00b7 today is judged at the end of it</div>
+      <div class="rw-eyebrow" style="margin:-6px 0 12px">Measured from the day you started \u00b7 ${p.days} day${p.days===1?"":"s"} in</div>
       <div class="rw-pace">
-        ${pc(balC,"Where you stand",balV,balS)}
-        ${pc(winC,"Last 7 days",winV,"days cleared")}
-        ${pc(shortC,"Lands you",shortV,shortS)}
+        ${pc(p.done?"good":"","Sessions done",p.done,"of " + LAST)}
+        ${pc(p.settled?rateCls:"","Pace",rateV,"sessions per week")}
+        ${pc(p.finish?"good":"","Finishes",finV,finS)}
       </div>
       <div class="rw-what">${what}</div></div>`;
   }
 
   function peekHTML() {
-    if (!peeked || !byDate[peeked]) return "";
-    const d = byDate[peeked], its = effItems(peeked), dn = doneMap(peeked), c = comp(peeked);
+    if (!peeked || !SESS[peeked]) return "";
+    const d = SESS[peeked], its = effItems(peeked), dn = doneMap(peeked), c = comp(peeked);
     const chips = its.map(it => `<button type="button" class="${dn[it.key]?"on":""}" data-pk="${it.key}"
       title="${esc(it.label)}"><i></i>${esc(stripTag(it.label))}</button>`).join("");
-    return `<div class="rw-peek"><div class="ph"><b>${longDate(peeked)}</b>
-        <span>${Math.round(c*100)}% \u00b7 day ${d.id} of ${SCHEDULE.length}</span>
-        <button class="go" type="button" data-goto="${peeked}" data-open="1">Open this day \u2192</button></div>
+    return `<div class="rw-peek"><div class="ph"><b>Session ${d.n}</b>
+        <span>${Math.round(c*100)}% \u00b7 ${d.n} of ${LAST}</span>
+        <button class="go" type="button" data-goto="${peeked}" data-open="1">Open this session \u2192</button></div>
       <div class="rw-chk">${chips}</div></div>`;
   }
 
   function timelineHTML() {
-    const weeks={}; SCHEDULE.forEach(d=>{(weeks[d.weekStart]=weeks[d.weekStart]||[]).push(d);});
-    let out="";
-    Object.keys(weeks).sort().forEach(ws => {
-      const list=weeks[ws], ru=rollup(list), wsd=new Date(ws+"T00:00:00");
-      out += `<div class="rw-wk"><div class="rw-wkhd"><span class="t">Week of ${wsd.toLocaleDateString("en-US",{month:"short",day:"numeric"})}</span>
-        <span class="p">${Math.round(ru.avgComp*100)}% · ${fmtH((ru.time.course+ru.time.dsa+ru.time.prep+ru.time.job))} logged</span></div>`;
-      list.forEach(day => {
-        const c=comp(day.date), col=day.type==="weekend"?"var(--violet)":(day.phase==="SPRING"?"var(--lime)":"var(--amber)");
-        out += `<button class="rw-row ${day.date===today?"today":""}" data-goto="${day.date}" data-open="1">
-          <div class="dd"><div class="dn">${day.day}</div><div class="dw">${day.month} · ${day.dow}</div></div>
-          <div class="bd"><div class="t">${esc(stripTag(day.mainTask))}</div>
-            <div class="s">${day.type==="weekend"?esc(stripTag(day.mainTask)):esc(stripTag(day.dsaTask))}</div></div>
-          <div class="rw-mini">${ring(c,34,4,c>=0.999?GOOD:col)}<span class="mv" style="color:var(--paper)">${Math.round(c*100)}</span></div></button>`;
-      });
-      out += `</div>`;
-    });
-    return out;
+    const cur = current();
+    const rows = SESSIONS.map(d => {
+      const c = comp(d.n);
+      const cls = c>=0.999 ? "done" : d.n===cur ? "now" : "";
+      const MT = {SCAFFOLD:"Scaffolding ready", BOOT:"Boot app boots", REST:"REST layer complete",
+        DB:"Database layer live", BUILDABLE:"CRUD service buildable", AUTH:"Auth done",
+        TESTS:"Test suite green", COURSE_DONE:"Course complete"};
+      const mile = d.milestone ? `<span class="rw-chip mile">\u2726 ${MT[d.milestone]}</span>` : "";
+      return `<button class="rw-srow ${cls}" data-goto="${d.n}" data-open="1" type="button">
+        <span class="sn">S${d.n}</span>
+        <span class="st">${esc(stripTag(d.mainTask))}${mile}</span>
+        <span class="sp">${mins(d.n) ? fmtM(mins(d.n)) : Math.round(c*100)+"%"}${
+          span(d.n) > 1 ? `<em class="sd">${span(d.n)}d</em>` : ""}</span>
+        <span class="sb"><i style="width:${Math.round(c*100)}%"></i></span></button>`;
+    }).join("");
+    return `<div class="rw-card"><h3>All ${LAST} sessions</h3>
+      <div class="rw-eyebrow" style="margin:-6px 0 11px">In order \u00b7 no dates, they happen when you do them</div>
+      <div class="rw-slist">${rows}</div></div>`;
   }
 
   const CATS4=[["course","Course","var(--amber)"],["dsa","DSA/LC","var(--violet)"],["prep","Prep","var(--cyan)"],["job","Job","var(--marker)"]];
@@ -837,56 +974,45 @@ const RUNWAY = (() => {
       <div class="c"><div class="k">Applied</div><div class="v">${ru.applied}</div></div></div>`;
   }
   const mk=(hit,t)=>`<li class="${hit?"hit":""}"><span class="rw-mbox"></span><span>${t}</span></li>`;
-  function fortMiles(gi) {
-    const ends=["2026-09-08","2026-09-29","2026-10-13","2026-10-28"], c=cumTo(ends[gi]);
-    if (gi===0) return mk(c.sp.size>=7,"Core Java, Maven & JUnit done (S1–7)")
-      +mk(c.dsa.size>=4,"Barik S1–4 · LeetCode Ch1–4 paired")
-      +mk(c.applied>=15,"Applications flowing — "+c.applied+" sent")
-      +mk(true,"Resume tailored · questions logged daily")
-      +mk(c.problems>=15,"15+ LeetCode ("+c.problems+") — prep: background");
-    if (gi===1) return mk(c.sp.size>=16,"REST + database layer live (S1–16)")
-      +mk(c.dsa.size>=8,"Barik through Graphs (S1–8)")
-      +mk(c.applied>=37,"37+ applications ("+c.applied+")")
-      +mk(true,"Answer drills started · prep: building")
-      +mk(c.problems>=35,"35+ LeetCode ("+c.problems+")");
-    if (gi===2) return mk(c.sp.size>=21,"CRUD service buildable · auth done (S1–21)")
-      +mk(c.dsa.size>=10,"Barik through Binary Search (S1–10)")
-      +mk(c.applied>=57,"57+ applications ("+c.applied+")")
-      +mk(true,"Project walkthrough rehearsed · prep: significant")
-      +mk(c.problems>=55,"55+ LeetCode ("+c.problems+")");
-    return mk(c.sp.size>=27,"Telusko course finished (S1–27) ✦")
-      +mk(c.dsa.size>=13,"Barik DSA course finished (S1–13) ✦")
-      +mk(c.lc.size>=13,"LeetCode Crash Course complete (Ch1–13) ✦")
-      +mk(c.applied>=90,"90 applications sent ("+c.applied+")")
-      +mk(true,"Spring service shipped · prep: headline priority");
+  function blockMiles(days) {
+    const MT = {SCAFFOLD:"Scaffolding ready \u2014 Maven, JUnit, Mockito",
+      BOOT:"Spring Boot app boots", REST:"REST layer complete",
+      DB:"Database layer live \u2014 JPA entities & repositories",
+      BUILDABLE:"CRUD service buildable end to end \u2726",
+      AUTH:"Security & JWT done", TESTS:"Test suite green \u2014 MockMvc + Testcontainers",
+      COURSE_DONE:"Telusko course finished \u2726"};
+    const mk=(ok,t)=>`<li class="${ok?"ok":""}"><span class="rw-mk">${ok?"\u2713":"\u25cb"}</span>${t}</li>`;
+    const out = days.filter(d=>d.milestone).map(d=>mk(comp(d.n)>=0.999, MT[d.milestone]||d.milestone));
+    const spDone = new Set(); days.forEach(d=>{ if(doneEff(d.n,"main")) d.adv.forEach(([k,v])=>spDone.add(v)); });
+    const lcDone = new Set(); days.forEach(d=>{ if(doneEff(d.n,"lc")) lcDone.add(d.lcChapter); });
+    out.push(mk(days.every(d=>comp(d.n)>=0.999), `All ${days.length} sessions complete`));
+    if (spDone.size) out.push(mk(true, `${spDone.size} Spring section${spDone.size===1?"":"s"} cleared here`));
+    if (lcDone.size) out.push(mk(true, `LeetCode chapters touched: ${[...lcDone].sort((a,b)=>a-b).join(", ")}`));
+    return out.join("");
   }
   function rollupsHTML() {
-    let groups=[];
-    if (rollMode==="week") { const w={}; SCHEDULE.forEach(d=>{(w[d.weekStart]=w[d.weekStart]||[]).push(d);});
-      groups=Object.keys(w).sort().map(k=>{const dd=new Date(k+"T00:00:00"),e=new Date(dd);e.setDate(e.getDate()+6);
-        return {title:"Week of "+dd.toLocaleDateString("en-US",{month:"short",day:"numeric"}),
-          sub:dd.toLocaleDateString("en-US",{month:"short",day:"numeric"})+" – "+e.toLocaleDateString("en-US",{month:"short",day:"numeric"}),days:w[k]};}); }
-    else if (rollMode==="month") { const m={}; SCHEDULE.forEach(d=>{(m[d.month]=m[d.month]||[]).push(d);});
-      const full={Jul:"July",Aug:"August",Sep:"September"};
-      groups=["Jul","Aug","Sep"].filter(k=>m[k]).map(k=>({title:full[k]+" 2026",sub:m[k].length+" tracked days",days:m[k]})); }
-    else { const F=[["Fortnight 1","Aug 5 – Aug 18","2026-08-05","2026-08-18"],["Fortnight 2","Aug 19 – Sep 1","2026-08-19","2026-09-01"],
-      ["Fortnight 3","Sep 2 – Sep 15","2026-09-02","2026-09-15"],["Fortnight 4","Sep 16 – Sep 24","2026-09-16","2026-09-24"]];
-      groups=F.map(([t,s,a,b])=>({title:t,sub:s,days:SCHEDULE.filter(d=>d.date>=a&&d.date<=b)})); }
-
-    let seg=`<div class="rw-seg" data-seg>
-      <button class="${rollMode==="week"?"on":""}" data-r="week">Weekly</button>
-      <button class="${rollMode==="fort"?"on":""}" data-r="fort">Fortnightly</button>
-      <button class="${rollMode==="month"?"on":""}" data-r="month">Monthly</button></div>`;
+    const BL = rollMode==="block" ? 10 : rollMode==="half" ? 17 : 5;
+    const groups = [];
+    for (let i=0;i<LAST;i+=BL) {
+      const from=i+1, to=Math.min(LAST,i+BL);
+      groups.push({title:`Sessions ${from}\u2013${to}`, sub:`${to-from+1} sessions`,
+                   days:SESSIONS.slice(i, to)});
+    }
+    const seg=`<div class="rw-seg" data-seg>
+      <button class="${rollMode==="five"?"on":""}" data-r="five">By 5</button>
+      <button class="${rollMode==="block"?"on":""}" data-r="block">By 10</button>
+      <button class="${rollMode==="half"?"on":""}" data-r="half">By 17</button></div>`;
+    const cur = current();
     let body="";
     groups.forEach((g,gi) => {
-      const ru=rollup(g.days), open=g.days.some(d=>d.date===today);
-      const miles = rollMode==="fort" ? `<div class="rw-eyebrow" style="margin-top:6px">Milestones</div><ul class="rw-miles">${fortMiles(gi)}</ul>` : "";
+      const ru=rollup(g.days), open=g.days.some(d=>d.n===cur);
+      const miles = `<div class="rw-eyebrow" style="margin-top:6px">Milestones</div><ul class="rw-miles">${blockMiles(g.days)}</ul>`;
       body += `<details class="rw-roll" ${open?"open":""}><summary>
           <div class="rw-mini" style="width:44px;height:44px">${ring(ru.avgComp,44,5,ru.avgComp>=0.999?GOOD:"var(--amber)")}
             <span class="mv" style="font-size:12px;color:var(--paper)">${Math.round(ru.avgComp*100)}</span></div>
           <div class="cap"><div class="rt">${g.title}</div><div class="rs">${g.sub}</div></div>
           <div class="rr"><div class="big">${fmtH((ru.time.course+ru.time.dsa+ru.time.prep+ru.time.job))}</div><div class="sm">${ru.problems} problems</div></div>
-          <span class="rw-caret">▶</span></summary>
+          <span class="rw-caret">\u25b6</span></summary>
         <div class="rw-rbody">${kv(ru)}${expVs(ru)}${miles}</div></details>`;
     });
     return seg+body;
@@ -899,27 +1025,33 @@ const RUNWAY = (() => {
       <div class="rw-pbar"><i style="width:${Math.round(p*100)}%;background:${color}"></i></div></div>`;
   }
   function dashHTML() {
-    const all=cumAll(), td=cumTo(today);
+    const all=cumAll(), td=cumTo(current());
     const overall=(all.sp.size/TOTALS.sp+all.dsa.size/TOTALS.dsa+all.lc.size/TOTALS.lc)/3;
-    const met=all.dsa.has(12)&&all.lc.has("Binary Search");
-    const daysDone=SCHEDULE.filter(d=>comp(d.date)>=0.999).length;
+    const daysDone=doneCount(), P=pace();
     let ev=""; CATS4.forEach(([k,lab,col])=>{const a=all.time[k], e=td.exp[k], mx=Math.max(a,e,1);
       ev += `<div class="rw-ex"><div class="nm"><span class="rw-dot" style="background:${col}"></span>${lab}</div>
         <div class="bars"><div class="b1"><i style="width:${a/mx*100}%;background:${col}"></i><span class="mk" style="left:${e/mx*100}%"></span></div></div>
         <div class="rd">${fmtH(a)} <small>/ ${fmtH(e)}</small></div></div>`;});
-    const cj = id => SCHEDULE.filter(d=>d.type==="weekend"&&(peek(d.date).done||{})[id]).length;
-    const qAll=[]; SCHEDULE.forEach(d=>((peek(d.date).iq)||[]).forEach(t=>{ if(t&&t.trim()) qAll.push({d:d.date,t:t.trim()}); }));
+    /* weekend prep lives in date-keyed records (w0..w4), not in sessions */
+    const cj = i => Object.keys(studyMap()).filter(k => /^\d{4}-\d{2}-\d{2}$/.test(k)
+      && (studyMap()[k].done||{})["w"+i]).length;
+    const qAll=[]; SESSIONS.forEach(d=>((peek(KEY(d.n)).iq)||[]).forEach(t=>{ if(t&&t.trim()) qAll.push({d:d.n,t:t.trim()}); }));
     const qRecent=qAll.slice(-14).reverse();
     const qHTML = qRecent.length
-      ? `<ul class="rw-qlist">${qRecent.map(q=>`<li><span class="qd">${new Date(q.d+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"})}</span><span>${esc(q.t)}</span></li>`).join("")}</ul>`
-      : `<div class="rw-subtask">Nothing logged yet — jot two questions on the Today tab as you meet them.</div>`;
+      ? `<ul class="rw-qlist">${qRecent.map(q=>`<li><span class="qd">S${q.d}</span><span>${esc(q.t)}</span></li>`).join("")}</ul>`
+      : `<div class="rw-subtask">Nothing logged yet \u2014 jot two questions on the Session tab as you meet them.</div>`;
     const tot=(all.time.course+all.time.dsa+all.time.prep+all.time.job), etot=(td.exp.course+td.exp.dsa+td.exp.prep+td.exp.job);
-    return `<div class="rw-call"><div class="ic">${met?"🎯":"✦"}</div>
-        <div class="tx"><b>August DSA target</b> — with a dedicated DSA hour every weekday you reach Section 12 (Searching) around <b>Aug 25</b>, still inside August.</div>
-        <div class="st ${met?"yes":"no"}">${met?"Met":"In progress"}</div></div>
+    const fin = P.finish ? P.finish.toLocaleDateString(undefined,{day:"numeric",month:"short"}) : "\u2014";
+    return `<div class="rw-call"><div class="ic">${P.started?"\u2726":"\u25cb"}</div>
+        <div class="tx"><b>${P.started?`${P.done} of ${LAST} sessions done`:"Not started yet"}</b> \u2014 ${
+          P.started ? (P.finish ? `at ${P.rate.toFixed(1)} sessions a week this finishes around <b>${fin}</b>. Nothing expires; a quiet week just moves the date.`
+                                : "a few more sessions and this will project a finish date from your own pace.")
+                    : "tick anything in the current session and the runway begins today."}</div>
+        <div class="st ${P.started?"yes":"no"}">${P.started?"Running":"Idle"}</div></div>
       <div class="rw-tiles">
-        <div class="rw-tile"><div class="k">Runway</div><div class="v">${daysDone}<small> / ${SCHEDULE.length}</small></div></div>
-        <div class="rw-tile"><div class="k">Streak</div><div class="v">${streak()}<small> days</small></div></div>
+        <div class="rw-tile"><div class="k">Sessions</div><div class="v">${daysDone}<small> / ${LAST}</small></div></div>
+        <div class="rw-tile"><div class="k">Streak</div><div class="v">${streak()}<small> sessions</small></div></div>
+        <div class="rw-tile"><div class="k">Avg session</div><div class="v">${avgMins()?fmtM(avgMins()):"—"}</div></div>
         <div class="rw-tile"><div class="k">LC problems</div><div class="v">${all.problems}</div></div>
         <div class="rw-tile"><div class="k">Applied</div><div class="v">${all.applied}</div></div>
         <div class="rw-tile"><div class="k">Questions</div><div class="v">${qAll.length}</div></div></div>
@@ -931,7 +1063,7 @@ const RUNWAY = (() => {
           ${mrow("Barik — DSA","var(--violet)",all.dsa.size,TOTALS.dsa)}
           ${mrow("LeetCode Crash Course","var(--violet)",all.lc.size,TOTALS.lc)}</div>
         <div class="rw-card"><h3>Time invested — actual vs planned to date</h3>
-          <div class="rw-eyebrow" style="margin-bottom:4px">Marker = where the plan expects you today</div>${ev}
+          <div class="rw-eyebrow" style="margin-bottom:4px">Marker = planned time for the sessions you have finished</div>${ev}
           <div class="rw-mrow" style="margin-top:16px"><div class="rw-mtop"><span class="nm">Total logged</span>
             <span class="cn">${fmtH(tot)}<small> / ${fmtH(etot)}</small></span></div>
             <div class="rw-pbar"><i style="width:${Math.min(100,tot/Math.max(1,etot)*100)}%;background:var(--lime)"></i></div></div></div></div>
@@ -940,13 +1072,22 @@ const RUNWAY = (() => {
       <div class="rw-card"><h3>Job hunt</h3>
         <div class="rw-kv" style="margin:0">
           <div class="c"><div class="k">Applied</div><div class="v">${all.applied}</div></div>
-          <div class="c"><div class="k">Resume touches</div><div class="v">${cj("resume")}</div></div>
-          <div class="c"><div class="k">LinkedIn touches</div><div class="v">${cj("linkedin")}</div></div>
-          <div class="c"><div class="k">Follow-ups</div><div class="v">${cj("followup")}</div></div></div></div>`;
+          <div class="c"><div class="k">Resume touches</div><div class="v">${cj(0)}</div></div>
+          <div class="c"><div class="k">Flashcard sessions</div><div class="v">${cj(1)}</div></div>
+          <div class="c"><div class="k">Mock interviews</div><div class="v">${cj(2)}</div></div></div></div>`;
   }
 
   /* --------------------------------------------------------------- render */
+  /* run once per render pass: migrate legacy data, then make sure `selected`
+     points at a real session (0 means "not chosen yet" -> use the current one) */
+  let booted = false;
+  function boot() {
+    if (!booted) { try { migrate(); } catch(e) {} booted = true; }
+    if (!selected || !SESS[selected]) selected = current();
+  }
+
   function render() {
+    boot();
     ensureStyles();
     const root=$("#rw-root"); if(!root) return;
     const ae = document.activeElement;
@@ -962,7 +1103,7 @@ const RUNWAY = (() => {
 
     root.innerHTML = `<div class="rw-wrap">
       <div class="rw-subnav">
-        <button class="rw-sb ${view==="today"?"on":""}" data-v="today">Today</button>
+        <button class="rw-sb ${view==="today"?"on":""}" data-v="today">Session</button>
         <button class="rw-sb ${view==="timeline"?"on":""}" data-v="timeline">Timeline</button>
         <button class="rw-sb ${view==="rollups"?"on":""}" data-v="rollups">Rollups</button>
         <button class="rw-sb ${view==="dash"?"on":""}" data-v="dash">Dashboard</button>
@@ -993,8 +1134,9 @@ const RUNWAY = (() => {
           const rip=document.createElement("span"); rip.className="rw-ripple"; rip.style.width=rip.style.height="8px";
           rip.style.left=(br.left-r.left+br.width/2)+"px"; rip.style.top=(br.top-r.top+br.height/2)+"px";
           host.appendChild(rip); setTimeout(()=>rip.remove(),480); } }
-      if (b.classList.contains("rw-pip")) peeked = (peeked===b.dataset.goto) ? null : b.dataset.goto;
-      selected=b.dataset.goto;
+      const gn = +b.dataset.goto;
+      if (b.classList.contains("rw-pip")) peeked = (peeked===gn) ? null : gn;
+      selected=gn;
       if (b.dataset.open){ view="today"; window.scrollTo({top:0,behavior:"smooth"}); } render();
     });
 
@@ -1002,9 +1144,9 @@ const RUNWAY = (() => {
     const card=root.querySelector(".rw-runway"), tip=root.querySelector(".rw-tip");
     if (card && tip) {
       const show = pip => {
-        const day=byDate[pip.dataset.goto]; if(!day) return;
-        const c=comp(day.date), dt=new Date(day.date+"T00:00:00");
-        tip.innerHTML=`<div class="tt-d">${dt.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})} · day ${day.id}${day.milestone?" · ✦ milestone":""}</div>
+        const day=SESS[+pip.dataset.goto]; if(!day) return;
+        const c=comp(day.n);
+        tip.innerHTML=`<div class="tt-d">Session ${day.n} of ${LAST}${day.milestone?" \u00b7 \u2726 milestone":""}</div>
           <div class="tt-t">${esc(stripTag(day.mainTask))}</div>
           <div class="tt-p"><span>${Math.round(c*100)}%</span><span class="tt-bar"><i style="width:${Math.round(c*100)}%"></i></span></div>`;
         tip.classList.add("on");
@@ -1025,9 +1167,9 @@ const RUNWAY = (() => {
       const meter=root.querySelector(".rw-meter"), scrub=root.querySelector(".rw-scrub");
       if (meter) {
         const idxFromX = clientX => { const r=meter.getBoundingClientRect();
-          const f=Math.max(0,Math.min(1,(clientX-r.left)/r.width)); return Math.round(f*(SCHEDULE.length-1)); };
+          const f=Math.max(0,Math.min(1,(clientX-r.left)/r.width)); return Math.round(f*(LAST-1)); };
         const applyX = clientX => { const j=idxFromX(clientX);
-          if (SCHEDULE[j] && SCHEDULE[j].date!==selected){ selected=SCHEDULE[j].date;
+          if (SESSIONS[j] && SESSIONS[j].n!==selected){ selected=SESSIONS[j].n;
             if(!rafPend){ rafPend=true; requestAnimationFrame(()=>{ rafPend=false; keepMeterGrab=true; render(); }); } } };
         const move = e => { if(!meterDrag) return; e.preventDefault(); applyX(e.touches?e.touches[0].clientX:e.clientX); };
         const up = () => { meterDrag=false; keepMeterGrab=false;
@@ -1042,30 +1184,32 @@ const RUNWAY = (() => {
       }
 
       // ---- click a month label to jump to its first day ----
-      root.querySelectorAll(".rw-months .rw-mo").forEach(mo=>mo.onclick=()=>{
-        const key=mo.dataset.mk; const d=SCHEDULE.find(x=>x.month===key); if(d){ selected=d.date; render(); } });
+      root.querySelectorAll(".rw-months .rw-mo").forEach((mo,bi)=>mo.onclick=()=>{
+        selected = Math.min(LAST, bi*10 + 1); render(); });
 
       const spine=root.querySelector(".rw-spine");
       if (spine) spine.onkeydown=e=>{
         const step={ArrowLeft:-1,ArrowRight:1,ArrowUp:-7,ArrowDown:7}[e.key];
         if(!step && e.key!=="Home" && e.key!=="End") return;
         e.preventDefault();
-        const i=SCHEDULE.findIndex(d=>d.date===selected);
-        const j = e.key==="Home" ? 0 : e.key==="End" ? SCHEDULE.length-1
-                : Math.max(0, Math.min(SCHEDULE.length-1, i+step));
-        selected=SCHEDULE[j].date; keepSpineFocus=true; render();
+        const i=selected-1;
+        const j = e.key==="Home" ? 0 : e.key==="End" ? LAST-1
+                : Math.max(0, Math.min(LAST-1, i+step));
+        selected=j+1; keepSpineFocus=true; render();
       };
     }
-    root.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>{ const i=SCHEDULE.findIndex(d=>d.date===selected)+(+b.dataset.nav);
-      if(i>=0&&i<SCHEDULE.length){ selected=SCHEDULE[i].date; render(); } });
-    const jump=root.querySelector("[data-jump]"); if(jump) jump.onclick=()=>{ selected=today; render(); };
+    root.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>{ const n=selected+(+b.dataset.nav);
+      if(n>=1&&n<=LAST){ selected=n; render(); } });
+    const jump=root.querySelector("[data-jump]"); if(jump) jump.onclick=()=>{ selected=current(); render(); };
 
     root.querySelectorAll("[data-tog]").forEach(li=>li.onclick=ev=>{
       if (ev.target.closest("[data-mv],[data-ret],.rw-pop")) return;   // the move affordances live inside the row
-      const r=rec(selected), id=li.dataset.tog, before=comp(selected);
+      const r=rec(KEY(selected)), id=li.dataset.tog, before=comp(selected);
       r.done[id]=!r.done[id];
-      syncNow(r, `trackhawk: study ${r.done[id]?"\u2713":"\u2717"} ${selected} ${id}`);
-      justPopped = (before<0.999 && comp(selected)>=0.999) ? selected : null;  // full-day completion -> celebrate
+      markStarted();                                   // first ever tick anchors day one
+      stamp(r, before, selected);                      // session clock
+      syncNow(r, `trackhawk: ${r.done[id]?"\u2713":"\u2717"} S${selected} ${id}`);
+      justPopped = (before<0.999 && comp(selected)>=0.999) ? selected : null;
       render();
     });
 
@@ -1075,15 +1219,15 @@ const RUNWAY = (() => {
       ev.stopPropagation();
       const li=btn.closest("li"), already=!!li.querySelector(".rw-pop");
       closePop(); if (already) return;
-      const id=btn.dataset.mv, i=SCHEDULE.findIndex(d=>d.date===selected);
-      const opts=SCHEDULE.slice(i+1, i+6);
+      const id=btn.dataset.mv, i=selected-1;
+      const opts=SESSIONS.slice(i+1, i+6);
       const pop=document.createElement("div"); pop.className="rw-pop";
       pop.innerHTML = opts.length
-        ? `<div class="ttl">Push to</div>` + opts.map(d=>`<button type="button" data-to="${d.date}">${d.dow} ${d.day} ${d.month}</button>`).join("")
-        : `<div class="ttl">No later day left in the plan</div>`;
+        ? `<div class="ttl">Push to</div>` + opts.map(d=>`<button type="button" data-to="${d.n}">Session ${d.n}</button>`).join("")
+        : `<div class="ttl">No later session left</div>`;
       li.appendChild(pop);
       pop.querySelectorAll("[data-to]").forEach(b2=>b2.onclick=e2=>{
-        e2.stopPropagation(); moveItem(selected, id, b2.dataset.to); render(); });
+        e2.stopPropagation(); moveItem(selected, id, +b2.dataset.to); render(); });
     });
     root.querySelectorAll("[data-ret]").forEach(btn=>btn.onclick=ev=>{
       ev.stopPropagation();
@@ -1118,45 +1262,52 @@ const RUNWAY = (() => {
       ev.stopPropagation();
       const k=b.dataset.tm, live = timerOn && timerOn.date===selected && timerOn.cat===k;
       stopTimer(true);                                   // banking any timer already running
-      if (!live) timerOn={date:selected, cat:k, t0:Date.now()};
+      if (!live) timerOn={n:selected, cat:k, t0:Date.now()};
       render();
     });
 
     /* ---- tick straight from the expanded pip ---------------------------- */
+    root.querySelectorAll("[data-wtog]").forEach(li=>li.onclick=()=>{
+      const d=todayISO(), r=rec(d), k=li.dataset.wtog;
+      r.done[k]=!r.done[k];
+      syncNow(r, `trackhawk: weekend prep ${d} ${k}`);
+      render();
+    });
+
     root.querySelectorAll("[data-pk]").forEach(b=>b.onclick=()=>{
       if (!peeked) return;
-      const r=rec(peeked), k=b.dataset.pk;
-      r.done[k]=!r.done[k];
-      syncNow(r, `trackhawk: study ${r.done[k]?"\u2713":"\u2717"} ${peeked} ${k}`);
+      const r=rec(KEY(peeked)), k=b.dataset.pk;
+      r.done[k]=!r.done[k]; markStarted();
+      syncNow(r, `trackhawk: ${r.done[k]?"\u2713":"\u2717"} S${peeked} ${k}`);
       render();
     });
 
     // Inputs update memory (and the visual bar) on every keystroke, but only PERSIST
     // on change/blur — so no sync-driven re-render happens while you're typing.
     root.querySelectorAll("[data-time]").forEach(inp=>{
-      inp.oninput=()=>{ const r=rec(selected), k=inp.dataset.time;
+      inp.oninput=()=>{ const r=rec(KEY(selected)), k=inp.dataset.time;
         r.tmin[k]= inp.value===""?null:Math.max(0,+inp.value);
-        const day=byDate[selected], e=day.expected[k], act=+inp.value||0;
+        const day=SESS[selected], e=day.expected[k], act=+inp.value||0;
         const bar=inp.closest(".rw-tcell").querySelector(".rw-tbar>i");
         if(bar) bar.style.width=Math.round((e?Math.min(1,act/e):(act>0?1:0))*100)+"%"; };
-      inp.onchange=()=>{ syncNow(rec(selected),"trackhawk: study time "+selected); };
+      inp.onchange=()=>{ syncNow(rec(KEY(selected)),"trackhawk: time S"+selected); };
     });
 
     root.querySelectorAll("[data-num]").forEach(inp=>{
-      inp.oninput=()=>{ const r=rec(selected), k=inp.dataset.num;
+      inp.oninput=()=>{ const r=rec(KEY(selected)), k=inp.dataset.num;
         r[k]= inp.value===""?(k==="problems"?null:0):Math.max(0,+inp.value); };
-      inp.onchange=()=>{ syncNow(rec(selected),"trackhawk: study "+inp.dataset.num+" "+selected); };
+      inp.onchange=()=>{ syncNow(rec(KEY(selected)),"trackhawk: "+inp.dataset.num+" S"+selected); };
     });
 
     root.querySelectorAll("[data-iq]").forEach(inp=>{
-      inp.oninput=()=>{ const r=rec(selected); r.iq[+inp.dataset.iq]=inp.value; };
-      inp.onchange=()=>{ const r=rec(selected); r.iq[+inp.dataset.iq]=inp.value; syncNow(r,"trackhawk: study question "+selected); };
+      inp.oninput=()=>{ const r=rec(KEY(selected)); r.iq[+inp.dataset.iq]=inp.value; };
+      inp.onchange=()=>{ const r=rec(KEY(selected)); r.iq[+inp.dataset.iq]=inp.value; syncNow(r,"trackhawk: question S"+selected); };
     });
 
     const note=root.querySelector("#rw-note");
     if(note){
-      note.oninput=()=>{ rec(selected).note=note.value; };                 // memory only, no re-render
-      note.onchange=()=>{ const r=rec(selected); r.note=note.value; syncNow(r,"trackhawk: study note "+selected); };
+      note.oninput=()=>{ rec(KEY(selected)).note=note.value; };                 // memory only, no re-render
+      note.onchange=()=>{ const r=rec(KEY(selected)); r.note=note.value; syncNow(r,"trackhawk: note S"+selected); };
     }
   }
 
