@@ -167,7 +167,8 @@
         +   '<span class="thpb-chip thpb-every">every ' + c.every + 'd</span></div>'
         + '<div class="thpb-detail">' + c.d + '</div>'
         + '<div class="thpb-foot"><span class="thpb-status ' + st.cls + '">' + st.txt + '</span>'
-        +   '<button class="thpb-btn thpb-mark" data-mark="' + c.id + '">Mark done</button>'
+        +   '<button class="thpb-btn thpb-mark" data-mark="' + c.id + '">' + (state.last[c.id] > 0 ? 'Mark again' : 'Mark done') + '</button>'
+        +   (state.last[c.id] > 0 ? '<button class="thpb-btn thpb-ghost" data-undo="' + c.id + '">Undo</button>' : '')
         +   (showRunway ? '<button class="thpb-btn thpb-ghost" data-runway="' + c.id + '">\uFF0B Add to Runway</button>' : '')
         + '</div></div></div>';
     });
@@ -198,6 +199,9 @@
       var fn = function () { state.last[b.dataset.mark] = Date.now(); persist(); render(); };
       b.onclick = fn;
       if (b.classList.contains('thpb-box')) b.onkeydown = function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); fn(); } };
+    });
+    mount.querySelectorAll('[data-undo]').forEach(function (b) {
+      b.onclick = function () { state.last[b.dataset.undo] = 0; persist(); render(); };
     });
     mount.querySelectorAll('[data-runway]').forEach(function (b) {
       b.onclick = function () {
