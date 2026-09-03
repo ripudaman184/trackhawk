@@ -1344,7 +1344,7 @@ const RUNWAY = (() => {
     /* ---- per-block timers ---------------------------------------------- */
     root.querySelectorAll("[data-tm]").forEach(b=>b.onclick=ev=>{
       ev.stopPropagation();
-      const k=b.dataset.tm, live = timerOn && timerOn.date===selected && timerOn.cat===k;
+      const k=b.dataset.tm, live = timerOn && timerOn.n===selected && timerOn.cat===k;
       stopTimer(true);                                   // banking any timer already running
       if (!live) timerOn={n:selected, cat:k, t0:Date.now()};
       render();

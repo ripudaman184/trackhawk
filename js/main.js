@@ -100,11 +100,12 @@ const UI = (() => {
     const t = e.target.closest(".tab"); if (!t) return;
     const v = t.dataset.view;
     $$(".tab").forEach(x => x.classList.toggle("is-active", x === t));
-    ["jobs", "cards", "project", "runway"].forEach(name =>
+    ["jobs", "cards", "project", "runway", "playbook"].forEach(name =>
       $("#view-" + name).classList.toggle("is-hidden", name !== v));
     if (v === "cards") CARDS.render();
     if (v === "project") ROADMAP.render();
     if (v === "runway") RUNWAY.render();
+    if (v === "playbook") Playbook.refresh();
   };
 
   $("#subtabs").onclick = e => {
@@ -189,5 +190,27 @@ const UI = (() => {
   /* ---------------------------------------------------------------- boot */
   JOBS.init();
   CARDS.init();
+
+  /* Playbook: job-hunt cadence + setup checklist. State rides in prefs.playbook
+     (same pattern as prefs.runway), so no new vault map is needed. Runway hook
+     is intentionally omitted — the runway is session-indexed, not dated — so the
+     "Add to Runway" buttons stay hidden. */
+  Playbook.init({
+    mount: $("#playbookMount"),
+    loadState: () => { try { return (TH.S.data.prefs || {}).playbook; } catch (e) { return undefined; } },
+    saveState: (s) => { s.id = "playbook"; TH.put("prefs", s, "trackhawk: playbook"); },
+    getWeeklyApps: () => {
+      try {
+        const j = TH.S.data.jobs || {}, now = Date.now(); let n = 0;
+        for (const id in j) {
+          const rec = j[id]; if (!rec || rec.del || !rec.applied) continue;
+          const days = (now - new Date(rec.applied).getTime()) / 864e5;
+          if (days >= 0 && days <= 7) n++;
+        }
+        return n;
+      } catch (e) { return 0; }
+    }
+  });
+
   showGate();
 })();
