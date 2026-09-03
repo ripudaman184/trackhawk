@@ -1,13 +1,13 @@
 /* TrackHawk service worker — caches the shell so the app opens instantly and
    works offline. Data is never cached here; it lives encrypted in the vault. */
-const CACHE = "trackhawk-v19";
-const V = "18";
+const CACHE = "trackhawk-v21";
+const V = "21";
 /* Asset URLs carry ?v=<build>, matching index.html exactly. A build bump therefore
    produces different cache keys, so nothing stale can survive a deploy.        */
 const SHELL = [
   "./", "./index.html", `./css/style.css?v=${V}`,
   `./js/core.js?v=${V}`, `./js/jobs.js?v=${V}`, `./js/cards.js?v=${V}`,
-  `./js/roadmap.js?v=${V}`, `./js/runway.js?v=${V}`, `./js/main.js?v=${V}`,
+  `./js/roadmap.js?v=${V}`, `./js/runway.js?v=${V}`, `./js/playbook.js?v=${V}`, `./js/main.js?v=${V}`,
   "./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png"
 ];
 
