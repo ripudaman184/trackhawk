@@ -30,6 +30,16 @@ const RUNWAY = (() => {
   const isWeekend = (dt) => { const w = (dt||new Date()).getDay(); return w===0 || w===6; };
 
   const TOTALS = {sp:40, dsa:13, lc:13};
+  /* Role lens (v24): which job each session pays off for. Read-only metadata keyed by
+     session number — it changes no progress, record or vault field.              */
+  const ROLE_META = {t:{n:"SDET priority",col:"#FFB020",ptr:"Important for SDET"},
+    b:{n:"Both roles",col:"#C8FF32",ptr:"Important for SDET and SDE"},
+    d:{n:"SDE only",col:"#FF2E9A",ptr:"Important for SDE \u00b7 low for SDET"},
+    p:{n:"Prep",col:"#22D3C5",ptr:"Interview conversion \u00b7 both roles"}};
+  const ROLE = {"1":["b","Warm-up \u2014 skim at 2x"],"2":["b","String immutability is asked in every Java round"],"3":["b","OOP pillars \u2014 a top-5 Java question"],"4":["b","Interface vs abstract class \u2014 always asked; POM uses both"],"5":["b","equals/hashCode contract leads straight into HashMap questions"],"6":["b","Checked vs unchecked; custom exceptions in frameworks"],"8":["b","Parallel runs and thread-safe drivers (ThreadLocal)"],"9":["b","Collections internals \u2014 the most-asked Java topic"],"10":["b","Live-coding rounds expect streams"],"11":["b","Direct practice for the coding round"],"12":["b","Framework builds, profiles, Surefire"],"13":["b","API-vs-DB validation in tests"],"15":["t","DB checks plus SQL-injection test cases"],"16":["b","Test-data setup and teardown utilities"],"17":["d","SDET rounds rarely go into ORM depth"],"18":["d","Backend design question, not a test one"],"19":["d","Classic SDE question; rare for SDET"],"20":["d","Backend data-modelling practice"],"22":["b","Asked conceptually \u2014 PerfectPay runs on Spring"],"23":["d","Backend depth beyond SDET needs"],"24":["d","Backend depth beyond SDET needs"],"25":["b","Know how the app you test boots"],"26":["b","Tells you what to test at which layer"],"27":["b","Gives you an API to automate against"],"29":["b","Context for every API-testing question"],"30":["b","Source of negative API test cases"],"31":["b","Status-code and error-body assertions"],"32":["b","Target for your RestAssured suite"],"33":["b","Lets you trace API data to the DB"],"34":["d","Backend query depth"],"36":["d","SDE interview favourite; rare for SDET"],"37":["d","Backend persistence practice"],"38":["d","Rarely asked of SDETs"],"39":["d","Implementing auth is backend work"],"40":["t","Token handling is core to API tests"],"41":["d","Authorization implementation is backend work"],"43":["d","Backend security build"],"44":["t","Test-design and mocking questions"],"45":["t","Strong SDET differentiator"],"46":["t","Your test-pyramid story in interviews"],"47":["t","Running tests in containers"],"48":["d","Mostly backend; optional for Selenium Grid"],"50":["d","Backend deployment practice"],"51":["d","SDE system-design territory"],"52":["d","SDE system-design territory"],"53":["d","Backend architecture build"],"54":["d","SDE performance question"],"55":["d","Backend ops depth"],"57":["t","Quality gates and pipeline questions"],"58":["d","Backend release depth"],"59":["d","SDE portfolio piece"]};
+  const roleOf = day => { const r = day.type==="prep" ? ["p","Turns the week into interview answers"] : (ROLE[day.n] || ["b",""]);
+    return Object.assign({k:r[0], why:r[1]}, ROLE_META[r[0]]); };
+  let roleLens = "all";                    // spine/timeline filter, memory only
   const CAT = {course:"var(--amber)", auto:"var(--amber)", spring:"var(--lime)", dsa:"var(--violet)", prep:"var(--cyan)", job:"var(--marker)"};
   const GOOD = "var(--lime)";
 
@@ -170,6 +180,17 @@ const RUNWAY = (() => {
     .rw-ring{flex:0 0 auto;position:relative}
     .rw-ring .v{position:absolute;inset:0;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-weight:700}
     .rw-chips{display:flex;gap:7px;flex-wrap:wrap}
+    .rw-role{position:absolute;left:3px;right:3px;bottom:3px;height:4px;border-radius:2px;z-index:3;background:var(--rc);box-shadow:0 0 0 1.5px #0A0A0C}
+    .rw-pip.lens-off{opacity:.18}
+    .rw-lens{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:2px 0 10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mute)}
+    .rw-lens button{font:inherit;font-size:10.5px;letter-spacing:.04em;color:var(--mute);background:transparent;border:1px solid #26262F;border-radius:999px;padding:5px 11px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+    .rw-lens button i{width:8px;height:8px;border-radius:2px;background:var(--rc)}
+    .rw-lens button.on{color:#0A0A0C;background:var(--rc,var(--paper));border-color:var(--rc,var(--paper))}
+    .rw-lens button.on i{background:#0A0A0C}
+    .rw-chip.role{color:var(--rc);border-color:color-mix(in srgb,var(--rc) 40%,transparent);background:color-mix(in srgb,var(--rc) 9%,transparent)}
+    .rw-rptr{margin-top:8px;font-size:12.5px;color:var(--mute);border-left:3px solid var(--rc);padding:2px 0 2px 9px}
+    .rw-rptr b{color:var(--rc);font-weight:600}
+    .rw-srow.lens-off{opacity:.25}
     .rw-chip{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
       border-radius:999px;padding:5px 10px;border:1px solid #26262F;color:var(--mute)}
     .rw-chip.auto{color:var(--amber);border-color:#4a3a12;background:rgba(255,176,32,.07)}
@@ -752,6 +773,13 @@ const RUNWAY = (() => {
   /* ------------------------------------------------------------ sub-views */
 
   const PHASE_TINT = {SPRING:"rgba(200,255,50,.5)", PREP:"rgba(34,211,197,.5)"};
+  function lensHTML() {
+    const cnt = k => SESSIONS.filter(d=>roleOf(d).k===k).length;
+    const done = k => SESSIONS.filter(d=>roleOf(d).k===k && comp(d.n)>=0.999).length;
+    const b = (k,lab) => `<button type="button" data-lens="${k}" class="${roleLens===k?"on":""}" style="--rc:${k==="all"?"var(--paper)":ROLE_META[k].col}">${k==="all"?"":"<i></i>"}${lab}</button>`;
+    return `<div class="rw-lens"><span>Role lens</span>${b("all","All "+LAST)}${b("t","SDET priority "+done("t")+"/"+cnt("t"))}${b("b","Both "+done("b")+"/"+cnt("b"))}${b("d","SDE only "+done("d")+"/"+cnt("d"))}${b("p","Prep "+done("p")+"/"+cnt("p"))}</div>`;
+  }
+
   function spineHTML() {
     const doneN = doneCount(), cur = current();
     const overall = SESSIONS.reduce((a,x)=>a+comp(x.n),0)/LAST;
@@ -774,11 +802,12 @@ const RUNWAY = (() => {
       if (day.type==="prep") cls.push("prep");
       if (day.milestone) cls.push("mile");
       if (day.type!=="prep" && day.prep>=4) cls.push("hot");
+      const rl = roleOf(day); if (roleLens!=="all" && rl.k!==roleLens) cls.push("lens-off");
       const capOn = c<1;
       cells += `<button class="${cls.join(" ")}" data-goto="${day.n}" type="button"
         style="--tint:${day.type==="prep"?PHASE_TINT.PREP:PHASE_TINT.SPRING}"
         aria-label="${day.type==="prep"?"Prep session":"Session"} ${day.n} of ${LAST}, ${Math.round(c*100)}% done">
-        <i class="rw-cap"></i>${c>0?`<i class="rw-fill${day.type==="prep"?" cy":""}" style="height:${Math.round(c*100)}%"></i>`:""}<b>${day.n}</b>${c>=0.999?'<em class="rw-tick">\u2713</em>':""}</button>`;
+        <i class="rw-cap"></i>${c>0?`<i class="rw-fill${day.type==="prep"?" cy":""}" style="height:${Math.round(c*100)}%"></i>`:""}<b>${day.n}</b>${c>=0.999?'<em class="rw-tick">\u2713</em>':""}<i class="rw-role" style="--rc:${rl.col}"></i></button>`;
     });
 
     const selFrac = LAST>1 ? (selected-1)/(LAST-1) : 0;
@@ -797,6 +826,7 @@ const RUNWAY = (() => {
       <div class="rw-meter"><i style="width:${Math.round(overall*100)}%"></i>
         <span class="rw-plane" style="left:${(overall*100).toFixed(1)}%" aria-hidden="true">\u2708</span>
         <span class="rw-scrub" style="left:${(selFrac*100).toFixed(1)}%" title="drag to move through the plan"></span></div>
+      ${lensHTML()}
       <div class="rw-months" style="--n:${LAST}">${band}</div>
       <div class="rw-spine" style="--n:${LAST}" tabindex="0">${cells}</div>
       <div class="rw-legend">
@@ -805,6 +835,7 @@ const RUNWAY = (() => {
         <span><i class="rw-dot" style="background:var(--cyan)"></i>prep session</span>
         <span><i class="rw-dot" style="border:1px solid var(--amber)"></i>current</span>
         <span><i class="rw-dot" style="background:var(--amber);transform:rotate(45deg);border-radius:1px;width:7px;height:7px"></i>milestone</span>
+        <span><i class="rw-dot" style="height:4px;background:linear-gradient(90deg,#FFB020 33%,#C8FF32 33% 66%,#FF2E9A 66%)"></i>bottom bar = role</span>
         <span style="margin-left:auto;opacity:.7">sessions advance when you finish them, not when the day ends</span></div>
       <div class="rw-tip"></div></div>`;
   }
@@ -828,6 +859,8 @@ const RUNWAY = (() => {
       DB:"Database layer live", BUILDABLE:"CRUD service buildable", AUTH:"Auth done",
       TESTS:"Test suite green", COURSE_DONE:"Telusko course complete"};
     if (MILE_TXT[day.milestone]) chips+=`<span class="rw-chip mile">✦ ${MILE_TXT[day.milestone]}</span>`;
+    const rlT = roleOf(day);
+    chips = `<span class="rw-chip role" style="--rc:${rlT.col}">${rlT.n}</span>` + chips;
 
     const items=effItems(selected), gone=goneFrom(selected), dnS=doneMap(selected);
     const liFor = it => `<li class="${it.main?"main":""} ${dnS[it.key]?"on":""} ${it.moved?"moved":""}"
@@ -887,7 +920,8 @@ const RUNWAY = (() => {
             <span class="v" style="font-size:16px;color:var(--paper)">${Math.round(c*100)}%</span></div>
           <div><div class="rw-chips">${chips}</div>
             <div class="rw-maintask">${esc(isW?(PREP_HEAD[day.prep]||day.prepTask):stripTag(day.mainTask))}</div>
-            <div class="rw-subtask">${isW?(PREP_SUB[day.prep]||"Convert this week\u2019s study into interview readiness"):esc(stripTag(day.dsaTask))+" \u00b7 "+esc(stripTag(day.lcTask))}</div></div></div>
+            <div class="rw-subtask">${isW?(PREP_SUB[day.prep]||"Convert this week\u2019s study into interview readiness"):esc(stripTag(day.dsaTask))+" \u00b7 "+esc(stripTag(day.lcTask))}</div>
+            <div class="rw-rptr" style="--rc:${rlT.col}">\u25b8 <b>${rlT.ptr}</b>${rlT.why?" \u2014 "+esc(rlT.why):""}</div></div></div>
         <ul class="rw-tasks">${tasks}</ul></div>
 
       ${paceHTML()}
@@ -1028,15 +1062,16 @@ const RUNWAY = (() => {
         DB:"Database layer live", BUILDABLE:"CRUD service buildable", AUTH:"Auth done",
         TESTS:"Test suite green", COURSE_DONE:"Course complete"};
       const mile = d.milestone ? `<span class="rw-chip mile">\u2726 ${MT[d.milestone]}</span>` : "";
-      return `<button class="rw-srow ${cls}" data-goto="${d.n}" data-open="1" type="button">
+      const rl = roleOf(d), off = roleLens!=="all" && rl.k!==roleLens ? " lens-off" : "";
+      return `<button class="rw-srow ${cls}${off}" data-goto="${d.n}" data-open="1" type="button" style="box-shadow:inset 3px 0 0 ${rl.col}">
         <span class="sn">S${d.n}</span>
-        <span class="st">${esc(stripTag(d.mainTask))}${mile}</span>
+        <span class="st">${esc(stripTag(d.mainTask))}${mile} <span class="rw-chip role" style="--rc:${rl.col}">${rl.n}</span></span>
         <span class="sp">${mins(d.n) ? fmtM(mins(d.n)) : Math.round(c*100)+"%"}${
           span(d.n) > 1 ? `<em class="sd">${span(d.n)}d</em>` : ""}</span>
         <span class="sb"><i style="width:${Math.round(c*100)}%"></i></span></button>`;
     }).join("");
     return `<div class="rw-card"><h3>All ${LAST} sessions</h3>
-      <div class="rw-eyebrow" style="margin:-6px 0 11px">In order \u00b7 no dates, they happen when you do them</div>
+      <div class="rw-eyebrow" style="margin:-6px 0 11px">In order \u00b7 no dates, they happen when you do them</div>${lensHTML()}
       <div class="rw-slist">${rows}</div></div>`;
   }
 
@@ -1151,6 +1186,9 @@ const RUNWAY = (() => {
           <div class="rw-mrow" style="margin-top:16px"><div class="rw-mtop"><span class="nm">Total logged</span>
             <span class="cn">${fmtH(tot)}<small> / ${fmtH(etot)}</small></span></div>
             <div class="rw-pbar"><i style="width:${Math.min(100,tot/Math.max(1,etot)*100)}%;background:var(--lime)"></i></div></div></div></div>
+      <div class="rw-card" style="margin-top:16px"><h3>Role split \u2014 sessions done by who they pay off for</h3>
+        <div class="rw-eyebrow" style="margin-bottom:4px">SDET-relevant = SDET priority + both roles</div>
+        ${["t","b","d","p"].map(k=>mrow(ROLE_META[k].n, ROLE_META[k].col, SESSIONS.filter(d=>roleOf(d).k===k && comp(d.n)>=0.999).length, SESSIONS.filter(d=>roleOf(d).k===k).length)).join("")}</div>
       <div class="rw-card" style="margin-top:16px"><h3>Interview questions logged${qAll.length?" — latest "+qRecent.length+" of "+qAll.length:""}</h3>${qHTML}</div>
 
       <div class="rw-card"><h3>Job hunt</h3>
@@ -1212,6 +1250,7 @@ const RUNWAY = (() => {
   function wire(root) {
     root.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{ view=b.dataset.v; render(); });
     root.querySelectorAll("[data-seg] [data-r]").forEach(b=>b.onclick=()=>{ rollMode=b.dataset.r; render(); });
+    root.querySelectorAll("[data-lens]").forEach(b=>b.onclick=()=>{ roleLens=b.dataset.lens; render(); });
     root.querySelectorAll("[data-goto]").forEach(b=>b.onclick=ev=>{
       if (b.classList.contains("rw-pip")) {   // little ripple on the runway pips
         const host=b.closest(".rw-runway"); if(host){ const r=host.getBoundingClientRect(), br=b.getBoundingClientRect();
@@ -1232,6 +1271,7 @@ const RUNWAY = (() => {
         const c=comp(day.n);
         tip.innerHTML=`<div class="tt-d">Session ${day.n} of ${LAST}${day.milestone?" \u00b7 \u2726 milestone":""}</div>
           <div class="tt-t">${esc(stripTag(day.mainTask))}</div>
+          <div class="tt-p" style="color:${roleOf(day).col}">\u25b8 ${roleOf(day).ptr}</div>
           <div class="tt-p"><span>${Math.round(c*100)}%</span><span class="tt-bar"><i style="width:${Math.round(c*100)}%"></i></span></div>`;
         tip.classList.add("on");
         const cr=card.getBoundingClientRect(), pr=pip.getBoundingClientRect(), w=tip.offsetWidth;
