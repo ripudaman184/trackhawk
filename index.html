@@ -11,8 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script>window.TH_BUILD="23";</script>
-<link rel="stylesheet" href="css/style.css?v=23">
+<script>window.TH_BUILD="24";</script>
+<link rel="stylesheet" href="css/style.css?v=24">
 </head>
 <body>
 
@@ -565,13 +565,13 @@
 
 <div id="toast" class="toast is-hidden"></div>
 
-<script src="js/core.js?v=23"></script>
-<script src="js/jobs.js?v=23"></script>
-<script src="js/cards.js?v=23"></script>
-<script src="js/roadmap.js?v=23"></script>
-<script src="js/runway.js?v=23"></script>
-<script src="js/playbook.js?v=23"></script>
-<script src="js/main.js?v=23"></script>
+<script src="js/core.js?v=24"></script>
+<script src="js/jobs.js?v=24"></script>
+<script src="js/cards.js?v=24"></script>
+<script src="js/roadmap.js?v=24"></script>
+<script src="js/runway.js?v=24"></script>
+<script src="js/playbook.js?v=24"></script>
+<script src="js/main.js?v=24"></script>
 <script>
   if ("serviceWorker" in navigator) {
     /* A new build changes every ?v= on the page, so the browser HTTP cache and the
@@ -583,7 +583,7 @@
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (swapped) return; swapped = true; location.reload();
     });
-    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js?v=23")
+    window.addEventListener("load", () => navigator.serviceWorker.register("sw.js?v=24")
       .then(reg => { reg.update(); setInterval(() => reg.update(), 60 * 60 * 1000); })
       .catch(() => {}));
   }
